@@ -1,0 +1,36 @@
+#
+#   Page Load Test Parameters file, contains the parameters which are passed to 
+#      page load test. contains the parameter sets for the tests.
+#
+Category=1
+Chassis=2
+Modules=3
+PowerSupply=4
+Fan=5
+Others=6
+Total=7
+
+Inventory_Name=Demo_Richardson_DC
+
+#Inventory_AllSource=Devices in Inventory(all sources)
+#Devices_Collected=Devices Collected
+#Devices_Imported=Devices Imported
+#Devices_Recognized=Devices Recognized
+#Devices_Covered=Devices Covered
+#Devices_NotCovered=Devices Not Covered
+#Past_LDOS=Past LDOS
+#LDOS_in12=LDOS within 12 months
+#LDOS_OVER12=LDOS over 12 months and within 12 months
+
+Inventory_AllSource=Row No:1,Category:Devices in Inventory(all sources),Chassis:26,Modules:17,Power Supply:7,Fan:1,Others:0,Total:51
+Devices_Collected=Row No:8,Category:Devices Collected,Chassis:25,Modules:17,Power Supply:7,Fan:1,Others:0,Total:50
+Devices_Imported=Row No:15,Category:Devices Imported,Chassis:1,Modules:0,Power Supply:0,Fan:0,Others:0,Total:1
+Devices_Recognized=Row No:23,Category:Devices Recognized,Chassis:24,Modules:16,Power Supply:6,Fan:0,Others:0,Total:46
+Devices_Covered=Row No:25,Category:Devices Covered,Chassis:8,Modules:4,Power Supply:2,Fan:0,Others:0,Total:14
+Devices_NotCovered=Row No:28,Category:Devices Not Covered,Chassis:13,Modules:8,Power Supply:1,Fan:0,Others:0,Total:22
+Past_LDOS=Row No:29,Category:Past LDOS,Chassis:1,Modules:2,Power Supply:0,Fan:0,Others:0,Total:3
+LDOS_in12=Row No:33,Category:LDOS within 12 months,Chassis:0,Modules:0,Power Supply:0,Fan:0,Others:0,Total:0
+LDOS_OVER12=Row No:37,Category:LDOS over 12 months and within 12 months,Chassis:4,Modules:1,Power Supply:0,Fan:0,Others:0,Total:5
+
+
+Inventory_AllSource_Data=Row No:1,Category:Devices in Inventory(all sources),Chassis:26,Modules:17,Power Supply:7,Fan:1,Others:0,Total:51;Row No:8,Category:Devices Collected,Chassis:25,Modules:17,Power Supply:7,Fan:1,Others:0,Total:50;Row No:15,Category:Devices Imported,Chassis:1,Modules:0,Power Supply:0,Fan:0,Others:0,Total:1;Row No:23,Category:Devices Recognized,Chassis:24,Modules:16,Power Supply:6,Fan:0,Others:0,Total:46;Row No:25,Category:Devices Covered,Chassis:8,Modules:4,Power Supply:2,Fan:0,Others:0,Total:14;Row No:28,Category:Devices Not Covered,Chassis:13,Modules:8,Power Supply:1,Fan:0,Others:0,Total:22;Row No:29,Category:Past LDOS,Chassis:1,Modules:2,Power Supply:0,Fan:0,Others:0,Total:3;Row No:33,Category:LDOS within 12 months,Chassis:0,Modules:0,Power Supply:0,Fan:0,Others:0,Total:0;Row No:37,Category:LDOS over 12 months and within 12 months,Chassis:4,Modules:1,Power Supply:0,Fan:0,Others:0,Total:5

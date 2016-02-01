@@ -1,0 +1,56 @@
+[subject]
+BSO Test Suite Run Report - {report_date}.
+[body]
+<html>
+<body>
+	<b><font face="Cambria" >Test Suite Run Report.</font></b>
+	<br />
+	<br />
+	<br />
+		<table border="1">
+		<tbody>
+			<tr>
+				<th align="left" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >Test Suite Name</font></th>
+				<td align="left"><font face="Cambria" >{testsuite_name}</font></td>
+			<tr>
+			<tr>
+				<th align="left" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >Test Suite Description</font></th>
+				<td align="left"><font face="Cambria" >{testsuite_description}</font></td>
+			<tr>
+			<tr>
+				<th align="left" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >Total Number of Tests in Test Suite</font></th>
+				<td align="left"><font face="Cambria" >{total_tests}</font></td>
+			<tr>
+			<tr>
+				<th align="left" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >Total Time Taken For the Tests</font></th>
+				<td align="left"><font face="Cambria" >{total_time_taken}</font></td>
+			<tr>
+		</tbody>
+	</table>
+	<br />
+	<br />
+	<font face="Cambria" >Details of the tests in the test suite.</font>
+	<br />
+	<table border="1">
+		<tbody>
+			<tr>
+				<th align="center" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >TEST DETAILS</font></th>
+			<tr>
+			<tr>
+				<td align="center" bgcolor="#DDA0DD"><font face="Cambria" >S.NO.</font></td>
+				<td align="center" bgcolor="#DDA0DD"><font face="Cambria" >Test Name</font></td>
+				<th align="center" bgcolor="#DDA0DD"><font face="Cambria" >Test Status</font></th>
+				<td align="center" bgcolor="#DDA0DD"><font face="Cambria" >Time Taken</font></td>
+			</tr>
+			<tr>
+				<td align="center"><font face="Cambria" >{test_id}</font></td>
+				<td align="center"><font face="Cambria" >{test_name}</font></td>
+				<th align="center"><font face="Cambria" >{test_status}</font></th>
+				<td align="center"><font face="Cambria" >{test_time_taken}</font></td>
+			</tr>
+			<!-- comment line here -->
+		</tbody>
+	</table>
+	<br /> <br />
+</body>
+</html>

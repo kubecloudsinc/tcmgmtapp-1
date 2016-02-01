@@ -1,0 +1,11 @@
+<html>
+<body>
+ Lessons learnt:
+ 
+ 1. always have only one @Before and @After for a test, if you are subclassing it.
+    So to keep it simple, don't sub class more than once. have all common utilities 
+    in BaseTest and extend this for all the tests
+ 2. Look at the way parameterized test are implemented
+     which use Spring content with the help of TestContextManager class.		
+</body>
+</html>

@@ -1,0 +1,29 @@
+<html>
+<body>
+   BEFORE CHECKING IN CODE FOR TAGS OR PRODUCTION BUILD, THE CHECKLIST
+   
+   1. Change the email addresses to production notifcation list
+   			TestConstants.cfg
+   2. Change the logback settings to production log files (logback.xml)
+   		location to production folder
+   		debug to info level
+   3. Make sure that driver quit is uncommented in the test for the browser to close after
+        the test runs.
+   4. do the test from localwith prod settings and then commit the changes to SVN. 
+   5. Before packaging war file make sure deployment assembly project properties
+   		include the maven dependencies also to be exported into the war file.
+   6. package the war file and deploy to production.
+   
+   
+   Instructions to disable cache in firefox 
+   
+   create a profile and 
+   go to about:config 
+   change the following settings.
+   user_pref("browser.cache.disk.enable", false);
+user_pref("browser.cache.memory.enable", false);
+user_pref("browser.cache.offline.enable", false);
+user_pref("network.http.use-cache", false);
+   		
+</body>
+</html>

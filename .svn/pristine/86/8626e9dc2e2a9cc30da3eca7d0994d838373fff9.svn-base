@@ -1,0 +1,25 @@
+
+package com.cisco.cstg.autotools.dao;
+
+import java.util.List;
+
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.cisco.cstg.autotools.domain.Test;
+
+@Repository
+public class HibernateTestDao extends AbstractHibernateDao<Test> implements TestDao {
+
+    @Transactional(readOnly = true, value="txManager")
+    public List<Test> getAll() throws DataAccessException {
+        return super.findAll("from Test order by id");
+    }
+
+	@Override
+	@Transactional(readOnly = true, value="txManager")
+	public Test getByTestId(Long testId) throws DataAccessException {
+		return super.findOne("from Test where testId=?", testId);
+	}
+}

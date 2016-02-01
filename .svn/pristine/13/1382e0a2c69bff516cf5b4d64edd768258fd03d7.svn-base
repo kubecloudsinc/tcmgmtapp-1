@@ -1,0 +1,46 @@
+#
+# This configuration controls all the tests which extends base test.
+#
+
+#Status report template
+TestSummaryReportTemplate = TestStatusSummaryReport
+PageLoadReportTemplate = SNTCPageLoadReport
+PSSPageLoadReportTemplate = PSSPageLoadReport
+
+#Email address to which test reports need to be sent.
+testReportEmailAddressess=sichituk@cisco.com
+
+ToEmailAddressess=sichituk@cisco.com
+#ToEmailAddressess=pageloadmonitor-sntc@cisco.com,bso-qa@cisco.com,bosiu@cisco.com,sichituk@cisco.com,sjaiswal@cisco.com
+
+#,pageloadmonitor-sntc@cisco.com, pageloadmonitor-pss@cisco.com
+
+#To email list for PSS report
+#PSSToEmailAddressess=autotools_cstg@cisco.com,sowreddy@cisco.com,sjaiswal@cisco.com,povetriv@cisco.com,vbheda@cisco.com,spathrik@cisco.com
+PSSToEmailAddressess=pageloadmonitor-pss@cisco.com
+
+# the inital delay after scheduling the page load monitor report
+pageLoadMonitorInitialDelay=0
+pssPageLoadMonitorInitialDelay=0
+
+# 
+# The frequency with which the monitor need to run
+# 
+
+pageLoadMonitorRunFrequency=2
+pssPageLoadMonitorRunFrequency=12
+#
+# units: DAYS; HOURS ; MINUTES; SECONDS
+monitorFrequencyUnit=HOURS
+#
+
+#WebDriver implictTime out in Secs
+implicitTimeOut=10
+
+#WebDriver Time out in Secs
+timeOut=60
+longerTimeOut=300
+maxWaitForElements=240
+
+#password hidden
+hiddenPasswordIndicator=HIDDEN

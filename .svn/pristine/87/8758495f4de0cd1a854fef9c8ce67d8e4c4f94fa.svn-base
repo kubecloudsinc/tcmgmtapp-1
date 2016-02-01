@@ -1,0 +1,26 @@
+[subject]
+BSO Test Status Report - {report_date}.
+[body]
+<html>
+<body>
+	<b>Test Summary Status Report.</b>
+	<br><br>
+	The below report is the status report of automation tests done.
+	<br><br><br>
+	<table border="1" size="80%">
+		<th align="center" colspan="17" bgcolor="#E6E6FA">TEST STATUS REPORT</th>
+		<tr>
+			<th align="center" bgcolor="#DDA0DD">S.NO.</th>
+			<th align="center" bgcolor="#DDA0DD">Test Description</th>
+			<th align="center" bgcolor="#DDA0DD">Test Status</th>
+		</tr>
+		<tr>
+			<th align="center">1</th>
+			<th align="center">{test_name}</th>
+			<th align="center">{Status}</th>
+		</tr>
+	</table>
+	<br>
+	<br>
+</body>
+</html>

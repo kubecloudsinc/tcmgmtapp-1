@@ -1,0 +1,57 @@
+<html>
+<body>
+	<b><font face="Cambria" >Test Suite Run Report.</font></b>
+	<br />
+	<br />
+	<br />
+		<table border="1">
+		<tbody>
+			<tr>
+				<th align="left" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >Test Suite Name</font></th>
+				<td align="left"><font face="Cambria" >{testsuite_name}</font></td>
+			<tr>
+			<tr>
+				<th align="left" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >Test Suite Description</font></th>
+				<td align="left"><font face="Cambria" >{testsuite_description}</font></td>
+			<tr>
+			<tr>
+				<th align="left" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >Total Number of Tests in Test Suite</font></th>
+				<td align="left"><font face="Cambria" >{total_tests}</font></td>
+			<tr>
+			<tr>
+				<th align="left" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >Total Tests Passed</font></th>
+				<td align="left"><font face="Cambria" >{total_tests_passed}</font></td>
+			<tr>
+			<tr>
+				<th align="left" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >Total Tests Failed</font></th>
+				<td align="left"><font face="Cambria" >{total_tests_failed}</font></td>
+			<tr>
+		</tbody>
+	</table>
+	<br />
+	<br />
+	<font face="Cambria" >Details of failed tests in the test suite.</font>
+	<br />
+	<table border="1">
+		<tbody>
+			<tr>
+				<th align="center" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >TEST DETAILS OF TEST CASES FAILED</font></th>
+			<tr>
+			<tr>
+				<td align="center" bgcolor="#DDA0DD"><font face="Cambria" >S.NO.</font></td>
+				<td align="center" bgcolor="#DDA0DD"><font face="Cambria" >Test Name</font></td>
+				<th align="center" bgcolor="#DDA0DD"><font face="Cambria" >Test Step</font></th>
+				<td align="center" bgcolor="#DDA0DD"><font face="Cambria" >Failure Message</font></td>
+			</tr>
+			<tr>
+				<td align="center"><font face="Cambria" >{test_id}</font></td>
+				<td align="center"><font face="Cambria" >{test_name}</font></td>
+				<th align="center"><font face="Cambria" >{test_step}</font></th>
+				<td align="center"><font face="Cambria" >{test_time_taken}</font></td>
+			</tr>
+			<!-- comment line here -->
+		</tbody>
+	</table>
+	<br /> <br />
+</body>
+</html>

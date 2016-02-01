@@ -1,0 +1,111 @@
+
+package com.cisco.cstg.autotools.domain;
+
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+@Entity
+@Table(name = "TABLE_TEST")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+public class Test extends IdentifiableEntity {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -699680677069379435L;
+
+	/**
+     * The TIMS or external test management system id 
+     */
+    private Long testDescription;
+
+    private String testClassName;
+
+    private String testMethodName;
+    
+    private String timsID;
+    
+    private Set<TestSuite> testSuites;
+    
+    @Column(name="TEST_DESCRIPTION")
+	public Long getTestDescription() {
+		return testDescription;
+	}
+
+	public void setTestDescription(Long testDescription) {
+		this.testDescription = testDescription;
+	}
+
+    @Column(name="TEST_CLASS_NAME")
+	public String getTestClassName() {
+		return testClassName;
+	}
+
+	public void setTestClassName(String testClassName) {
+		this.testClassName = testClassName;
+	}
+
+   @Column(name="TEST_METHOD_NAME")
+	public String getTestMethodName() {
+		return testMethodName;
+	}
+
+	public void setTestMethodName(String testMethodName) {
+		this.testMethodName = testMethodName;
+	}
+
+	@Column(name="TIMS_ID")	
+	public String getTimsID() {
+		return timsID;
+	}
+
+	public void setTimsID(String timsID) {
+		this.timsID = timsID;
+	}
+	public Set<TestSuite> getTestSuites() {
+		return testSuites;
+	}
+
+	@ManyToMany(cascade=CascadeType.ALL, mappedBy="tests") 
+	public void setTestSuites(Set<TestSuite> testSuites) {
+		this.testSuites = testSuites;
+	}
+	
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (this.getId() == null) {
+            return false;
+        } else if (o instanceof Test) {
+            Test that = (Test) o;
+            return this.getId().equals(that.getId());
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getId() == null ? System.identityHashCode(this) : 17 * this.getId()
+                .hashCode();
+    }
+
+    @Transient
+    public String getName() {
+        return this.getId() + " " + this.getId();
+    }
+
+    @Override
+    public String toString() {
+        return this.getName();
+    }
+}

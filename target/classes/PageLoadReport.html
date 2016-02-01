@@ -1,0 +1,91 @@
+<html>
+<body>
+	<b><font face="Cambria" >Page Load Times Report.</font></b>
+	<br />
+	<br />
+	<br />
+		<table border="1">
+		<tbody>
+			<tr>
+				<th align="left" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >Customer Name</font></th>
+				<td align="left"><font face="Cambria" >{customer_name}</font></td>
+			<tr>
+			<tr>
+				<th align="left" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >Number of Inventories</font></th>
+				<td align="left"><font face="Cambria" >{total_inventories}</font></td>
+			<tr>
+			<tr>
+				<th align="left" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >Inventory Names</font></th>
+				<td align="left"><font face="Cambria" >{inventory_names}</font></td>
+			<tr>
+			<tr>
+				<th align="left" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >Login User Name</font></th>
+				<td align="left"><font face="Cambria" >{user_name}</font></td>
+			<tr>			
+			<tr>
+				<th align="left" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >Login User Name Role</font></th>
+				<td align="left"><font face="Cambria" >{user_roles}</font></td>
+			<tr>						
+		</tbody>
+	</table>
+	<br />
+	<br />
+	<font face="Cambria" >Listed below are time taken by various pages for the above Customer Inventory.</font>
+	<br />
+	<table border="1">
+		<tbody>
+			<tr>
+				<th align="center" colspan="17" bgcolor="#E6E6FA"><font face="Cambria" >PAGE LOAD REPORT</font></th>
+			<tr>
+			<tr>
+				<td align="center" bgcolor="#DDA0DD"><font face="Cambria" >S.NO.</font></td>
+				<td align="center" bgcolor="#DDA0DD"><font face="Cambria" >Page Name</font></td>
+				<th align="center" bgcolor="#DDA0DD"><font face="Cambria" >Time Taken</font></th>
+				<td align="center" bgcolor="#DDA0DD"><font face="Cambria" >Comments</font></td>
+			</tr>
+			<tr>
+				<td align="center"><font face="Cambria" >1</font></td>
+				<td align="center"><font face="Cambria" >Login to SNTC portal</font></td>
+				<th align="center"><font face="Cambria" >{time_taken_to_login}</font></th>
+				<td align="center"><font face="Cambria" >Load time from entering the credentials to
+					the display of welcome page</font></td>
+			</tr>
+			<tr>
+				<td align="center"><font face="Cambria" >2</font></td>
+				<td align="center"><font face="Cambria" >Left Navigation Page</font></td>
+				<th align="center"><font face="Cambria" >{time_taken_to_load_lnp}</font></th>
+				<td align="center"><font face="Cambria" >Load time for Left Navigation Page</font></td>
+			</tr>
+			<tr>
+				<td align="center"><font face="Cambria" >3</font></td>
+				<td align="center"><font face="Cambria" >Smart Net Total Case Dashboard</font></td>
+				<th align="center"><font face="Cambria" >{time_taken_to_load_sntc}</font></th>
+				<td align="center"><font face="Cambria" >Load time for all the widgets in the SNTC
+					dashboard page</font></td>
+			</tr>
+			<tr>
+				<td align="center"><font face="Cambria" >4</font></td>
+				<td align="center"><font face="Cambria" >All Alerts</font></td>
+				<th align="center"><font face="Cambria" >{time_taken_to_load_AllAlerts}</font></th>
+				<td align="center"><font face="Cambria" >Load time for all alerts page including the
+					data table</font></td>
+			</tr>
+			<tr>
+				<td align="center"><font face="Cambria" >5</font></td>
+				<td align="center"><font face="Cambria" >All Contracts</font></td>
+				<th align="center"><font face="Cambria" >{time_taken_to_load_AllContracts}</font></th>
+				<td align="center"><font face="Cambria" >Load time for all contracts including the
+					data table</font></td>
+			</tr>
+			<tr>
+				<td align="center"><font face="Cambria" >6</font></td>
+				<td align="center"><font face="Cambria" >All Equipment</font></td>
+				<th align="center"><font face="Cambria" >{time_taken_to_load_AllEquip}</font></th>
+				<td align="center"><font face="Cambria" >Load time for all equipments page including
+					the data table</font></td>
+			</tr>
+		</tbody>
+	</table>
+	<br /> <br />
+</body>
+</html>

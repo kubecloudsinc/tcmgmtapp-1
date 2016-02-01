@@ -1,0 +1,95 @@
+#
+# This configuration controls all the tests which extends base test.
+#
+
+# username password of SNTC Stage
+
+#url.username = sntc_cust_admin_8501
+#url.password = Cisco!23
+#url.username = sntcadm27041
+#url.password = Test1ng1
+
+# username password for SNTC production
+url.username = sntcprodtest
+url.password = Cisco123
+#url.username = sntcusr2706001
+#url.password = Test1ng1
+
+# username password for PSS production
+pss.username = ibmademo1
+pss.password = myIBMA411
+
+#Firefox profile name that should be created on host machine
+firefoxProfileName=SNTC
+sntcProfileName=SNTCNextGen
+pssProfileName=PSS
+
+# URL for the portal
+#baseURL = https://tools-stage.cisco.com/rptcso
+baseURL = https://tools.cisco.com/smartservices/
+
+#baseURLNextGen = https://tools-stage.cisco.com/smartservices/nextgen
+baseURLNextGen = https://tools.cisco.com/smartservices/nextgen
+
+#URL for UI3
+efui3URL=http://wwwin-tools.cisco.com/ef/bse/accessManagement.do
+
+## SNTC Link NAMES
+appSettings=Application Settings
+calendar=Calendar
+myReports=My Reports
+usefulLinks=Useful Links
+notifications=Notifications
+## SNTC Dashboards
+admin=Admin
+alertManagement=Alert Management
+contractManagement=Contract Management
+deviceDiagnostics=Device Diagnostics
+inventoryManagement=Inventory Management
+smartNetTotalCare = Smart Net Total Care
+## Library Links
+contractProperties=Contracts Properties
+uploadProcessing=Upload Processing
+allCollectors=All Collectors
+activeAlerts=Active Alerts
+serviceCoverage=Service Coverage
+allAlerts=All Alerts
+allFieldNotices=All Field Notices
+allHardwareAlerts=All Hardware Alerts
+allPSIRTs=All PSIRTs
+allSoftwareAlerts=All Software Alerts
+deviceWithalerts=Devices with Alerts
+ldos=Last Day of Support
+productAlertsDelta=Product Alerts Delta
+allContracts=All Contracts
+expiringContracts=Expiring Contracts
+covered=Covered
+notCovered=Not Covered
+expiringDeviceCoverage=Expiring Device Coverages
+contractDuplicates=Contract Duplicates
+aggregatedReport=Aggregated Report
+allSupportCases=All Support Cases for past 90 days
+mySupportCases=My Support Cases for past 90 days
+inventorySummary=Summary
+allEquipment=All Equipment
+inventoryDuplicates=Inventory Duplicates
+inventoryByProduct=Inventory by Product
+inventoryCollectionDelta=Inventory Collection Delta
+inventoryBySites=Inventory by Sites
+allHosts=All Hosts
+customInventory=Custom Inventory
+inventoryInsightSummary=Summary
+inventoryInsightNotCollected=Not Collected
+inventoryInsightThirdParty=Third Party
+inventoryInsightDuplicates=Duplicates
+inventoryInsightNotRecognised=Not Recognized
+inventoryInsightNotFieldReplacable=Not Field Replaceable
+inventoryInsightOthers=Others
+
+## SNTC USER ROLES
+sntcCustAdmin=CustomerAdmin
+sntcCBRAdmin=CBRAdmin
+sntcCustUser=CustomerUser
+sntcCBRUser=CBRUser
+sntcGlobalAppAdmin=CiscoSNTCGloAppAdmin
+sntcGlobalAppAdminParty=ALL_PARTY

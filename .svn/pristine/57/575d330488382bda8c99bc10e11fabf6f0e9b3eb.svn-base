@@ -1,0 +1,163 @@
+package com.cisco.cstg.autotools.tests;
+
+import static org.junit.Assert.*;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+
+
+
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.test.annotation.Repeat;
+
+import com.cisco.cstg.autotools.support.configuration.ComponentConfiguration;
+import com.cisco.cstg.autotools.support.configuration.Configuration;
+import com.cisco.cstg.autotools.tests.pages.ApplicationSettingsPage;
+import com.cisco.cstg.autotools.tests.pages.BasePage;
+import com.cisco.cstg.autotools.tests.pages.InventorySummaryPage;
+import com.cisco.cstg.autotools.tests.pages.LandingPage;
+import com.cisco.cstg.autotools.tests.pages.LoginPage;
+
+
+
+
+public class InventorySummaryTest extends BaseTest {
+	
+	protected static final Logger logger = LoggerFactory.getLogger(InventorySummaryTest.class);
+	LandingPage landingPage;
+	
+	
+	private static final String INVENTORY_ALLSOURCE_DATA="Inventory_AllSource_Data";
+	public ArrayList<String> summaryListData = new ArrayList<String>();
+	private InventorySummaryPage isummaryPage;
+	Configuration paramConfig;
+	@Before
+	public void  setUp() throws Exception {
+		driver = openFireFoxProfileDriverWithoutAuth(BasePage.SNTC_FIREFOX_PROFILE_NAME);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		}
+
+	@After
+	public void tearDown() throws Exception {
+		driver.quit();
+		String verificationErrorString = verificationErrors.toString();
+		if (!"".equals(verificationErrorString)) {
+			fail(verificationErrorString);
+		}
+	}	
+	
+	
+	public void loginToPortal() throws Exception {
+		try{
+			
+		//start the test
+		driver = new LoginPage(driver).loginToPortal(BasePage.baseUrlNextGen, BasePage.username, BasePage.pwd);
+		driver.manage().timeouts().setScriptTimeout(100, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		//wait until the page loads.
+		
+		}
+		catch(Exception exp){
+		  logger.debug("EXCEPTION IN GETTING THE DAO");
+		    final Writer result = new StringWriter();
+		    final PrintWriter printWriter = new PrintWriter(result);
+		    exp.printStackTrace(printWriter);
+		    logger.debug(result.toString());
+		}
+	}
+	
+	@Test
+	public void clickInventorySummary() throws Exception{
+		
+		
+		Configuration paramConfig = new ComponentConfiguration(InventorySummaryTest.class);
+		String [] allsource =paramConfig.getStringValue(INVENTORY_ALLSOURCE_DATA).split(";");
+				
+		try
+		{
+		
+			logger.debug("INSIDE ClickInventory Summary");
+			//Login to portal
+			loginToPortal();
+			
+			logger.debug("INSIDE ClickInventory Summary METHOD: loginToPortal Complete");
+			
+			logger.debug("INSIDE clickInventorySummary");
+		
+			landingPage = new LandingPage(driver);
+			
+			landingPage.waitForLNPLoad();
+			
+			landingPage.clickOnLNPlink(BasePage.INVENTORY_SUMMARY);
+			
+			// click on app setting page and get the app page
+			isummaryPage = new InventorySummaryPage(landingPage.clickOnLNPlink(BasePage.INVENTORY_SUMMARY));
+			
+			isummaryPage.waitForContentArea();
+			
+			summaryListData = isummaryPage.getTableRowData(); // To Retive the Data from Summary Data Grid
+			
+				 int size = summaryListData.size();
+				logger.debug(" Total records in trlist "+size);
+		       	      
+				for(int i=0;i<size;i++)
+		        {
+		           
+		            
+		            String  summaryRow = (String) summaryListData.get(i);
+		            String[] summaryRowValues = summaryRow.split(",");
+		            String[] expectedResult=allsource[i].split(",");
+		            String rowCategoryName="";
+		            	for(int j=1;j<summaryRowValues.length;j++)  {
+		            		
+							//System.out.println(summaryRowValues[j]); 
+		            		//System.out.println(expectedResult[j]); 
+		            		//assertEquals(expectedResult[j]+ "is ",expectedResult[j], summaryRowValues[j]);
+		            		//assertTrue(expectedResult[j], summaryRowValues[j]);
+		            		 if(j==1)
+		            			 rowCategoryName = summaryRowValues[j]+"  : ";
+		            		 else
+		            			 rowCategoryName=rowCategoryName+" ||"+summaryRowValues[j];
+		            		 
+		            		if(expectedResult[j].equalsIgnoreCase(summaryRowValues[j]))
+		            			{
+			            			logger.debug(rowCategoryName+expectedResult[j]+ "  is Pass");
+			            			assertEquals(expectedResult[j]+ "is ",expectedResult[j], summaryRowValues[j]);
+		            			}
+		            		else{
+			            			assertEquals(expectedResult[j]+ "is ",expectedResult[j], summaryRowValues[j]);
+			            			logger.debug(rowCategoryName+expectedResult[j]+ "  is Fail");
+		            			}
+		            			
+		            		
+		            	}
+		            	logger.debug(rowCategoryName+"    is Done ");	
+		            	
+		           
+		        }
+	    
+		
+		}
+		catch(Exception exp){
+		  logger.debug("EXCEPTION IN click InventorySummary method");
+		    final Writer result = new StringWriter();
+		    final PrintWriter printWriter = new PrintWriter(result);
+		    exp.printStackTrace(printWriter);
+		    logger.debug(result.toString());
+		}		
+	}
+	
+
+}

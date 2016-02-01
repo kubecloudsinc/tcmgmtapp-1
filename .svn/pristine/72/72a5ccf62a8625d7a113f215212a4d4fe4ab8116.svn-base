@@ -1,0 +1,8 @@
+[subject]    
+Hello World Test Email Template.  Do Not Delete.  An {alpha} in the subject {beta}.
+[body]
+This testing template is intended to show that the Email locator can find templates
+and {gamma} {alpha}ions properly. It has multiple {beta}s:
+	And tabbed {beta}s.
+	And more tabbed {beta}s.
+When {gamma}ed, all of the {alpha}ions should be resolved.

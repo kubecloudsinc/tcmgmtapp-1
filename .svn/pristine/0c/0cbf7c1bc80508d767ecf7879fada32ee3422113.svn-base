@@ -1,0 +1,75 @@
+package com.cisco.cstg.autotools.teststhreads;
+
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Request;
+import org.junit.runner.Result;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class JunitTestExecutor implements Runnable{
+
+	private static final Logger logger = LoggerFactory.getLogger(LoginToBSOThread.class);
+	private Class<?> junitTestClassName;
+	private String junitTestMethodName;
+	
+	private String RUN_INDICATOR;
+	private static final String ALL_METHODS="ALL";
+	private static final String ONLY_ONE="ONE";
+	private static final String SELECT_FEW = "SELECT";
+	
+	/**
+	 * Constructor to run just one test out of many in a given class
+	 * 
+	 * @param junitTestClassName
+	 * @param junitTestMethodName
+	 */
+	public JunitTestExecutor(Class<?> junitTestClassName, String junitTestMethodName) {
+		super();
+		setJunitTestClassName(junitTestClassName);
+		setJunitTestMethodName(junitTestMethodName);
+		RUN_INDICATOR = ONLY_ONE;
+		
+	}
+	
+	/**
+	 * Constructor to run all tests included in a given Junit class
+	 * @param junitTestClassName
+	 */
+	public JunitTestExecutor(Class<?> junitTestClassName) {
+		super();
+		setJunitTestClassName(junitTestClassName);
+		RUN_INDICATOR = ALL_METHODS;
+	}	
+
+	@Override
+	public void run() {
+		if(RUN_INDICATOR.equals(ALL_METHODS)){
+			JUnitCore.runClasses(getJunitTestClassName());
+		}else if(RUN_INDICATOR.equals(ONLY_ONE)){
+			JUnitCore junit = new JUnitCore();
+			logger.debug("Start running Junit Method: "+getJunitTestMethodName()+" in Test Class: "+getJunitTestClassName().getName());
+			Request request = Request.method(getJunitTestClassName(),getJunitTestMethodName());
+			Result rs = junit.run(request);
+			logger.debug("Time taken to run Junit Method: "+getJunitTestMethodName()+" in Test Class: "+getJunitTestClassName().getName()
+	    		   + " is: "+new Long(rs.getRunTime()).toString());
+		}else if(RUN_INDICATOR.equals(SELECT_FEW)){
+			//TODO write code for running the loop on the request of Junits that needs to be run
+		}
+	}
+
+	public Class<?> getJunitTestClassName() {
+		return junitTestClassName;
+	}
+
+	public void setJunitTestClassName(Class<?> junitTestClassName) {
+		this.junitTestClassName = junitTestClassName;
+	}
+
+	public String getJunitTestMethodName() {
+		return junitTestMethodName;
+	}
+
+	public void setJunitTestMethodName(String junitTestMethodName) {
+		this.junitTestMethodName = junitTestMethodName;
+	}
+}

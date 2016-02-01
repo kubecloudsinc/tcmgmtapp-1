@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Context [ ]>
+<Context>
+	<!-- java:comp/env/jdbc/sforums -> java:jdbc/sforums -->
+	<ResourceLink name="jdbc/autotools" global="jdbc/autotools" />
+	<ResourceLink name="jdbc/factdb" global="jdbc/factdb" />
+</Context>

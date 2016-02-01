@@ -1,0 +1,8 @@
+
+package com.cisco.cstg.autotools.dao;
+
+import com.cisco.cstg.autotools.domain.TestSuite;
+
+public interface TestSuiteDao extends IdentifiableEntityDao<TestSuite> {
+
+}

@@ -1,0 +1,14 @@
+#  all the configuration for LNP are in this config file
+
+#Web Elements details
+selectButtonClassName=ssueDomainFilterEditAction
+contentAreaClassName=ssueContentArea
+lnpContainerClassName=ssueLNPContainer
+dashboardClassName=ssueDeliverableName
+titleSpanClassName=ssue-title
+ssueDomainFilterTag=ssue-domainfilter
+ssueDomainFilterClassName=ssueDomainFilter
+ssueDomainFilterLabelClassName=ssueDomainFilterLabel 
+ssueDomainFilterValueClassName=ssueDomainFilterValue 
+ssueDomainFilterCustomerLabel=Customer: 
+ssueDomainFilterInventoryLabel=Inventory and Segment:

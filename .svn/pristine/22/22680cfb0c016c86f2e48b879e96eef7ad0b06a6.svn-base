@@ -1,0 +1,442 @@
+package com.cisco.cstg.autotools.domain.factdb;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+@Entity
+@Table(name = "EQUIPMENT",schema="XMP_ADMIN")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+public class Equipment implements Serializable {
+
+	private static final long serialVersionUID = 7653905209095238390L;
+
+    private Long equipmentId;
+
+	    @Id
+	    @GeneratedValue(strategy = GenerationType.AUTO)
+	    @Column(name="EQUIPMENT_ID")
+	    public Long getEquipmentId() {
+	        return this.equipmentId;
+	    }
+
+	    public void setEquipmentId(Long id) {
+	        this.equipmentId = id;
+	    }
+
+	    @Transient
+	    public boolean isEquipmentIdIdSet() {
+	        return this.equipmentId != null;
+	    }
+
+	    private String administrativeStateCode;
+	    
+	    @Size(max=255)
+	    @Column(name="ADMINISTRATIVESTATECODE", length = 255)
+        public String getAdministrativeStateCode() {
+			return administrativeStateCode;
+		}
+
+		public void setAdministrativeStateCode(String administrativeStateCode) {
+			this.administrativeStateCode = administrativeStateCode;
+		}
+
+		private String assemblyNumber;
+		
+		@Column(name="ASSEMBLYNUMBER", length=255)
+        public String getAssemblyNumber() {
+			return assemblyNumber;
+		}
+
+		public void setAssemblyNumber(String assemblyNumber) {
+			this.assemblyNumber = assemblyNumber;
+		}
+
+		private String assemblyRevision;
+		
+		@Column(name="ASSEMBLYREVISION", length=32)
+        public String getAssemblyRevision() {
+			return assemblyRevision;
+		}
+
+		public void setAssemblyRevision(String assemblyRevision) {
+			this.assemblyRevision = assemblyRevision;
+		}
+
+		private String deviationNumber;
+		
+		@Column(name="DEVIATIONNUMBER", length=255)
+        public String getDeviationNumber() {
+			return deviationNumber;
+		}
+
+		public void setDeviationNumber(String deviationNumber) {
+			this.deviationNumber = deviationNumber;
+		}
+
+		private Long equipmentType;
+		
+		@Column(name="EQUIPMENTTYPE")
+        public Long getEquipmentType() {
+			return equipmentType;
+		}
+
+		public void setEquipmentType(Long equipmentType) {
+			this.equipmentType = equipmentType;
+		}
+
+		private String hardwareVersion;
+		
+		@Column(name="HARDWAREVERSION", length=128)
+        public String getHardwareVersion() {
+			return hardwareVersion;
+		}
+
+		public void setHardwareVersion(String hardwareVersion) {
+			this.hardwareVersion = hardwareVersion;
+		}
+		private Long isFruable;
+
+		@Column(name="ISFRUABLE")
+		public Long getIsFruable() {
+			return isFruable;
+		}
+
+		public void setIsFruable(Long isFruable) {
+			this.isFruable = isFruable;
+		}
+		
+        private Long isReportingAllarmsAllowed;  
+        
+    	@Column(name="ISREPORTINGALARMSALLOWED")
+        public Long getIsReportingAllarmsAllowed() {
+			return isReportingAllarmsAllowed;
+		}
+
+		public void setIsReportingAllarmsAllowed(Long isReportingAllarmsAllowed) {
+			this.isReportingAllarmsAllowed = isReportingAllarmsAllowed;
+		}
+
+	   private Date manufactureDate;
+		
+	   @Column(name="MANUFACTUREDDATE")
+	   @Temporal(TemporalType.TIMESTAMP)
+		public Date getManufactureDate() {
+			return manufactureDate;
+		}
+
+		public void setManufactureDate(Date manufactureDate) {
+			this.manufactureDate = manufactureDate;
+		}
+
+		private String manufacturer;
+		
+        @Column(name="MANUFACTURER")
+		public String getManufacturer() {
+			return manufacturer;
+		}
+
+		public void setManufacturer(String manufacturer) {
+			this.manufacturer = manufacturer;
+		}
+
+		private String operationalStateCode;
+		
+		@Column(name="OPERATIONALSTATECODE", length=255)
+		public String getOperationalStateCode() {
+			return operationalStateCode;
+		}
+
+		public void setOperationalStateCode(String operationalStateCode) {
+			this.operationalStateCode = operationalStateCode;
+		}
+
+		private String partnumber;
+		
+		@Column(name="PARTNUMBER")
+		public String getPartnumber() {
+			return partnumber;
+		}
+
+		public void setPartnumber(String partnumber) {
+			this.partnumber = partnumber;
+		}
+
+		private String productFamily;
+		
+		@Column(name="PRODUCTFAMILY", length=255)
+		public String getProductFamily() {
+			return productFamily;
+		}
+
+		public void setProductFamily(String productFamily) {
+			this.productFamily = productFamily;
+		}
+		
+		private String productId;
+		
+		@Column(name="PRODUCTID", length=255)
+		public String getProductId() {
+			return productId;
+		}
+
+		public void setProductId(String productId) {
+			this.productId = productId;
+		}
+
+		private String productName;
+		
+		@Column(name="PRODUCTNAME", length=255)
+		public String getProductName() {
+			return productName;
+		}
+
+		public void setProductName(String productName) {
+			this.productName = productName;
+		}
+
+		private String serialNumber;
+		
+		@Column(name="SERIALNUMBER", length=150)
+		public String getSerialNumber() {
+			return serialNumber;
+		}
+
+		public void setSerialNumber(String serialNumber) {
+			this.serialNumber = serialNumber;
+		}
+
+		private Long serviceState;
+		
+		@Column(name="SERVICESTATE")
+		public Long getServiceState() {
+			return serviceState;
+		}
+
+		public void setServiceState(Long serviceState) {
+			this.serviceState = serviceState;
+		}
+
+		private String udi;
+		
+		@Column(name="UDI", length=255)
+		public String getUdi() {
+			return udi;
+		}
+
+		public void setUdi(String udi) {
+			this.udi = udi;
+		}
+
+		private String vendorEquipmentType;
+		
+		@Column(name="VENDOREQUIPMENTTYPE", length=120)
+		public String getVendorEquipmentType() {
+			return vendorEquipmentType;
+		}
+
+		public void setVendorEquipmentType(String vendorEquipmentType) {
+			this.vendorEquipmentType = vendorEquipmentType;
+		}
+		private String entPhysicalContainedIn;
+		
+		@Column(name="ENTPHYSICALCONTAINEDIN", length=255)
+		public String getEntPhysicalContainedIn() {
+			return entPhysicalContainedIn;
+		}
+
+		public void setEntPhysicalContainedIn(String entPhysicalContainedIn) {
+			this.entPhysicalContainedIn = entPhysicalContainedIn;
+		}
+		private String entPhysicalIndex;
+		
+		@Column(name="ENTPHYSICALINDEX", length=255)
+		public String getEntPhysicalIndex() {
+			return entPhysicalIndex;
+		}
+
+		public void setEntPhysicalIndex(String entPhysicalIndex) {
+			this.entPhysicalIndex = entPhysicalIndex;
+		}
+//		              ,
+		private String objectCreatedBy;
+		
+		@Column(name="OBJECTCREATEDBY", length=255, columnDefinition="VARCHAR2(255 BYTE) DEFAULT 'NA'")
+		public String getObjectCreatedBy() {
+			return objectCreatedBy;
+		}
+
+		public void setObjectCreatedBy(String objectCreatedBy) {
+			this.objectCreatedBy = objectCreatedBy;
+		}
+
+		private Date objectCreationDate;
+		
+		@Column(name="OBJECTCREATIONDATE")
+		@Temporal(TemporalType.TIMESTAMP)
+		public Date getObjectCreationDate() {
+			return objectCreationDate;
+		}
+
+		public void setObjectCreationDate(Date objectCreationDate) {
+			this.objectCreationDate = objectCreationDate;
+		}
+
+		private Date objectLastUpdateDate;
+		
+		@Column(name="OBJECTLASTUPDATEDATE")
+		@Temporal(TemporalType.TIMESTAMP)		
+		public Date getObjectLastUpdateDate() {
+			return objectLastUpdateDate;
+		}
+
+		public void setObjectLastUpdateDate(Date objectLastUpdateDate) {
+			this.objectLastUpdateDate = objectLastUpdateDate;
+		}
+
+		private String objectLastUpdatedBy;
+		
+		@Column(name="OBJECTLASTUPDATEDBY", columnDefinition="VARCHAR2(255 BYTE) DEFAULT 'NA'")
+		public String getObjectLastUpdatedBy() {
+			return objectLastUpdatedBy;
+		}
+
+		public void setObjectLastUpdatedBy(String objectLastUpdatedBy) {
+			this.objectLastUpdatedBy = objectLastUpdatedBy;
+		}
+
+		private String generatedKey;
+		
+		@Column(name="GENERATEDKEY", columnDefinition="VARCHAR2(255 BYTE) DEFAULT 'NA'", nullable=false)
+		public String getGeneratedKey() {
+			return generatedKey;
+		}
+
+		public void setGeneratedKey(String generatedKey) {
+			this.generatedKey = generatedKey;
+		}
+
+//		    ,
+		private Long numberOfImmediateChildren;
+		
+		@Column(name="NUMBEROFIMMEDIATECHILDREN", columnDefinition="NUMBER(10) DEFAULT 0")
+		public Long getNumberOfImmediateChildren() {
+			return numberOfImmediateChildren;
+		}
+
+		public void setNumberOfImmediateChildren(Long numberOfImmediateChildren) {
+			this.numberOfImmediateChildren = numberOfImmediateChildren;
+		}
+
+		private Long partIdKey;
+		
+		@Column(name="PARTYIDKEY", columnDefinition="NUMBER(10) DEFAULT 0", nullable=false)
+		public Long getPartIdKey() {
+			return partIdKey;
+		}
+
+		public void setPartIdKey(Long partIdKey) {
+			this.partIdKey = partIdKey;
+		}
+
+		private String pcbSerialNumKey;
+		
+		@Column(name="PCBSERIALNUMKEY", length=255, nullable=false)
+		public String getPcbSerialNumKey() {
+			return pcbSerialNumKey;
+		}
+
+		public void setPcbSerialNumKey(String pcbSerialNumKey) {
+			this.pcbSerialNumKey = pcbSerialNumKey;
+		}
+
+//		                 VARCHAR2(255 BYTE) NOT NULL,
+		private String productIdKey;
+		
+		@Column(name="PRODUCTIDKEY", length=255, nullable=false )
+		public String getProductIdKey() {
+			return productIdKey;
+		}
+
+		public void setProductIdKey(String productIdKey) {
+			this.productIdKey = productIdKey;
+		}
+
+		private String productVersionIdKey;
+		
+		@Column(name="PRODUCTVERSIONIDKEY", length=255, nullable=false)
+		public String getProductVersionIdKey() {
+			return productVersionIdKey;
+		}
+
+		public void setProductVersionIdKey(String productVersionIdKey) {
+			this.productVersionIdKey = productVersionIdKey;
+		}
+
+		private String serialNumKey;
+		
+		@Column(name="SERIALNUMKEY", length=255, nullable=false)
+		public String getSerialNumKey() {
+			return serialNumKey;
+		}
+
+		public void setSerialNumKey(String serialNumKey) {
+			this.serialNumKey = serialNumKey;
+		}
+
+		private Long containingEquipmentId;
+		
+		@Column(name="CONTAININGEQUIPMENT_ID", columnDefinition="NUMBER(19)")
+		public Long getContainingEquipmentId() {
+			return containingEquipmentId;
+		}
+
+		public void setContainingEquipmentId(Long containingEquipmentId) {
+			this.containingEquipmentId = containingEquipmentId;
+		}
+
+		private Long owningPartyId;
+		
+		@Column(name="OWNINGPARTY_ID", columnDefinition="NUMBER(19)")
+		public Long getOwningPartyId() {
+			return owningPartyId;
+		}
+
+		public void setOwningPartyId(Long owningPartyId) {
+			this.owningPartyId = owningPartyId;
+		}
+
+		private Long parentEquipmentId;
+		
+		@Column(name="PARENTEQUIPMENT_ID", columnDefinition="NUMBER(19)" )
+		public Long getParentEquipmentId() {
+			return parentEquipmentId;
+		}
+
+		public void setParentEquipmentId(Long parentEquipmentId) {
+			this.parentEquipmentId = parentEquipmentId;
+		}
+		private String pathToRoot;
+
+		@Column(name="PATHTOROOT", length=255)
+		public String getPathToRoot() {
+			return pathToRoot;
+		}
+
+		public void setPathToRoot(String pathToRoot) {
+			this.pathToRoot = pathToRoot;
+		}
+}

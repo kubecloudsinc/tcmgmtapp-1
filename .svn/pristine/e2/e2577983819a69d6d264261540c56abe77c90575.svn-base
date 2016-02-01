@@ -1,0 +1,125 @@
+package com.cisco.cstg.autotools.tests;
+
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.io.FileUtils;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.internal.ProfilesIni;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.cisco.cstg.autotools.semantic.test.ApplicationConstants;
+import com.cisco.cstg.autotools.support.configuration.Configuration;
+import com.cisco.cstg.autotools.tests.pages.BasePage;
+import com.cisco.cstg.autotools.tests.pages.InventorySummaryPage;
+import com.cisco.cstg.autotools.tests.pages.LandingPage;
+import com.cisco.cstg.autotools.tests.pages.LoginPage;
+
+/**
+ * 
+ * @author sichituk
+ *
+ */
+public class InventorySummaryTest extends BaseTest {
+	
+	protected static final Logger logger = LoggerFactory.getLogger(InventorySummaryTest.class);
+//	private static final String INVENTORY_ALLSOURCE_DATA="Inventory_AllSource_Data";
+	private static final String INV_SUMMARY_TEST_EXPECTED_VALUES_FILE_NAME = "InventorySummaryTestExpectedValues.txt";
+	
+	Configuration paramConfig;
+	
+	@Before
+	public void  setUp() throws Exception {
+//		driver = openFireFoxProfileDriverWithoutAuth(BasePage.SNTC_FIREFOX_PROFILE_NAME);
+//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		}
+
+	@After
+	public void tearDown() throws Exception {
+//		driver.quit();
+//		String verificationErrorString = verificationErrors.toString();
+//		if (!"".equals(verificationErrorString)) {
+//			fail(verificationErrorString);
+//		}
+	}	
+	
+	@BeforeClass
+	public static void extractData(){
+		
+//		Configuration paramConfig = new ComponentConfiguration(InventorySummaryTest.class);
+//		String [] allsource =paramConfig.getStringValue(INVENTORY_ALLSOURCE_DATA).split(";");
+		WebDriver staticDriver;
+				
+		try
+		{
+			FirefoxProfile profile = null;
+			profile = new ProfilesIni().getProfile(BasePage.SNTC_FIREFOX_PROFILE_NAME);
+			staticDriver = new FirefoxDriver(profile);
+			staticDriver.manage().timeouts().implicitlyWait(TestConstants.WEBDRIVER_IMPLICIT_TIMEOUT_VALUE, TimeUnit.SECONDS);
+			
+			logger.debug("INSIDE ClickInventory Summary");
+			//Login to portal
+			//start the test
+			staticDriver = new LoginPage(staticDriver).loginToPortal(BasePage.baseUrlNextGen, BasePage.username, BasePage.pwd);
+			staticDriver.manage().timeouts().setScriptTimeout(100, TimeUnit.SECONDS);
+			staticDriver.manage().window().maximize();
+			
+			logger.debug("INSIDE ClickInventory Summary METHOD: loginToPortal Complete");
+			
+			logger.debug("INSIDE clickInventorySummary");
+		
+			LandingPage landingPage;
+			landingPage = new LandingPage(staticDriver);
+			
+			landingPage.waitForLNPLoad();
+			
+			landingPage.clickOnLNPlink(BasePage.INVENTORY_SUMMARY);
+			
+			InventorySummaryPage invSummaryPage;
+			// click on app setting page and get the app page
+			invSummaryPage = new InventorySummaryPage(landingPage.clickOnLNPlink(BasePage.INVENTORY_SUMMARY));
+			
+			invSummaryPage.waitForContentArea();
+			
+			ArrayList<String> summaryListData = new ArrayList<String>();
+			summaryListData = invSummaryPage.getTableRowData(); // To Retive the Data from Summary Data Grid
+			
+			int size = summaryListData.size();
+			logger.debug(" Total records in trlist "+size);
+			staticDriver.quit();
+
+			// get the Directory name of the file.
+			File expectedValuesFile = new File(
+										ApplicationConstants.getClasspathDirectory().toString(),
+										INV_SUMMARY_TEST_EXPECTED_VALUES_FILE_NAME
+									  ).getAbsoluteFile();
+			logger.debug("CReated the file object");
+			
+			FileUtils.writeLines(expectedValuesFile, summaryListData);
+			
+		}
+		catch(Exception exp){
+		  logger.debug("EXCEPTION IN click InventorySummary method");
+		    final Writer result = new StringWriter();
+		    final PrintWriter printWriter = new PrintWriter(result);
+		    exp.printStackTrace(printWriter);
+		    logger.debug(result.toString());
+		}		
+	}
+	
+	@Test
+	public void clickInventorySummary() throws Exception{
+		
+	}
+}

@@ -1,0 +1,78 @@
+package com.cisco.cstg.autotools.domain.appdb;
+
+/**
+ * UI encapsulation of Customer info on application landing page.
+ * @author sichituk
+ *
+ */
+public class CustomerInfo {
+	
+	public static final String MULTI_INVENTORY_SELECTION_INDICATOR="SELECTED";
+	public static final String ALL_INVENTORY_SELECTION_INDICATOR="All Inventory and Segment";
+	
+	private String customerLabel;
+	private String customerName;
+	
+	private String inventoryLabel;
+	private String inventoryInfo;
+	
+	private String customerRole;
+	
+	public String getCustomerLabel() {
+		return customerLabel;
+	}
+	public void setCustomerLabel(String customerLabel) {
+		this.customerLabel = customerLabel;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getInventoryLabel() {
+		return inventoryLabel;
+	}
+	public void setInventoryLabel(String inventoryLabel) {
+		this.inventoryLabel = inventoryLabel;
+	}
+	public String getInventoryInfo() {
+		return inventoryInfo;
+	}
+	public void setInventoryInfo(String inventoryInfo) {
+		this.inventoryInfo = inventoryInfo;
+	}
+	public String getCustomerRole() {
+		return customerRole;
+	}
+	public void setCustomerRole(String customerRole) {
+		this.customerRole = customerRole;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuffer custInfoAsString=new StringBuffer();
+		
+		custInfoAsString.append("CustomerLabel:");
+		custInfoAsString.append(" ");
+		custInfoAsString.append(customerLabel);
+		custInfoAsString.append("; ");
+
+		custInfoAsString.append("CustomerName:");
+		custInfoAsString.append(" ");
+		custInfoAsString.append(customerName);
+		custInfoAsString.append("; ");
+
+		custInfoAsString.append("InventoryLabel:");
+		custInfoAsString.append(" ");
+		custInfoAsString.append(inventoryLabel);
+		custInfoAsString.append("; ");
+		
+		custInfoAsString.append("Inventory:");
+		custInfoAsString.append(" ");
+		custInfoAsString.append(inventoryInfo);
+		custInfoAsString.append("; ");
+		
+		return custInfoAsString.toString();
+	}
+}

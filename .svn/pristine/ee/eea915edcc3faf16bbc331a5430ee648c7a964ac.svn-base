@@ -1,0 +1,130 @@
+package com.cisco.cstg.autotools.tests;
+
+import static org.junit.Assert.fail;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.concurrent.TimeUnit;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.cisco.cstg.autotools.tests.pages.BasePage;
+import com.cisco.cstg.autotools.tests.pages.LandingPage;
+import com.cisco.cstg.autotools.tests.pages.LoginPage;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations=
+{
+ "/applicationContext.xml",
+ "/applicationContext-security.xml",
+ "/spring-servlet.xml"
+}
+)
+public class TestLogin extends BaseTest {
+	
+	protected static final Logger logger = LoggerFactory.getLogger(TestLogin.class);
+
+	@Before
+	public void setUp() throws Exception {
+			driver = openFireFoxProfileDriverWithoutAuth(BasePage.SNTC_FIREFOX_PROFILE_NAME);
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);			
+	}
+
+	@After
+	public void tearDown() throws Exception {
+//	    driver.quit();
+		String verificationErrorString = verificationErrors.toString();
+		if (!"".equals(verificationErrorString)) {
+			fail(verificationErrorString);
+		}
+	}	
+	
+	@Test
+	public void loginToPortal() throws Exception {
+		try{
+			
+		//start the test
+		driver = new LoginPage(driver).loginToPortal(BasePage.baseUrlNextGen, BasePage.username, BasePage.pwd);
+		driver.manage().timeouts().setScriptTimeout(100, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+		//wait until the page loads.
+		
+		}
+		catch(Exception exp){
+		  logger.debug("EXCEPTION IN GETTING THE DAO");
+		    final Writer result = new StringWriter();
+		    final PrintWriter printWriter = new PrintWriter(result);
+		    exp.printStackTrace(printWriter);
+		    logger.debug(result.toString());
+		}
+	}
+	
+	@Test
+	public void clickHomeView() throws Exception{
+		try{
+		
+		logger.debug("INSIDE ClickHomeView METHOD");
+		//Login to portal
+		loginToPortal();
+		
+		logger.debug("INSIDE ClickHomeView METHOD: loginToPortal Complete");
+		
+		// find the LNP and click on the Home View.
+		LandingPage landingPage = new LandingPage(driver);
+		//
+		logger.debug("INSIDE ClickHomeView METHOD: Landing page obtained");
+		driver = landingPage.clickOnLNPlink(BasePage.APPLICATION_SETTINGS);
+		logger.debug("INSIDE ClickHomeView METHOD: Clicked app settings");
+//		driver = landingPage.clickOnDashboard(BasePage.CALENDAR);
+		driver = landingPage.clickOnLNPlink(BasePage.MY_REPORTS);
+		driver = landingPage.clickOnLNPlink(BasePage.USEFUL_LINKS);
+		driver = landingPage.clickOnLNPlink(BasePage.NOTIFICATIONS);
+		driver = landingPage.clickOnLNPlink(BasePage.ADMIN);
+		driver = landingPage.clickOnLNPlink(BasePage.ALERT_MANAGEMENT);
+		driver = landingPage.clickOnLNPlink(BasePage.CONTRACT_MANAGEMENT);
+		driver = landingPage.clickOnLNPlink(BasePage.DEVICE_DIAGNOSTICS);
+		driver = landingPage.clickOnLNPlink(BasePage.INVENTORY_MANAGEMENT);
+		driver = landingPage.clickOnLNPlink(BasePage.SMART_NET_TOTAL_CARE);
+		}
+		catch(Exception exp){
+		  logger.debug("EXCEPTION IN click home view method");
+		    final Writer result = new StringWriter();
+		    final PrintWriter printWriter = new PrintWriter(result);
+		    exp.printStackTrace(printWriter);
+		    logger.debug(result.toString());
+		}		
+	}
+	
+	@Test
+	public void chooseInventory() throws Exception{
+		try{
+			
+		//Login to portal
+		loginToPortal();
+		
+		// find the LNP and click on the Home View.
+		LandingPage landingPage = new LandingPage(driver);
+		
+//		CHARLESTON COUNTY SCHOOL DISTRICT
+		String [] customerNames = new String [] {"CHARLESTON COUNTY SCHOOL DISTRICT","AARP"};
+//		driver = landingPage.choose(customerNames);
+		}
+		catch(Exception exp){
+		  logger.debug("EXCEPTION IN click home view method");
+		    final Writer result = new StringWriter();
+		    final PrintWriter printWriter = new PrintWriter(result);
+		    exp.printStackTrace(printWriter);
+		    logger.debug(result.toString());
+		}		
+	}
+	
+	
+}

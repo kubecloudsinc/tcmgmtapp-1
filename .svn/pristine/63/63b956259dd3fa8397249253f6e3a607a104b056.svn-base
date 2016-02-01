@@ -1,0 +1,27 @@
+#
+#   Page Load Test Parameters file, contains the parameters which are passed to 
+#      page load test. contains the parameter sets for the tests.
+#   Parameter Set is defined as follows:
+#     username  -- User Name to be used to log into the portal
+#     password  -- password to be used; if the password is for an employee and doesn't want to be displayed 
+#					then should be HIDDEN. The program will retreive from the initiation of the script thru UI
+#     Customername -- the name of the customer.
+#     Inventory name -- the name of the inventory.
+#
+usernames=sntcprodtest,sichituk
+#,cisco_sntccustuser01,appAdministrator,sntcpartner_admin,sichituk,sntcpartner_admin2
+passwords=Cisco123,HIDDEN
+#,Cisco!23,goSNTC2014,goSNTC2015,HIDDEN,goSNTC2015
+customernames=CISCO SYSTEMS INC,ALTISOURCE  BUSINESS SL PVT LTD
+#,AEGIS TECH LTD,CISCO SYSTEMS INC FOR US INTERNAL DEMO EVAL ONLY,CISCO SYSTEMS INC,CHARLESTON COUNTY SCHOOL DISTRICT,CISCO SYSTEMS INC 
+inventorynames=All Inventory and Segment,All Inventory and Segment
+#,All Inventory and Segment,All Inventory and Segment,All Inventory and Segment,All Inventory and Segment,All Inventory and Segment
+url=https://tools.cisco.com/smartservices/nextgen
+
+#
+#cisco_sntccustuser01   Cisco!23
+#sntcprodtest    Cisco123
+#appAdministrator goSNTC2014
+#sntcpartner_admin2  goSNTC2015
+#sntcpartner_admin   goSNTC2015
+#sichituk    HIDDEN

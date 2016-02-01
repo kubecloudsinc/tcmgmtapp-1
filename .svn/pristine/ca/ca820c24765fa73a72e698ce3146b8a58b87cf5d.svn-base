@@ -1,0 +1,15 @@
+package com.cisco.cstg.autotools.tests.pages;
+
+import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class InventorySummaryPage extends LandingPage {
+
+	protected static final Logger logger = LoggerFactory.getLogger(InventorySummaryPage.class);
+	
+	public InventorySummaryPage(WebDriver driver) {
+		super(driver);
+		
+	}
+}
