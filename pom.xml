@@ -10,7 +10,7 @@
 
 	<properties>
 		<final-name>autotools</final-name>
-		<webapp-directory>C:\Tomcat\apache-tomcat-7.0.39\webapps</webapp-directory>
+		<webapp-directory>\Tomcat\apache-tomcat-7.0.39\webapps</webapp-directory>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<compiler-plugin-version>3.1</compiler-plugin-version>
 		<war-plugin-version>2.3</war-plugin-version>
