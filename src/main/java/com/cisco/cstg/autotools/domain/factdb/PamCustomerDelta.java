@@ -16,7 +16,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
-@Table(name = "PAM_CUSTOMER_DELTA",schema="PAM_ADMIN")
+@Table(name = "PAM_CUSTOMER_DELTA",schema="HR")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class PamCustomerDelta implements Serializable {
 

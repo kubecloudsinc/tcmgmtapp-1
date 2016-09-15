@@ -18,7 +18,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
-@Table(name = "EQUIPMENT",schema="XMP_ADMIN")
+@Table(name = "EQUIPMENT",schema="HR")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Equipment implements Serializable {
 
