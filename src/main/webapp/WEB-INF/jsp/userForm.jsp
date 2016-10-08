@@ -19,10 +19,6 @@
       <tags:textInput path="title" label="Title" />
       <tags:textInput path="organization" label="Organization" />
       <tags:textInput path="email" label="Email" required="${true}" autocomplete="off"/>
-      <c:if test="${not requestScope.profile}">
-        <tags:booleanInput path="enabled" label="Enabled"/>
-        <tags:booleanInput path="admin" label="Admin"/>
-      </c:if>
     </spring:nestedPath>
     <c:set var="passwordRequired" value="${not userAndPassword.user.idSet}"/>
     <tags:passwordInput path="password" label="Password" autocomplete="off" 

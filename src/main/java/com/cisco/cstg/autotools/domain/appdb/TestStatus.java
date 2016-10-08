@@ -15,7 +15,9 @@ import javax.validation.constraints.Past;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.junit.runner.Result;
+
+import com.cisco.cstg.autotools.semantic.test.TestResult;
+
 
 @Entity
 @Table(name = "TABLE_TEST_STATUS")
@@ -45,7 +47,7 @@ public class TestStatus extends IdentifiableEntity {
     /**
      * stores the test result from the last execution. its a transient one and not persisted.
      */
-    private Result testResult;
+    private TestResult testResult;
     
     private String reportName;
     
@@ -139,11 +141,10 @@ public class TestStatus extends IdentifiableEntity {
     }
 
     @Transient
-	public Result getTestResult() {
+	public TestResult getTestResult() {
 		return testResult;
 	}
-
-	public void setTestResult(Result testResult) {
+	public void setTestResult(TestResult testResult) {
 		this.testResult = testResult;
 	}
 }

@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +35,7 @@ import com.cisco.cstg.autotools.support.email.PostOffice;
 import com.cisco.cstg.autotools.support.email.SystemPostOffice;
 import com.cisco.cstg.autotools.tests.TestConstants;
 import com.cisco.cstg.autotools.teststhreads.JunitTestExecutor;
+import com.cisco.cstg.autotools.teststhreads.TestExecutor;
 
 @Service
 public class TestManager extends BaseManager implements TestMonitor {
@@ -52,7 +53,7 @@ public class TestManager extends BaseManager implements TestMonitor {
 	
 	@Autowired
 	private TestDao testDao;
-	
+
 	
 	@Override
 	public void runTest(Long testId) {
@@ -61,38 +62,18 @@ public class TestManager extends BaseManager implements TestMonitor {
 			TestStatus testStatus = testStatusDao.getByTestId(testId);
 			testStatus.setTestStatus(TestStatus.RUNNING);
 			testStatusDao.save(testStatus);
-
-			logger.debug("The test Class Name: {}",testStatus.getTest().getTestClassName());
-			logger.debug("The test Method Name: {}",testStatus.getTest().getTestMethodName());
+			logger.debug("UPDATED AND SAVED TO RUNNING STATUS");
 			logger.debug("The test  Name: {}",testStatus.getTest().getTestName());
-			
-			// run the test
-//			JunitTestExecutor executor = new JunitTestExecutor(TestLogin.class, "clickHomeView");
-			JunitTestExecutor executor = new JunitTestExecutor(Class.forName(testStatus.getTest().getTestClassName()), 
-					testStatus.getTest().getTestMethodName());
-			executor.run();
-			
-			Result testResult = executor.getTestResult();
-
-			testStatus.setTestResult(testResult);
-			// generate a test report.
-			String testReportURL = generateTestReport(testStatus.getTest(), testResult);
-			
-			// update the test with the URL link
-			testStatus.setReportName(testReportURL);
-			
-			// update the status
-			testStatus.setTestStatus("Passed");
-			testStatusDao.save(testStatus);
-
-		} catch(ClassNotFoundException cExp){
-			// return error message that the class name is not correct
-			// this shud not happen as this is configured in the database.
-			logger.debug("ClassNotFound exception");
-			final Writer result = new StringWriter();
-			final PrintWriter printWriter = new PrintWriter(result);
-			cExp.printStackTrace(printWriter);
-			logger.debug(result.toString());
+			scheduleATest(new TestExecutor(testId));
+//		} 
+//		catch(ClassNotFoundException cExp){
+//			// return error message that the class name is not correct
+//			// this shud not happen as this is configured in the database.
+//			logger.debug("ClassNotFound exception");
+//			final Writer result = new StringWriter();
+//			final PrintWriter printWriter = new PrintWriter(result);
+//			cExp.printStackTrace(printWriter);
+//			logger.debug(result.toString());
 		} catch (Exception exp) {
 			logger.debug("EXCEPTION IN GETTING THE DAO");
 			final Writer result = new StringWriter();
@@ -128,28 +109,28 @@ public class TestManager extends BaseManager implements TestMonitor {
 				JunitTestExecutor executor = new JunitTestExecutor(Class.forName
 						(test.getTestClassName()),test.getTestMethodName());
 				executor.run();
-				Result testResult = executor.getTestResult();
+//				Result testResult = executor.getTestResult();
 
-				List<Failure> failures = testResult.getFailures();
+//				List<Failure> failures = testResult.getFailures();
 				
-				test.getTestStatus().setTestStatus("Passed");
-				for (Failure failure : failures) {
-					logger.debug("descr: {} Msg: {} Test Header: {} Trace:",
-					failure.getDescription(),
-					failure.getMessage(),
-					failure.getTestHeader());
-					// this test failed.
-					FailedTestResult failedTest = new FailedTestResult();
-					failedTest.setFailMessage(failure.getMessage());
-					failedTest.setTestMethodName(test.getTestMethodName());
-					failedTest.setTestName(test.getTestName());
-					failedTests.add(failedTest);
-						
-					test.getTestStatus().setTestStatus("Failed");	
-				}
-				
-				testDao.save(test);
-				
+//				test.getTestStatus().setTestStatus("Passed");
+//				for (Failure failure : failures) {
+//					logger.debug("descr: {} Msg: {} Test Header: {} Trace:",
+//					failure.getDescription(),
+//					failure.getMessage(),
+//					failure.getTestHeader());
+//					// this test failed.
+//					FailedTestResult failedTest = new FailedTestResult();
+//					failedTest.setFailMessage(failure.getMessage());
+//					failedTest.setTestMethodName(test.getTestMethodName());
+//					failedTest.setTestName(test.getTestName());
+//					failedTests.add(failedTest);
+//						
+//					test.getTestStatus().setTestStatus("Failed");	
+//				}
+//				
+//				testDao.save(test);
+//				
 			}
 
 			testSuiteResult.setTestSuiteName(testSuite.getTestSuiteName());
@@ -213,7 +194,8 @@ public class TestManager extends BaseManager implements TestMonitor {
 		return testReportURL;
 	}
 	
-	private String generateTestReport(Test test, Result testResult){
+	@Override
+	public String generateTestReport(Test test, TestResult testResult){
 		
 		File reportFile=null;
 		String testReportURL  = ApplicationConstants.getUniqueReportURL();
@@ -224,7 +206,7 @@ public class TestManager extends BaseManager implements TestMonitor {
 									   ApplicationConstants.getReportNameFromURL(testReportURL)).getAbsoluteFile();
 			logger.debug("CReated the file object");
 			// create the html string for the report.
-			StringBuilder htmString = createHTMString(test,testResult);
+			StringBuilder htmString = createHTMStringForTest(test,testResult);
 			
 			FileUtils.writeStringToFile(reportFile, 
 					htmString.toString(), ApplicationConstants.APPLICATION_DEFAULT_ENCODING);
@@ -242,7 +224,7 @@ public class TestManager extends BaseManager implements TestMonitor {
 		return testReportURL;
 	}
 	
-	private StringBuilder createHTMString(Test test, Result testResult){
+	private StringBuilder createHTMStringForTest(Test test, TestResult testResult){
 		StringBuilder htmString= new StringBuilder();
 		
 	  htmString.append("<html><body><b><font face=\"Cambria\" >Test Suite Run Report.</font></b><br />	<br /><br />");
@@ -280,11 +262,6 @@ public class TestManager extends BaseManager implements TestMonitor {
 	  List<Failure> failures = testResult.getFailures();
 	  int i=1;
 	  for (Failure failure : failures) {
-		logger.debug("descr: {} Msg: {} Test Header: {} Trace:{}",
-		failure.getDescription(),
-		failure.getMessage(),
-		failure.getTestHeader(),
-		failure.getTrace());
 
 		htmString.append("</tr><tr><td align=\"center\"><font face=\"Cambria\" >");
 		htmString.append(i);
@@ -437,4 +414,15 @@ public class TestManager extends BaseManager implements TestMonitor {
 		}
 		
 	}
+	
+	private void scheduleATest(Runnable runnableImplementationClass){
+		
+		logger.debug("SCHEDULING A TEST");
+				
+		// Executor is down start it
+		ScheduledExecutorService executor= Executors.newSingleThreadScheduledExecutor();
+        Runnable taskThread = runnableImplementationClass;
+       // get the run frequency unit
+       executor.submit(taskThread);
+	}	
 }
