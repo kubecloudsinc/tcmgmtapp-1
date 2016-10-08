@@ -10,7 +10,7 @@
 
 	<properties>
 		<final-name>autotools</final-name>
-		<webapp-directory>\Tomcat\apache-tomcat-7.0.39\webapps</webapp-directory>
+		<webapp-directory>C:\tomcat7\webapps</webapp-directory>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<compiler-plugin-version>3.1</compiler-plugin-version>
 		<war-plugin-version>2.3</war-plugin-version>
@@ -29,6 +29,7 @@
 		<spring-framework-version>4.0.5.RELEASE</spring-framework-version>
 		<hibernate-validator-version>4.3.1.Final</hibernate-validator-version>
 		<spring-security-version>3.2.4.RELEASE</spring-security-version>
+		<aspectj-version>1.7.4.RELEASE</aspectj-version>
 		<xml-apis-version>1.4.01</xml-apis-version>
 		<commons-lang-version>2.3</commons-lang-version>
 		<javax-mail-version>1.4.5</javax-mail-version>
@@ -67,6 +68,34 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>1.5</version>
+				<configuration>
+					<showWeaveInfo>true</showWeaveInfo>
+					<source>1.7</source>
+					<target>1.7</target>
+					<Xlint>ignore</Xlint>
+					<complianceLevel>1.7</complianceLevel>
+					<encoding>UTF-8</encoding>
+					<verbose>false</verbose>
+					<aspectLibraries>
+						<aspectLibrary>
+							<groupId>org.springframework</groupId>
+							<artifactId>spring-aspects</artifactId>
+						</aspectLibrary>
+					</aspectLibraries>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>test-compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${war-plugin-version}</version>
@@ -95,11 +124,6 @@
 	</build>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring-test-version}</version>
-		</dependency>
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
@@ -185,12 +209,21 @@
 			<version>${hibernate-version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-core</artifactId>
 			<version>${ehcache-version}</version>
 			<scope>runtime</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring-test-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -212,13 +245,6 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring-framework-version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>${hibernate-validator-version}</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
@@ -234,8 +260,24 @@
 			<artifactId>spring-security-aspects</artifactId>
 			<version>${spring-security-version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring-framework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.7.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+			<version>1.7.3</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aop</artifactId> 
+			<version>${spring-framework-version}</version> </dependency> <dependency> 
+			<groupId>org.aspectj</groupId> <artifactId>aspectjweaver</artifactId> <version>${aspectj-version}</version> 
+			</dependency> -->
 	</dependencies>
-
-
 </project>

@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
@@ -18,7 +19,7 @@ import com.cisco.cstg.autotools.semantic.test.Failure;
 import com.cisco.cstg.autotools.semantic.test.TestMonitor;
 import com.cisco.cstg.autotools.semantic.test.TestResult;
 
-@Configurable
+@Configurable(autowire = Autowire.BY_TYPE, dependencyCheck = true)
 public class TestExecutor implements Runnable {
 
 	private static final Logger logger = LoggerFactory.getLogger(TestExecutor.class);
