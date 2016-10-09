@@ -29,7 +29,7 @@ public class TestSuiteStatusListController {
 
     @RequestMapping(value="/test_suite_status.html", method = RequestMethod.GET)
     public ModelAndView setupForm(@ModelAttribute("testSuiteStatus") TestSuiteStatus testSuiteStatus) {
-            logger.debug("INSIDE SET UP FORM");
+            logger.debug("INSIDE GET TEST SUITE STATUS CONTROLLER");
             List<TestSuiteStatus> result = testMonitor.getAllTestSuiteStatus();
             logger.debug("Got {} entities", result.size());
             ModelAndView mav = new ModelAndView("TestSuiteStatus");

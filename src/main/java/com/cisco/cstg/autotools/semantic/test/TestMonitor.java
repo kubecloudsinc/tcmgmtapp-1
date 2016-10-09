@@ -10,6 +10,8 @@ public interface TestMonitor extends BaseMonitor {
 	
 	public void runTest(Long testId);
 	
+	public void scheduleATest(Runnable runnableImplementationClass);
+	
 	public void runTestSuite(Long testSuiteId);
 	
 	public List<TestStatus> getAllTestStatus();

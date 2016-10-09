@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -46,7 +47,7 @@ public class TestSuite extends IdentifiableEntity {
 //	@JoinTable(name="TABLE_TEST_TABLE_TEST_SUITE", joinColumns=@JoinColumn(name="TEST_SUITE_ID"), inverseJoinColumns=@JoinColumn(name="TEST_ID"))
 //    mappedBy="testSuite"
     
-    @OneToMany(mappedBy="testSuite", targetEntity=TestSuiteTest.class)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="testSuite", targetEntity=TestSuiteTest.class)
 	public Set<TestSuiteTest> getTestSuiteTests() {
 
 		return testSuiteTests;

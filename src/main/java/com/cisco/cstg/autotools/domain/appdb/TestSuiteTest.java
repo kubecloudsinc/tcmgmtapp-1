@@ -19,10 +19,6 @@ public class TestSuiteTest extends IdentifiableEntity {
 	 * 
 	*/
 	private static final long serialVersionUID = 8920600437411386305L;
-
-//	private  Long testSuiteId;
-//
-//    private Long testId;
     
     private TestSuite testSuite;
 
@@ -47,24 +43,6 @@ public class TestSuiteTest extends IdentifiableEntity {
 	public void setTest(Test test) {
 		this.test = test;
 	}
-
-//	@Column(name="TEST_SUITE_ID")
-//	public Long getTestSuiteId() {
-//		return testSuiteId;
-//	}
-//
-//	public void setTestSuiteId(Long testSuiteId) {
-//		this.testSuiteId = testSuiteId;
-//	}
-//
-//	@Column(name="TEST_ID")
-//	public Long getTestId() {
-//		return testId;
-//	}
-//
-//	public void setTestId(Long testId) {
-//		this.testId = testId;
-//	}
 
 	@Override
     public boolean equals(Object o) {

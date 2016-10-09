@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -27,15 +26,13 @@ import com.cisco.cstg.autotools.dao.TestSuiteStatusDao;
 import com.cisco.cstg.autotools.domain.appdb.TempUser;
 import com.cisco.cstg.autotools.domain.appdb.Test;
 import com.cisco.cstg.autotools.domain.appdb.TestStatus;
-import com.cisco.cstg.autotools.domain.appdb.TestSuite;
 import com.cisco.cstg.autotools.domain.appdb.TestSuiteStatus;
-import com.cisco.cstg.autotools.domain.appdb.TestSuiteTest;
 import com.cisco.cstg.autotools.semantic.diagnostics.ValidationException;
 import com.cisco.cstg.autotools.support.email.PostOffice;
 import com.cisco.cstg.autotools.support.email.SystemPostOffice;
 import com.cisco.cstg.autotools.tests.TestConstants;
-import com.cisco.cstg.autotools.teststhreads.JunitTestExecutor;
 import com.cisco.cstg.autotools.teststhreads.TestExecutor;
+import com.cisco.cstg.autotools.teststhreads.TestSuiteExecutor;
 
 @Service
 public class TestManager extends BaseManager implements TestMonitor {
@@ -65,15 +62,6 @@ public class TestManager extends BaseManager implements TestMonitor {
 			logger.debug("UPDATED AND SAVED TO RUNNING STATUS");
 			logger.debug("The test  Name: {}",testStatus.getTest().getTestName());
 			scheduleATest(new TestExecutor(testId));
-//		} 
-//		catch(ClassNotFoundException cExp){
-//			// return error message that the class name is not correct
-//			// this shud not happen as this is configured in the database.
-//			logger.debug("ClassNotFound exception");
-//			final Writer result = new StringWriter();
-//			final PrintWriter printWriter = new PrintWriter(result);
-//			cExp.printStackTrace(printWriter);
-//			logger.debug(result.toString());
 		} catch (Exception exp) {
 			logger.debug("EXCEPTION IN GETTING THE DAO");
 			final Writer result = new StringWriter();
@@ -86,69 +74,42 @@ public class TestManager extends BaseManager implements TestMonitor {
 	@Override
 	public void runTestSuite(Long testSuiteId) {
 		try {
+			logger.debug("RUNNING THE TEST SUITE");
 			// update the test id status to running in the DB.
 			TestSuiteStatus testSuiteStatus = testSuiteStatusDao.getByTestSuiteId(testSuiteId);
 			testSuiteStatus.setTestSuiteStatus(TestSuiteStatus.RUNNING);
 			testSuiteStatusDao.save(testSuiteStatus);
-
-			// get the test suite
-			// get all the tests in the test suite.
-			// run the tests.
-			TestSuite testSuite = testSuiteStatus.getTestSuite();
-			Set<TestSuiteTest> testSuiteTests = testSuite.getTestSuiteTests();
-			TestSuiteResult testSuiteResult = new TestSuiteResult();
-			List<FailedTestResult> failedTests = new ArrayList<FailedTestResult>();
-			
-			for (TestSuiteTest testSuiteTest : testSuiteTests) {
-				Test test = testSuiteTest.getTest();
-				// run the test
-				// update the test id status to running in the DB.
-				test.getTestStatus().setTestStatus(TestStatus.RUNNING);
-				testDao.save(test);
-
-				JunitTestExecutor executor = new JunitTestExecutor(Class.forName
-						(test.getTestClassName()),test.getTestMethodName());
-				executor.run();
-//				Result testResult = executor.getTestResult();
-
-//				List<Failure> failures = testResult.getFailures();
-				
-//				test.getTestStatus().setTestStatus("Passed");
-//				for (Failure failure : failures) {
-//					logger.debug("descr: {} Msg: {} Test Header: {} Trace:",
-//					failure.getDescription(),
-//					failure.getMessage(),
-//					failure.getTestHeader());
-//					// this test failed.
-//					FailedTestResult failedTest = new FailedTestResult();
-//					failedTest.setFailMessage(failure.getMessage());
-//					failedTest.setTestMethodName(test.getTestMethodName());
-//					failedTest.setTestName(test.getTestName());
-//					failedTests.add(failedTest);
-//						
-//					test.getTestStatus().setTestStatus("Failed");	
-//				}
-//				
-//				testDao.save(test);
-//				
-			}
-
-			testSuiteResult.setTestSuiteName(testSuite.getTestSuiteName());
-			testSuiteResult.setTestSuiteDescription(testSuite.getTestSuiteDescription());
-			testSuiteResult.setTotalTests(testSuiteTests.size());
-			testSuiteResult.setFailedTests(failedTests);
-			testSuiteResult.setTotalFailed(failedTests.size());
-
-			// generate a test Suite report.
-			String testReportURL = generateTestSuiteReport(testSuiteResult);
-			
-			// update the test with the URL link
-			testSuiteStatus.setReportName(testReportURL);
-			testSuiteStatus.setTestSuiteStatus(TestSuiteStatus.COMPLETED);
-			testSuiteStatusDao.save(testSuiteStatus);
-
-		}catch (ClassNotFoundException exp){
-			
+			logger.debug("TEST SUITE STATUS UPDATED AND SAVED TO RUNNING");
+			scheduleATestSuite(new TestSuiteExecutor(testSuiteId));
+//			Thread.sleep(10000);
+//			// get the test suite
+//			// get all the tests in the test suite.
+//			// run the tests.
+//			TestSuite testSuite = testSuiteStatus.getTestSuite();
+//			Set<TestSuiteTest> testSuiteTests = testSuite.getTestSuiteTests();
+//			TestSuiteResult testSuiteResult = new TestSuiteResult();
+//			List<FailedTestResult> failedTests = new ArrayList<FailedTestResult>();
+//			
+//			for (TestSuiteTest testSuiteTest : testSuiteTests) {
+//				Test test = testSuiteTest.getTest();
+//				// run the test
+//				Thread.sleep(10000);
+//				logger.debug("SLEEPING COMPLETED");
+//			}
+//
+//			testSuiteResult.setTestSuiteName(testSuite.getTestSuiteName());
+//			testSuiteResult.setTestSuiteDescription(testSuite.getTestSuiteDescription());
+//			testSuiteResult.setTotalTests(testSuiteTests.size());
+//			testSuiteResult.setFailedTests(failedTests);
+//			testSuiteResult.setTotalFailed(failedTests.size());
+//
+//			// generate a test Suite report.
+//			String testReportURL = generateTestSuiteReport(testSuiteResult);
+//			
+//			// update the test with the URL link
+//			testSuiteStatus.setReportName(testReportURL);
+//			testSuiteStatus.setTestSuiteStatus(TestSuiteStatus.COMPLETED);
+//			testSuiteStatusDao.save(testSuiteStatus);
 		}catch (Exception exp) {
 			logger.debug("EXCEPTION IN");
 			final Writer result = new StringWriter();
@@ -227,65 +188,69 @@ public class TestManager extends BaseManager implements TestMonitor {
 	private StringBuilder createHTMStringForTest(Test test, TestResult testResult){
 		StringBuilder htmString= new StringBuilder();
 		
-	  htmString.append("<html><body><b><font face=\"Cambria\" >Test Suite Run Report.</font></b><br />	<br /><br />");
-	  htmString.append("<table border=\"1\"><tbody><tr><th align=\"left\" colspan=\"17\" bgcolor=\"#E6E6FA\"><font face=\"Cambria\" >Test Suite Name</font></th>");
+	  htmString.append("<html><body><b><font face=\"Cambria\" >Test Run Report.</font></b><br />	<br /><br />");
+	  htmString.append("<table border=\"1\"><tbody><tr><th align=\"left\" colspan=\"17\" bgcolor=\"#E6E6FA\"><font face=\"Cambria\" >Test Name</font></th>");
 	  
 	  htmString.append("<td align=\"left\"><font face=\"Cambria\" >");
 	  htmString.append(test.getTestName());
 	  htmString.append("</font></td>");
-	  htmString.append("<tr><tr><th align=\"left\" colspan=\"17\" bgcolor=\"#E6E6FA\"><font face=\"Cambria\" >Test Suite Description</font></th>");
+//	  htmString.append("<tr><tr><th align=\"left\" colspan=\"17\" bgcolor=\"#E6E6FA\"><font face=\"Cambria\" >Test Suite Description</font></th>");
+//	  htmString.append("<td align=\"left\"><font face=\"Cambria\" >");
+//	  htmString.append(test.getTestDescription());
+//	  htmString.append("</font></td>");
+//	  htmString.append("<tr><tr><th align=\"left\" colspan=\"17\" bgcolor=\"#E6E6FA\"><font face=\"Cambria\" >Total Number of Tests in Test Suite</font></th>");
+//	  htmString.append("<td align=\"left\"><font face=\"Cambria\" >");
+//	  htmString.append(testResult.getRunCount());
+//	  htmString.append("</font></td>");
+//	  htmString.append("<tr><tr><th align=\"left\" colspan=\"17\" bgcolor=\"#E6E6FA\"><font face=\"Cambria\" >Total Tests Passed</font></th>");
+//	  htmString.append("<td align=\"left\"><font face=\"Cambria\" >");
+//	  htmString.append(testResult.getRunCount()-testResult.getFailureCount());
+//	  htmString.append("</font></td>");
+	  htmString.append("<tr><tr><th align=\"left\" colspan=\"17\" bgcolor=\"#E6E6FA\"><font face=\"Cambria\" >Test Result</font></th>");
 	  htmString.append("<td align=\"left\"><font face=\"Cambria\" >");
-	  htmString.append(test.getTestDescription());
-	  htmString.append("</font></td>");
-	  htmString.append("<tr><tr><th align=\"left\" colspan=\"17\" bgcolor=\"#E6E6FA\"><font face=\"Cambria\" >Total Number of Tests in Test Suite</font></th>");
-	  htmString.append("<td align=\"left\"><font face=\"Cambria\" >");
-	  htmString.append(testResult.getRunCount());
-	  htmString.append("</font></td>");
-	  htmString.append("<tr><tr><th align=\"left\" colspan=\"17\" bgcolor=\"#E6E6FA\"><font face=\"Cambria\" >Total Tests Passed</font></th>");
-	  htmString.append("<td align=\"left\"><font face=\"Cambria\" >");
-	  htmString.append(testResult.getRunCount()-testResult.getFailureCount());
-	  htmString.append("</font></td>");
-	  htmString.append("<tr><tr><th align=\"left\" colspan=\"17\" bgcolor=\"#E6E6FA\"><font face=\"Cambria\" >Total Tests Failed</font></th>");
-	  htmString.append("<td align=\"left\"><font face=\"Cambria\" >");
-	  htmString.append(testResult.getFailureCount());
-	  htmString.append("</font></td>");
-	  htmString.append("<tr></tbody></table><br /><br /><font face=\"Cambria\" >Details of failed tests in the test suite.</font><br />");
-	  htmString.append("<table border=\"1\"><tbody><tr>");
-	  htmString.append("<th align=\"center\" colspan=\"17\" bgcolor=\"#E6E6FA\"><font face=\"Cambria\" >TEST DETAILS OF TEST CASES FAILED</font></th>");
-	  htmString.append("<tr><tr><td align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >S.NO.</font></td>");
-	  htmString.append("<td align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >Test Name</font></td>");
-	  htmString.append("<th align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >Test Step</font></th>");
-	  htmString.append("<td align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >Failure Message</font></td>");
+	  if(testResult.getFailureCount()==1){
+		  htmString.append("FAILED");
+		  htmString.append("</font></td>");
+		  htmString.append("<tr></tbody></table><br /><br />");
+		  htmString.append("<font face=\"Cambria\" >Details of failure.</font><br />");
+		  htmString.append("<table border=\"1\"><tbody><tr>");
+		  htmString.append("<th align=\"center\" colspan=\"17\" bgcolor=\"#E6E6FA\"><font face=\"Cambria\" >FAILURE DETAILS</font></th>");
+		  htmString.append("<tr><tr><td align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >S.NO.</font></td>");
+//		  htmString.append("<td align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >Test Name</font></td>");
+		  htmString.append("<th align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >Test Name</font></th>");
+		  htmString.append("<td align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >Failure Message</font></td>");
+		  List<Failure> failures = testResult.getFailures();
+		  int i=1;
+		  for (Failure failure : failures) {
+
+			htmString.append("</tr><tr><td align=\"center\"><font face=\"Cambria\" >");
+			htmString.append(i);
+			i++;
+			htmString.append("</font></td>");
+//			htmString.append("<td align=\"center\"><font face=\"Cambria\" >");
+//			htmString.append(test.getTestClassName());
+//			htmString.append("</font></td>");
+			htmString.append("<th align=\"center\"><font face=\"Cambria\" >");
+			htmString.append(test.getTestName());
+			htmString.append("</font></th>");
+			htmString.append("<td align=\"center\"><font face=\"Cambria\" >");
+			htmString.append(failure.getMessage());
+			htmString.append("</font></td>");
+			htmString.append("</tr>");
+		  }
+		  htmString.append("<!-- comment line here --></tbody></table><br /><br />");
+		  
+	  }else{
+		  htmString.append("PASSED");
+		  htmString.append("</font></td>");
+		  htmString.append("<tr></tbody></table><br /><br />");
+	  }
+	 
 	  
 	// get the results from the thread.
 	  logger.debug("Time taken to run Junit Method: "+new Long(testResult.getRunTime()).toString());
-	  List<Failure> failures = testResult.getFailures();
-	  int i=1;
-	  for (Failure failure : failures) {
 
-		htmString.append("</tr><tr><td align=\"center\"><font face=\"Cambria\" >");
-		htmString.append(i);
-		i++;
-		htmString.append("</font></td>");
-		htmString.append("<td align=\"center\"><font face=\"Cambria\" >");
-		htmString.append(test.getTestClassName());
-		htmString.append("</font></td>");
-		htmString.append("<th align=\"center\"><font face=\"Cambria\" >");
-		htmString.append(test.getTestName());
-		htmString.append("</font></th>");
-		htmString.append("<td align=\"center\"><font face=\"Cambria\" >");
-		htmString.append(failure.getMessage());
-		htmString.append("</font></td>");
-		htmString.append("</tr>");
-		
-//		Throwable exp = failure.getException();
-//		final Writer result = new StringWriter();
-//	    final PrintWriter printWriter = new PrintWriter(result);
-//	    exp.printStackTrace(printWriter);
-//	    logger.debug(result.toString());
-			
-	  }
-	  htmString.append("<!-- comment line here --></tbody></table><br /><br /></body></html>");
+	  htmString.append("</body></html>");
 		  
 		return htmString;
 	}
@@ -315,44 +280,40 @@ public class TestManager extends BaseManager implements TestMonitor {
 	  htmString.append("<td align=\"left\"><font face=\"Cambria\" >");
 	  htmString.append(testSuiteResult.getTotalFailed());
 	  htmString.append("</font></td>");
-	  htmString.append("<tr></tbody></table><br /><br /><font face=\"Cambria\" >Details of failed tests in the test suite.</font><br />");
-	  htmString.append("<table border=\"1\"><tbody><tr>");
-	  htmString.append("<th align=\"center\" colspan=\"17\" bgcolor=\"#E6E6FA\"><font face=\"Cambria\" >TEST DETAILS OF TEST CASES FAILED</font></th>");
-	  htmString.append("<tr><tr><td align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >S.NO.</font></td>");
-	  htmString.append("<td align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >Test Name</font></td>");
-	  htmString.append("<th align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >Test Step</font></th>");
-	  htmString.append("<td align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >Failure Message</font></td>");
+	  htmString.append("<tr></tbody></table><br /><br />");
 	  
-	// get the results from the thread.
 	  List<FailedTestResult> failedTests = testSuiteResult.getFailedTests();
-	  int i=1;
-	  for (FailedTestResult failedTest : failedTests) {
-
-		htmString.append("</tr><tr><td align=\"center\"><font face=\"Cambria\" >");
-		htmString.append(i);
-		i++;
-		htmString.append("</font></td>");
-		htmString.append("<td align=\"center\"><font face=\"Cambria\" >");
-		htmString.append(failedTest.getTestMethodName());
-		htmString.append("</font></td>");
-		htmString.append("<th align=\"center\"><font face=\"Cambria\" >");
-		htmString.append(failedTest.getTestName());
-		htmString.append("</font></th>");
-		htmString.append("<td align=\"center\"><font face=\"Cambria\" >");
-		htmString.append(failedTest.getFailMessage());
-		htmString.append("</font></td>");
-		htmString.append("</tr>");
-		
-//		Throwable exp = failure.getException();
-//		final Writer result = new StringWriter();
-//	    final PrintWriter printWriter = new PrintWriter(result);
-//	    exp.printStackTrace(printWriter);
-//	    logger.debug(result.toString());
-			
+	  if(failedTests.size()>0){
+		  htmString.append("<font face=\"Cambria\" >Details of failed tests in the test suite.</font><br />");
+		  htmString.append("<table border=\"1\"><tbody><tr>");
+		  htmString.append("<th align=\"center\" colspan=\"17\" bgcolor=\"#E6E6FA\"><font face=\"Cambria\" >TEST DETAILS OF TEST CASES FAILED</font></th>");
+		  htmString.append("<tr><tr><td align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >S.NO.</font></td>");
+//		  htmString.append("<td align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >Test Name</font></td>");
+		  htmString.append("<th align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >Test Name</font></th>");
+		  htmString.append("<td align=\"center\" bgcolor=\"#DDA0DD\"><font face=\"Cambria\" >Failure Message</font></td>");	
+		  int i=1;
+		  for (FailedTestResult failedTest : failedTests) {
+			  htmString.append("</tr><tr><td align=\"center\"><font face=\"Cambria\" >");
+			  htmString.append(i);
+			  i++;
+			  htmString.append("</font></td>");
+//			  htmString.append("<td align=\"center\"><font face=\"Cambria\" >");
+//			  htmString.append(failedTest.getTestMethodName());
+//			  htmString.append("</font></td>");
+			  htmString.append("<th align=\"center\"><font face=\"Cambria\" >");
+			  htmString.append(failedTest.getTestName());
+			  htmString.append("</font></th>");
+			  htmString.append("<td align=\"center\"><font face=\"Cambria\" >");
+			  htmString.append(failedTest.getFailMessage());
+			  htmString.append("</font></td>");
+			  htmString.append("</tr>");			  
+		  }
+		  htmString.append("<!-- comment line here --></tbody></table><br /><br />");
 	  }
-	  htmString.append("<!-- comment line here --></tbody></table><br /><br /></body></html>");
+	  
+	  htmString.append("</body></html>");
 		  
-		return htmString;
+	  return htmString;
 	
 	}
 
@@ -415,9 +376,21 @@ public class TestManager extends BaseManager implements TestMonitor {
 		
 	}
 	
-	private void scheduleATest(Runnable runnableImplementationClass){
+	@Override
+	public void scheduleATest(Runnable runnableImplementationClass){
 		
 		logger.debug("SCHEDULING A TEST");
+				
+		// Executor is down start it
+		ScheduledExecutorService executor= Executors.newSingleThreadScheduledExecutor();
+        Runnable taskThread = runnableImplementationClass;
+       // get the run frequency unit
+       executor.submit(taskThread);
+	}	
+	
+	private void scheduleATestSuite(Runnable runnableImplementationClass){
+		
+		logger.debug("SCHEDULING A TEST SUITE");
 				
 		// Executor is down start it
 		ScheduledExecutorService executor= Executors.newSingleThreadScheduledExecutor();
