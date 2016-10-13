@@ -19,9 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cisco.cstg.autotools.dao.TestDao;
 import com.cisco.cstg.autotools.dao.TestStatusDao;
-import com.cisco.cstg.autotools.dao.TestSuiteDao;
 import com.cisco.cstg.autotools.dao.TestSuiteStatusDao;
 import com.cisco.cstg.autotools.domain.appdb.TempUser;
 import com.cisco.cstg.autotools.domain.appdb.Test;
@@ -44,13 +42,6 @@ public class TestManager extends BaseManager implements TestMonitor {
 	
 	@Autowired
 	private TestSuiteStatusDao testSuiteStatusDao;
-
-	@Autowired
-	private TestSuiteDao testSuiteDao;
-	
-	@Autowired
-	private TestDao testDao;
-
 	
 	@Override
 	public void runTest(Long testId) {
@@ -81,35 +72,7 @@ public class TestManager extends BaseManager implements TestMonitor {
 			testSuiteStatusDao.save(testSuiteStatus);
 			logger.debug("TEST SUITE STATUS UPDATED AND SAVED TO RUNNING");
 			scheduleATestSuite(new TestSuiteExecutor(testSuiteId));
-//			Thread.sleep(10000);
-//			// get the test suite
-//			// get all the tests in the test suite.
-//			// run the tests.
-//			TestSuite testSuite = testSuiteStatus.getTestSuite();
-//			Set<TestSuiteTest> testSuiteTests = testSuite.getTestSuiteTests();
-//			TestSuiteResult testSuiteResult = new TestSuiteResult();
-//			List<FailedTestResult> failedTests = new ArrayList<FailedTestResult>();
-//			
-//			for (TestSuiteTest testSuiteTest : testSuiteTests) {
-//				Test test = testSuiteTest.getTest();
-//				// run the test
-//				Thread.sleep(10000);
-//				logger.debug("SLEEPING COMPLETED");
-//			}
-//
-//			testSuiteResult.setTestSuiteName(testSuite.getTestSuiteName());
-//			testSuiteResult.setTestSuiteDescription(testSuite.getTestSuiteDescription());
-//			testSuiteResult.setTotalTests(testSuiteTests.size());
-//			testSuiteResult.setFailedTests(failedTests);
-//			testSuiteResult.setTotalFailed(failedTests.size());
-//
-//			// generate a test Suite report.
-//			String testReportURL = generateTestSuiteReport(testSuiteResult);
-//			
-//			// update the test with the URL link
-//			testSuiteStatus.setReportName(testReportURL);
-//			testSuiteStatus.setTestSuiteStatus(TestSuiteStatus.COMPLETED);
-//			testSuiteStatusDao.save(testSuiteStatus);
+
 		}catch (Exception exp) {
 			logger.debug("EXCEPTION IN");
 			final Writer result = new StringWriter();

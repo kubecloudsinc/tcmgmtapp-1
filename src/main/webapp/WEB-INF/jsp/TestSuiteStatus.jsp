@@ -55,6 +55,7 @@
 									<a href="<c:url value='${testSuiteStatus.reportName}'/>">Latest ReportLink</a>
 								</td>
 						</form:form>
+						<%-- 
 						<form:form method="post" action="${testSuiteEmailUrl}" modelAttribute="testSuiteStatus">
 							<td>
 								<button type="submit" class="btn btn-primary" >Send Email</button>
@@ -62,6 +63,7 @@
 								<form:hidden path="id" value="${testSuiteStatus.id}"/>
 							</td>
 						</form:form>
+						--%>
 						</tr>
 					</c:forEach>
 				</tbody>

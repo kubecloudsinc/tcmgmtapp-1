@@ -22,7 +22,17 @@
 
 		<intercept-url pattern="^/user_register\.html.*$"
 			requires-channel="http" access="ROLE_ANONYMOUS" />
-
+			
+		<intercept-url pattern="^/equipment_form\.html.*$"
+			requires-channel="http" access="ROLE_ADMIN" />
+		<intercept-url pattern="^/find_equipment\.html.*$"
+			requires-channel="http" access="ROLE_ADMIN" />						
+		<intercept-url pattern="^/users\.html.*$"
+			requires-channel="http" access="ROLE_USER" />						
+		<intercept-url pattern="^/test_status\.html.*$"
+			requires-channel="http" access="ROLE_USER" />						
+		<intercept-url pattern="^/test_suite_status\.html.*$"
+			requires-channel="http" access="ROLE_USER" />												
 		<intercept-url pattern="^/login.html.*$"
 			requires-channel="http" method="POST" />
 

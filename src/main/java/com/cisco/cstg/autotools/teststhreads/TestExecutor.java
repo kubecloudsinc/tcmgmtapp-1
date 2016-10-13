@@ -44,15 +44,20 @@ public class TestExecutor implements Runnable {
 	@Override
 	public void run() {
 		try {
+			if(testStatusDao==null){
+				logger.debug("The test doa is null");
+			}
+			TestStatus testStatus = testStatusDao.getByTestId(testId);
+			if(! testStatus.getTestStatus().equals(TestStatus.RUNNING)){
+				testStatus.setTestStatus(TestStatus.RUNNING);
+				testStatusDao.save(testStatus);
+				logger.debug("UPDATED AND SAVED TO RUNNING STATUS INSIDE TEST EXECUTOR");		
+			}
 			logger.debug("INSIDE THE RUN METHOD OF: {} ",this.getClass().getName());
 			long start = System.nanoTime();	
 			Thread.sleep(10000);
 			logger.debug("COMPLETED THE WAIT ");
 			logger.debug("The test id is:"+testId);
-			if(testStatusDao==null){
-				logger.debug("The test doa is null");
-			}
-			TestStatus testStatus = testStatusDao.getByTestId(testId);
 			TestResult testResult = new TestResult();
 			testResult.setRunCount(1);
 			int intResult=(Math.random()<0.5)?0:1;

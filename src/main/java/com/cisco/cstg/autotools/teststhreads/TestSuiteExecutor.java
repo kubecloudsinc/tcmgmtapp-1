@@ -68,7 +68,7 @@ public class TestSuiteExecutor implements Runnable {
 				testMonitor.scheduleATest(new TestExecutor(aTest.getId()));
 			}
 			logger.debug("Total number of tests in test suite: "+testIds.size());
-			Thread.sleep(10000);
+			Thread.sleep(15000);
 			
 			TestSuiteResult result = new TestSuiteResult();
 			result.setTestSuiteName(testSuite.getTestSuiteName());

@@ -26,13 +26,16 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
+        <%-- 
           <a class="brand" href="<c:url value='/home.html'/>">Auto Tools</a>
+          --%>
           <div class="nav-collapse collapse">
             <ul class="nav">
             <security:authorize ifNotGranted="ROLE_USER">
                 <li><a href="<c:url value='/login.html'/>">Login</a></li>
               </security:authorize>
             <security:authorize ifAllGranted="ROLE_USER">
+            	<a class="brand" href="<c:url value='/home.html'/>">Auto Tools</a>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     ${fn:escapeXml(authUser.name)} <b class="caret"></b>
@@ -63,7 +66,9 @@
                     <li><a href="<c:url value='/test_suite_status.html'/>">Test Suite Status</a></li>
                   </ul>
                 </li>
+                <%-- 
               	<li class="${nav eq 'users'? 'active' : ''}"><a href="<c:url value='/schedule.html'/>">Schedule</a></li>
+              	--%>
               </security:authorize>
             </ul>
           </div>
