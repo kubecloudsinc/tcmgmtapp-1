@@ -31,7 +31,7 @@
 		<spring-security-version>3.2.4.RELEASE</spring-security-version>
 		<aspectj-version>1.7.4.RELEASE</aspectj-version>
 		<xml-apis-version>1.4.01</xml-apis-version>
-		<commons-lang-version>2.3</commons-lang-version>
+		<commons-lang-version>2.5</commons-lang-version>
 		<javax-mail-version>1.4.5</javax-mail-version>
 		<spring-test-version>4.0.5.RELEASE</spring-test-version>
 	</properties>
