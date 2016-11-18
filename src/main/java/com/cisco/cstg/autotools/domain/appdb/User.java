@@ -42,6 +42,8 @@ public class User extends IdentifiableEntity {
     private boolean admin = false;
 
     private boolean enabled = true;
+    
+    private Long totalLogins;
 
     @Size(max = 64)
     @Column(name="TITLE", length = 64)
@@ -137,6 +139,15 @@ public class User extends IdentifiableEntity {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+    
+	@Column(name="TOTAL_HITS")
+	public Long getTotalLogins() {
+		return totalLogins;
+	}
+
+	public void setTotalLogins(Long totalLogins) {
+		this.totalLogins = totalLogins;
+	}
 
     @Override
     public boolean equals(Object o) {
