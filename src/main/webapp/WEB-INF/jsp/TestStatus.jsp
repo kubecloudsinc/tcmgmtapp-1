@@ -58,7 +58,7 @@
 									</c:otherwise>
 								</c:choose>
 								<td>
-									<a href="<c:url value='${testStatus.reportName}'/>">Latest ReportLink</a>
+									<a target="_blank" href="<c:url value='${testStatus.reportName}'/>">Latest ReportLink</a>
 								</td>
 							</tr>
 						</form:form>
