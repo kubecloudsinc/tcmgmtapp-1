@@ -14,7 +14,7 @@
 
 	<mvc:annotation-driven />
 
-	<context:component-scan base-package="com.cisco.cstg.autotools.web" />
+	<context:component-scan base-package="com.onecloud.autotools.web" />
 	<context:annotation-config />
 	
 	<mvc:resources mapping="/reports/**" location="/reports/" />
@@ -37,24 +37,24 @@
 	<mvc:view-controller path="/access_denied.html"	view-name="accessDenied" />
 
 	<mvc:interceptors>
-		<bean class="com.cisco.cstg.autotools.web.UserContextInterceptor" />
+		<bean class="com.onecloud.autotools.web.UserContextInterceptor" />
 	</mvc:interceptors>
-	
-	<bean name="/equipment_form.html"
-		class="com.cisco.cstg.autotools.web.IdentifiableAppEntityListController"
-		p:dao-ref="equipmentDao" p:viewName="EquipmentForm" />
 
 	<bean name="/users.html"
-		class="com.cisco.cstg.autotools.web.IdentifiableEntityListController"
+		class="com.onecloud.autotools.web.IdentifiableEntityListController"
 		p:dao-ref="userDao" p:viewName="userList" />
 
 	<bean name="/user.html"
-		class="com.cisco.cstg.autotools.web.IdentifiableEntityGetController"
+		class="com.onecloud.autotools.web.IdentifiableEntityGetController"
 		p:dao-ref="userDao" p:viewName="userView" />
 
 	<bean name="/user_delete.html"
-		class="com.cisco.cstg.autotools.web.IdentifiableEntityDeleteController"
+		class="com.onecloud.autotools.web.IdentifiableEntityDeleteController"
 		p:dao-ref="userDao" />
+
+	<bean name="/regions.html"
+		  class="com.onecloud.autotools.web.IdentifiableEntityListController"
+		  p:dao-ref="regionDao" p:viewName="regionList" />
 
 	<bean id="exceptionResolver"
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">

@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.cisco.cstg</groupId>
+	<groupId>com.onecloud</groupId>
 	<artifactId>autotools</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>autotools Webapp</name>
-	<url>http://savi-svn/svn/autotools/</url>
+	<url>http://github/autotools/</url>
 
 	<properties>
 		<final-name>autotools</final-name>
@@ -15,7 +15,7 @@
 		<compiler-plugin-version>3.1</compiler-plugin-version>
 		<war-plugin-version>2.3</war-plugin-version>
 		<assembly-plugin-version>2.4</assembly-plugin-version>
-		<jdk-version>1.7</jdk-version>
+		<jdk-version>1.8</jdk-version>
 		<servlet-version>3.0.1</servlet-version>
 		<jsp-version>2.2.1</jsp-version>
 		<jstl-version>1.2</jstl-version>
@@ -29,7 +29,7 @@
 		<spring-framework-version>4.0.5.RELEASE</spring-framework-version>
 		<hibernate-validator-version>4.3.1.Final</hibernate-validator-version>
 		<spring-security-version>3.2.4.RELEASE</spring-security-version>
-		<aspectj-version>1.7.4.RELEASE</aspectj-version>
+		<aspectj-version>1.7</aspectj-version>
 		<xml-apis-version>1.4.01</xml-apis-version>
 		<commons-lang-version>2.5</commons-lang-version>
 		<javax-mail-version>1.4.5</javax-mail-version>
@@ -70,13 +70,13 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
-				<version>1.5</version>
+				<version>${aspectj-version}</version>
 				<configuration>
 					<showWeaveInfo>true</showWeaveInfo>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<Xlint>ignore</Xlint>
-					<complianceLevel>1.7</complianceLevel>
+					<complianceLevel>1.8</complianceLevel>
 					<encoding>UTF-8</encoding>
 					<verbose>false</verbose>
 					<aspectLibraries>
@@ -268,12 +268,12 @@
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
-			<version>1.7.3</version>
+			<version>1.8.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjtools</artifactId>
-			<version>1.7.3</version>
+			<version>1.8.2</version>
 		</dependency>
 		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aop</artifactId> 
 			<version>${spring-framework-version}</version> </dependency> <dependency> 

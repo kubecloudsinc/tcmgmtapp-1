@@ -52,30 +52,21 @@
 								</ul></li>
 						</security:authorize>
 						<security:authorize ifAllGranted="ROLE_ADMIN">
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Equipment<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li><a href="<c:url value='/equipment_form.html'/>">Equipment
-											List</a></li>
-									<li><a href="<c:url value='/find_equipment.html'/>">Equipment
-											Search</a></li>
-								</ul></li>
 							<li class="${nav eq 'users'? 'active' : ''}"><a
-								href="<c:url value='/users.html'/>">List Users</a></li>
+								href="<c:url value='/users.html'/>">List Application Users</a></li>
 						</security:authorize>
 						<security:authorize ifAllGranted="ROLE_USER">
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown"> Test Management <b class="caret"></b>
-							</a>
+								data-toggle="dropdown">Employee Details<b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li><a href="<c:url value='/test_status.html'/>">Test
-											Status</a></li>
-									<li><a href="<c:url value='/test_suite_status.html'/>">Test
-											Suite Status</a></li>
-								</ul></li>
-							<%-- 
-              	<li class="${nav eq 'users'? 'active' : ''}"><a href="<c:url value='/schedule.html'/>">Schedule</a></li>
-              	--%>
+									<li><a href="<c:url value='/employee_details.html'/>">
+									       Employee List</a></li>
+									<li><a href="<c:url value='/find_employee.html'/>">
+									      Employee Search</a></li>
+								</ul>
+							</li>
+              	            <li class="${nav eq 'regions'? 'active' : ''}">
+              	               <a href="<c:url value='/regions.html'/>">Region Details</a></li>
 						</security:authorize>
 					</ul>
 				</div>
