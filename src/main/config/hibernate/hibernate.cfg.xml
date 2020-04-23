@@ -8,7 +8,7 @@
 	
 		<!-- Database connection settings --> 
 		<property name="hibernate.connection.datasource">
-			java:/comp/env/jdbc/autotools
+			java:/comp/env/jdbc/tcmgmt
 		</property>
 		<!--  		
 		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>		
@@ -56,21 +56,6 @@
 
 		<!-- Enable monitoring of our SessionFactory -->
 		<property name="hibernate.generate_statistics">true</property>
-		
-		<!-- naming strategy for the columns
-		<property name="hibernate.naming_strategy">org.hibernate.cfg.DefaultComponentSafeNamingStrategy</property>
-		<property name="hibernate.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</property> 
-		-->
-
-		<!-- Map all of our Hibernate-managed entity classes 
-		<mapping class="com.cisco.cstg.autotools.domain.Test" />
-		<mapping class="com.cisco.cstg.autotools.domain.TestSuite" />
-		<mapping class="com.cisco.cstg.autotools.domain.TestSuiteTest" />
-		<mapping class="com.cisco.cstg.autotools.domain.TestSuiteStatus" />
-		<mapping class="com.cisco.cstg.autotools.domain.TestStatus" />
-		<mapping class="com.cisco.cstg.autotools.domain.User" />
-		<mapping class="com.cisco.cstg.autotools.domain.Schedule" />
-		-->
 
 	</session-factory>
 </hibernate-configuration>

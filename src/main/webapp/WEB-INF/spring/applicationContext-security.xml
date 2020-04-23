@@ -9,10 +9,13 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<http path-type="regex" realm="Autotools" access-denied-page="/access_denied.html">
+	<http path-type="regex" realm="tcmgmt" access-denied-page="/access_denied.html">
 
 		<intercept-url pattern="^/user_delete\.html.*$"
 			access="ROLE_ADMIN" />
+
+		<intercept-url pattern="^/testcase_delete\.html.*$"
+					   access="ROLE_ADMIN" />
 
 		<intercept-url pattern="^/user_profile\.html.*$"
 			requires-channel="http" access="ROLE_USER" />
@@ -54,7 +57,7 @@
 	<!--<password-encoder ref="passwordEncoder" />  -->
 
 	<beans:bean id="userDetailsService"
-		class="com.onecloud.autotools.security.DefaultUserDetailsService" />
+		class="com.onecloud.tcmgmt.security.DefaultUserDetailsService" />
 <!-- 
 	<beans:bean id="passwordEncoder"
 		class="org.springframework.security.crypto.password.StandardPasswordEncoder">

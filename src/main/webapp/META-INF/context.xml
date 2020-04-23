@@ -2,6 +2,5 @@
 <!DOCTYPE Context [ ]>
 <Context xmlns="">
 	<!-- java:comp/env/jdbc/sforums -> java:jdbc/sforums -->
-	<ResourceLink name="jdbc/autotools" global="jdbc/autotools" />
-	<ResourceLink name="jdbc/factdb" global="jdbc/factdb" />
+	<ResourceLink name="jdbc/tcmgmt" global="jdbc/tcmgmt" />
 </Context>

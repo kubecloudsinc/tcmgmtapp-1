@@ -2,6 +2,7 @@
 <%@ attribute name="label" required="false" rtexprvalue="true"%>
 <%@ attribute name="path" required="true" rtexprvalue="true"%>
 <%@ attribute name="required" required="false" rtexprvalue="true" type="java.lang.Boolean"%>
+<%@ attribute name="readonly" required="false" rtexprvalue="true" type="java.lang.Boolean"%>
 <%@ attribute name="cssClass" required="false" rtexprvalue="true"%>
 <%@ attribute name="autocomplete" required="false" rtexprvalue="true"%>
 
@@ -15,5 +16,6 @@
 <tags:formInput path="${pageScope.path}" label="${pageScope.label}" required="${pageScope.required}">
   <form:input path="${pageScope.path}"
     cssClass="${empty pageScope.cssClass? 'input-xlarge' : pageScope.cssClass}"
+    readonly="${ pageScope.readonly }"
     autocomplete="${pageScope.autocomplete}" />
 </tags:formInput>

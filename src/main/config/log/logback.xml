@@ -3,11 +3,11 @@
 <configuration xmlns="">
 	<jmxConfigurator />
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>C:\logs\autotools.log</file>
+		<file>C:\logs\tcmgmt.log</file>
 		<append>true</append>
 		   <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- rollover daily -->
-      <fileNamePattern>C:logs\autotools-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <fileNamePattern>C:logs\tcmgmt-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
       <timeBasedFileNamingAndTriggeringPolicy
             class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
         <!-- or whenever the file size reaches 100MB -->
@@ -23,11 +23,11 @@
 	</appender>
 
 	<appender name="CLASSFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>C:\logs\autotoolsCode.log</file>
+		<file>C:\logs\tcmgmtCode.log</file>
 		<append>true</append>
 		   <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- rollover daily -->
-      <fileNamePattern>C:\logs\autotoolsCode-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <fileNamePattern>C:\logs\tcmgmtCode-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
       <timeBasedFileNamingAndTriggeringPolicy
             class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
         <!-- or whenever the file size reaches 100MB -->
@@ -43,11 +43,11 @@
 	</appender>
 	
 	<appender name="HIBFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>C:\logs\autotoolsHibernate.log</file>
+		<file>C:\logs\tcmgmtHibernate.log</file>
 		<append>true</append>
 		   <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- rollover daily -->
-      <fileNamePattern>C:\logs\autotoolsHibernate-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <fileNamePattern>C:\logs\tcmgmtHibernate-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
       <timeBasedFileNamingAndTriggeringPolicy
             class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
         <!-- or whenever the file size reaches 100MB -->
@@ -72,7 +72,7 @@
 	
 	<logger name="net.sf.ehcache" level="INFO" />
 	
-	<logger name="com.cisco.cstg.autotools" level="DEBUG" >
+	<logger name="com.onecloud.tcmgmt" level="DEBUG" >
 		<appender-ref ref="CLASSFILE" />
 	</logger>
 	

@@ -8,8 +8,8 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<context:component-scan base-package="com.onecloud.autotools.semantic.test,
-	                                      com.onecloud.autotools.dao" />
+	<context:component-scan base-package="com.onecloud.tcmgmt.semantic.dto,
+	                                      com.onecloud.tcmgmt.dao" />
     <context:annotation-config />	    
     <context:spring-configured/>
 	
@@ -23,7 +23,7 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
-		<property name="packagesToScan" value="com.onecloud.autotools.domain.appdb" />
+		<property name="packagesToScan" value="com.onecloud.tcmgmt.domain.appdb" />
 	</bean>
 
 	<bean id="txManager"
@@ -38,11 +38,11 @@
 
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
-	<bean id="userDao" class="com.onecloud.autotools.dao.HibernateUserDao" />
+	<bean id="userDao" class="com.onecloud.tcmgmt.dao.HibernateUserDao" />
 
-	<bean id="regionDao" class="com.onecloud.autotools.dao.HibernateRegionDao" />
+	<bean id="testCaseDao" class="com.onecloud.tcmgmt.dao.HibernateTestCaseDao" />
 	
-	<bean id="userStoreService"	class="com.onecloud.autotools.service.DefaultUserStoreService" />
-	<bean id="userContextService" class="com.onecloud.autotools.service.DefaultUserContextService" />
+	<bean id="userStoreService"	class="com.onecloud.tcmgmt.service.DefaultUserStoreService" />
+	<bean id="userContextService" class="com.onecloud.tcmgmt.service.DefaultUserContextService" />
 	
 </beans>

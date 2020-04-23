@@ -2,14 +2,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.onecloud</groupId>
-	<artifactId>autotools</artifactId>
+	<artifactId>tcmgmt</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>autotools Webapp</name>
-	<url>http://github/autotools/</url>
+	<name>Test Case Management Webapp</name>
+	<url>http://github/tcmgmt/</url>
 
 	<properties>
-		<final-name>autotools</final-name>
+		<final-name>tcmgmt</final-name>
 		<webapp-directory>C:\tomcat7\webapps</webapp-directory>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<compiler-plugin-version>3.1</compiler-plugin-version>
@@ -275,9 +275,5 @@
 			<artifactId>aspectjtools</artifactId>
 			<version>1.8.2</version>
 		</dependency>
-		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aop</artifactId> 
-			<version>${spring-framework-version}</version> </dependency> <dependency> 
-			<groupId>org.aspectj</groupId> <artifactId>aspectjweaver</artifactId> <version>${aspectj-version}</version> 
-			</dependency> -->
 	</dependencies>
 </project>

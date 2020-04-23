@@ -11,7 +11,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <security:authorize ifNotGranted="ROLE_USER">
-	<tags:page title="Login to Auto Tools">
+	<tags:page title="One Cloud Test Management">
 		<c:if test="${not empty sessionScope.SPRING_SECURITY_LAST_EXCEPTION}">
 			<spring:message var="errorTitle"
 				code="loginError.${f:getType(sessionScope.SPRING_SECURITY_LAST_EXCEPTION)}"
@@ -53,7 +53,7 @@
 	</tags:page>
 </security:authorize>
 <security:authorize ifAllGranted="ROLE_USER">
-	<tags:page title="Auto Tools" nav="home">
-		<p>Welcome to Auto Tools</p>
+	<tags:page title="One Cloud Test Management" nav="home">
+		<p>Welcome to One Cloud Test Case Management</p>
 	</tags:page>
 </security:authorize>

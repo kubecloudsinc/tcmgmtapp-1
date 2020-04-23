@@ -30,17 +30,13 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<%-- 
-          <a class="brand" href="<c:url value='/home.html'/>">Auto Tools</a>
-          --%>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<security:authorize ifNotGranted="ROLE_USER">
 							<li><a href="<c:url value='/login.html'/>">Login</a></li>
 						</security:authorize>
 						<security:authorize ifAllGranted="ROLE_USER">
-							<a class="brand" href="<c:url value='/home.html'/>">Auto
-								Tools</a>
+							<a class="brand" href="<c:url value='/home.html'/>">OneCloud</a>
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown"> ${fn:escapeXml(authUser.name)} <b
 									class="caret"></b>
@@ -56,17 +52,11 @@
 								href="<c:url value='/users.html'/>">List Application Users</a></li>
 						</security:authorize>
 						<security:authorize ifAllGranted="ROLE_USER">
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">Employee Details<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li><a href="<c:url value='/employee_details.html'/>">
-									       Employee List</a></li>
-									<li><a href="<c:url value='/find_employee.html'/>">
-									      Employee Search</a></li>
-								</ul>
-							</li>
-              	            <li class="${nav eq 'regions'? 'active' : ''}">
-              	               <a href="<c:url value='/regions.html'/>">Region Details</a></li>
+                            <li class="${nav eq 'testcase'? 'active' : ''}">
+                                <a href="<c:url value='/testcases.html'/>">
+                                    Test Case Management
+                                </a>
+                            </li>
 						</security:authorize>
 					</ul>
 				</div>

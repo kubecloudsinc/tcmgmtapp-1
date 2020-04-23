@@ -14,7 +14,7 @@
 
 	<mvc:annotation-driven />
 
-	<context:component-scan base-package="com.onecloud.autotools.web" />
+	<context:component-scan base-package="com.onecloud.tcmgmt.web" />
 	<context:annotation-config />
 	
 	<mvc:resources mapping="/reports/**" location="/reports/" />
@@ -37,24 +37,32 @@
 	<mvc:view-controller path="/access_denied.html"	view-name="accessDenied" />
 
 	<mvc:interceptors>
-		<bean class="com.onecloud.autotools.web.UserContextInterceptor" />
+		<bean class="com.onecloud.tcmgmt.web.UserContextInterceptor" />
 	</mvc:interceptors>
 
 	<bean name="/users.html"
-		class="com.onecloud.autotools.web.IdentifiableEntityListController"
+		class="com.onecloud.tcmgmt.web.IdentifiableEntityListController"
 		p:dao-ref="userDao" p:viewName="userList" />
 
 	<bean name="/user.html"
-		class="com.onecloud.autotools.web.IdentifiableEntityGetController"
+		class="com.onecloud.tcmgmt.web.IdentifiableEntityGetController"
 		p:dao-ref="userDao" p:viewName="userView" />
 
 	<bean name="/user_delete.html"
-		class="com.onecloud.autotools.web.IdentifiableEntityDeleteController"
+		class="com.onecloud.tcmgmt.web.IdentifiableEntityDeleteController"
 		p:dao-ref="userDao" />
 
-	<bean name="/regions.html"
-		  class="com.onecloud.autotools.web.IdentifiableEntityListController"
-		  p:dao-ref="regionDao" p:viewName="regionList" />
+	<bean name="/testcases.html"
+		  class="com.onecloud.tcmgmt.web.IdentifiableEntityListController"
+		  p:dao-ref="testCaseDao" p:viewName="testcaseList" />
+
+	<bean name="/testcase.html"
+		  class="com.onecloud.tcmgmt.web.TestCaseGetController"
+		  p:dao-ref="testCaseDao" p:viewName="testcaseView" />
+
+	<bean name="/testcase_delete.html"
+		  class="com.onecloud.tcmgmt.web.IdentifiableEntityDeleteController"
+		  p:dao-ref="testCaseDao" />
 
 	<bean id="exceptionResolver"
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">

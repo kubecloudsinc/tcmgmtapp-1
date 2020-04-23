@@ -8,6 +8,6 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="f" uri="/WEB-INF/functions.tld"%>
 
-<tags:page title="Auto Tools" nav="home">
- <p>Welcome to Auto Tools</p>
+<tags:page title="One Cloud Test Management" nav="home">
+ <p>Welcome to One Cloud Test Case Management</p>
 </tags:page>

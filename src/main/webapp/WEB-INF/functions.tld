@@ -9,7 +9,7 @@ http://java.sun.com/xml/ns/j2ee "
 
   <function>
     <name>now</name>
-    <function-class>com.onecloud.autotools.web.JSPFunctions</function-class>
+    <function-class>com.onecloud.tcmgmt.web.JSPFunctions</function-class>
     <function-signature>
       java.util.Date now()
     </function-signature>
@@ -17,7 +17,7 @@ http://java.sun.com/xml/ns/j2ee "
 
   <function>
     <name>convertToHtmlLineBreaks</name>
-    <function-class>com.onecloud.autotools.web.JSPFunctions</function-class>
+    <function-class>com.onecloud.tcmgmt.web.JSPFunctions</function-class>
     <function-signature>
       java.lang.String convertToHtmlLineBreaks(java.lang.String)
     </function-signature>
@@ -25,7 +25,7 @@ http://java.sun.com/xml/ns/j2ee "
 
   <function>
     <name>trimToLength</name>
-    <function-class>com.onecloud.autotools.web.JSPFunctions</function-class>
+    <function-class>com.onecloud.tcmgmt.web.JSPFunctions</function-class>
     <function-signature>
       java.lang.String trimToLength(java.lang.String, int)
     </function-signature>
@@ -33,7 +33,7 @@ http://java.sun.com/xml/ns/j2ee "
 
   <function>
     <name>getType</name>
-    <function-class>com.onecloud.autotools.web.JSPFunctions</function-class>
+    <function-class>com.onecloud.tcmgmt.web.JSPFunctions</function-class>
     <function-signature>
       java.lang.String getType(java.lang.Object)
     </function-signature>
