@@ -21,6 +21,7 @@
       <tags:textAreaInput path="expectedResult" label="Expected Result" rows="3" />
       <tags:booleanInput path="automated" label="Test Automated?" />
     </div>
+    <div class="container">
       <table class="table table-striped table-hover" >
         <thead>
             <tr>
@@ -32,7 +33,7 @@
         <tbody>
             <c:forEach varStatus="index" items="${testCaseDTO.testSteps}">
             <tr class="form-row form-group col">
-                <td read>
+                <td>
                     <tags:textInput path="testSteps[${index.count - 1}].testStepOrder" readonly="${true}" />
                 </td>
                 <td>
@@ -51,6 +52,7 @@
             </td>
         </tbody>
       </table>
+     </div>
      <div class="form-actions">
       <button type="submit" class="btn btn-primary">Save</button>
      </div>

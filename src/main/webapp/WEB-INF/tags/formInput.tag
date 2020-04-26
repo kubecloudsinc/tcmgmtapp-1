@@ -15,7 +15,7 @@
 </c:set>
 <div class="control-group ${pageScope.required? 'required' : ''} ${empty pageScope.error? '' : 'error'}">
   <c:if test="${not empty pageScope.label}">
-    <form:label path="${pageScope.path}" style="display:inline" cssClass="control-label"><strong>${pageScope.label}</strong></form:label>
+    <form:label path="${pageScope.path}" cssClass="control-label"><strong>${pageScope.label}</strong></form:label>
   </c:if>
   <div class="controls">
     <jsp:doBody/>

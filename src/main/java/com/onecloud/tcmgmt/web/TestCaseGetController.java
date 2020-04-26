@@ -35,10 +35,6 @@ public class TestCaseGetController extends ParameterizableViewController {
         TestCase result = this.dao.getById(id);
         this.logger.debug("Got {} by id {}", result, id);
         Collections.sort(result.getTestSteps(),new SortByStepOrder());
-//        logger.debug("AFTER SORT");
-//        for (TestStep aStep: result.getTestSteps()){
-//            logger.debug("Step order: "+aStep.getTestStepOrder());
-//        }
 
         return new ModelAndView(this.getViewName()).addObject(result);
     }

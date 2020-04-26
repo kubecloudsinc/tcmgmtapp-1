@@ -41,6 +41,8 @@
 	<bean id="userDao" class="com.onecloud.tcmgmt.dao.HibernateUserDao" />
 
 	<bean id="testCaseDao" class="com.onecloud.tcmgmt.dao.HibernateTestCaseDao" />
+
+	<bean id="testRunDao" class="com.onecloud.tcmgmt.dao.HibernateTestRunDao" />
 	
 	<bean id="userStoreService"	class="com.onecloud.tcmgmt.service.DefaultUserStoreService" />
 	<bean id="userContextService" class="com.onecloud.tcmgmt.service.DefaultUserContextService" />

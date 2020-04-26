@@ -59,5 +59,6 @@
          </table>
     </c:otherwise>
  </c:choose>
- <a class="backUrl btn btn-primary" href="<c:url value='/testcases.html'/>">Back</a>
+ <a class="btn btn-info" href="<c:url value='/testcases.html'/>">Go To Test Cases</a>
+ <a class="btn btn-info" href="<c:url value='/testruns.html'/>">Go To Test Runs</a>
 </tags:page>

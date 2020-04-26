@@ -37,24 +37,43 @@
 						</security:authorize>
 						<security:authorize ifAllGranted="ROLE_USER">
 							<a class="brand" href="<c:url value='/home.html'/>">OneCloud</a>
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown"> ${fn:escapeXml(authUser.name)} <b
-									class="caret"></b>
-							</a>
+							<li class="dropdown">
+							    <a href="#"
+							        class="dropdown-toggle"	data-toggle="dropdown">
+							            ${fn:escapeXml(authUser.name)} <b class="caret"></b>
+							    </a>
 								<ul class="dropdown-menu">
 									<li><a href="<c:url value='/user_profile.html'/>">My
 											Profile</a></li>
 									<li><a href="<c:url value='/logout.html'/>">Logout</a></li>
-								</ul></li>
+								</ul>
+							</li>
 						</security:authorize>
 						<security:authorize ifAllGranted="ROLE_ADMIN">
 							<li class="${nav eq 'users'? 'active' : ''}"><a
 								href="<c:url value='/users.html'/>">List Application Users</a></li>
 						</security:authorize>
 						<security:authorize ifAllGranted="ROLE_USER">
-                            <li class="${nav eq 'testcase'? 'active' : ''}">
-                                <a href="<c:url value='/testcases.html'/>">
-                                    Test Case Management
+							<li class="dropdown ${nav eq 'testcase'? 'active' : ''}">
+							    <a href="#" class="dropdown-toggle"
+							          data-toggle="dropdown">Test Case Management <b class="caret"></b>
+							    </a>
+								<ul class="dropdown-menu">
+									<li>
+									    <a href="<c:url value='/testcases.html'/>">
+									        List Test Cases
+									    </a>
+									</li>
+									<li>
+									    <a href="<c:url value='/testcase_form.html'/>">
+									        Add Test Case
+									    </a>
+									</li>
+								</ul>
+							</li>
+                            <li class="${nav eq 'testrun'? 'active' : ''}">
+                                <a href="<c:url value='/testruns.html'/>">
+                                    Test Run Management
                                 </a>
                             </li>
 						</security:authorize>

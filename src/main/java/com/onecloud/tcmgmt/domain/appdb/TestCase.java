@@ -3,7 +3,6 @@ package com.onecloud.tcmgmt.domain.appdb;
 
 import com.onecloud.tcmgmt.semantic.dto.TestCaseDTO;
 import com.onecloud.tcmgmt.semantic.utils.SortByStepOrder;
-import com.onecloud.tcmgmt.web.TestCaseFormController;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.slf4j.Logger;
@@ -11,7 +10,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Table(name = "TEST_CASE")
@@ -21,7 +22,7 @@ public class TestCase extends IdentifiableEntity {
     private static final Logger logger = LoggerFactory
             .getLogger(TestCase.class);
 
-    private static final long serialVersionUID = 2912349267760500809L;
+    private static final long serialVersionUID = 1L;
 
     private String testName;
 
@@ -36,6 +37,10 @@ public class TestCase extends IdentifiableEntity {
     private boolean automated = false;
 
     private List<TestStep> testSteps = new ArrayList<TestStep>();
+
+    private List<TestRun> testRuns = new ArrayList<TestRun>();
+
+    private Boolean checked=false;
 
     @Size(max = 20)
     @Column(name="TEST_NAME", length = 20, unique = true)
@@ -103,6 +108,24 @@ public class TestCase extends IdentifiableEntity {
 
     public void setTestSteps(List<TestStep> testSteps) {
         this.testSteps = testSteps;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "testCases")
+    public List<TestRun> getTestRuns() {
+        return testRuns;
+    }
+
+    public void setTestRuns(List<TestRun> testRuns) {
+        this.testRuns = testRuns;
+    }
+
+    @Transient
+    public Boolean getChecked() {
+        return this.checked;
+    }
+
+    public void setChecked(Boolean checked) {
+        this.checked = checked;
     }
 
     @Override

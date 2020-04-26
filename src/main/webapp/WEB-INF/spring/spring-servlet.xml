@@ -64,6 +64,14 @@
 		  class="com.onecloud.tcmgmt.web.IdentifiableEntityDeleteController"
 		  p:dao-ref="testCaseDao" />
 
+	<bean name="/testruns.html"
+		  class="com.onecloud.tcmgmt.web.IdentifiableEntityListController"
+		  p:dao-ref="testRunDao" p:viewName="testrunList" />
+
+	<bean name="/testrun.html"
+		  class="com.onecloud.tcmgmt.web.IdentifiableEntityGetController"
+		  p:dao-ref="testRunDao" p:viewName="testrunView" />
+
 	<bean id="exceptionResolver"
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
