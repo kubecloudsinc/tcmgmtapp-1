@@ -37,8 +37,9 @@ public class ApplicationConstants {
 	 * Application related configuration.
 	 */
 	public static Configuration APPLICATION_CONFIG = new ComponentConfiguration(ApplicationConstants.class);
-	
-	
+
+	public static final int UI_PAGINATION_PAGE_SIZE = 8;
+
 	public static final String APPLICATION_DEFAULT_ENCODING = APPLICATION_CONFIG.getStringValue(APPLICATION_DEFAULT_ENCODING_KEY);
 	
 	public static final String REPORTS_FOLDER = APPLICATION_CONFIG.getStringValue(REPORTS_FOLDER_KEY);

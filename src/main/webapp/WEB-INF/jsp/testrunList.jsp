@@ -5,20 +5,14 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="f" uri="/WEB-INF/functions.tld"%>
 <tags:page title="Test Runs" nav="testrun">
+  <c:if test="${not empty param.success}">
+    <tags:alert type="success" title="Success!" message="Saved Test Run."/>
+  </c:if>
   <c:choose>
     <c:when test="${fn:length(testRunList) == 0}">
       <p>No Test Runs</p>
     </c:when>
     <c:otherwise>
-      <table class="table table-striped table-hover">
-        <thead>
-            <th>
-                <a class="addUrl btn btn-primary" href="<c:url value='/testrun_form.html'/>">
-                    Add New Test Run
-                </a>
-            </th>
-        </thead>
-      </table>
       <div class="container">
         <span class="badge badge-primary">Test Runs List</span>
       </div>
@@ -45,13 +39,15 @@
               <td class="number"><a href="${viewUrl}">${testrun.id}</a></td>
               <td>${fn:escapeXml(testrun.name)}</td>
               <td>${fn:escapeXml(testrun.description)}</td>
-              <security:authorize ifAllGranted="ROLE_ADMIN">
+
                   <td>
                     <a class="viewUrl btn btn-primary" href="${viewUrl}">View</a>
-                    <a class="editUrl btn btn-info" href="${editUrl}">Edit</a>
-                    <a class="deleteUrl btn btn-danger" href="${deleteUrl}">Delete</a>
+                    <security:authorize ifAllGranted="ROLE_ADMIN">
+                        <a class="editUrl btn btn-info" href="${editUrl}">Edit</a>
+                        <a class="deleteUrl btn btn-danger" href="${deleteUrl}">Delete</a>
+                    </security:authorize>
                   </td>
-                </security:authorize>
+
             </tr>
           </c:forEach>
         </tbody>

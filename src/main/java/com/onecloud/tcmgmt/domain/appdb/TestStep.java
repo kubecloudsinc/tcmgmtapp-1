@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "TEST_STEP")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class TestStep extends IdentifiableEntity {
+public class TestStep extends IdentifiableEntity implements Comparable{
 
     private static final long serialVersionUID = 2923459267760500809L;
 
@@ -23,6 +23,8 @@ public class TestStep extends IdentifiableEntity {
     private Long testCaseId;
 
     private Long testStepOrder;
+
+    private boolean checked;
 
     @Column(name="TEST_STEP_ORDER")
     public Long getTestStepOrder() {
@@ -72,6 +74,15 @@ public class TestStep extends IdentifiableEntity {
         this.testCaseId = testCaseId;
     }
 
+    @Transient
+    public boolean getChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
     @Override
     public boolean equals(Object o) {
         boolean isEqual = false;
@@ -103,5 +114,31 @@ public class TestStep extends IdentifiableEntity {
     @Override
     public String toString() {
         return this.getTestStep();
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        int isEqual = -1;
+        if (this == o) {
+            return 0;
+        } else if (this.getId() == null) {
+            return 10000000;
+        } else if (o instanceof TestStep) {
+            TestStep that = (TestStep) o;
+            if(this.getId().equals(that.getId())){
+                if(this.getTestStepOrder().intValue()== that.getTestStepOrder().intValue()){
+                    if(this.getTestStep().equals(that.getTestStep())){
+                        if(this.testStepResult.equals(that.testStepResult)){
+                            isEqual=0;
+                        }
+                    }
+                }else{
+                    return this.getTestStepOrder().intValue()-that.getTestStepOrder().intValue();
+                }
+            }else{
+                return this.getId().intValue()-that.getTestCaseId().intValue();
+            }
+        }
+        return isEqual;
     }
 }

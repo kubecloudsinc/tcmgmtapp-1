@@ -1,10 +1,8 @@
 package com.onecloud.tcmgmt.semantic.dto;
 
-import com.onecloud.tcmgmt.domain.appdb.TestStep;
-import org.hibernate.validator.constraints.NotEmpty;
+import com.onecloud.tcmgmt.domain.appdb.TestCase;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class TestRunDTO {
@@ -17,9 +15,7 @@ public class TestRunDTO {
 
     private String description;
 
-    private Date created;
-
-    public List<SimpleTestCaseDTO> testCaseDTOs = new ArrayList<SimpleTestCaseDTO>();
+    public List<TestCase> testCases = new ArrayList<TestCase>();
 
     public Long getId() {
         return id;
@@ -45,19 +41,11 @@ public class TestRunDTO {
         this.description = description;
     }
 
-    public Date getCreated() {
-        return this.created;
+    public List<TestCase> getTestCases() {
+        return testCases;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public List<SimpleTestCaseDTO> getTestCaseDTOs() {
-        return testCaseDTOs;
-    }
-
-    public void setTestCaseDTOs(List<SimpleTestCaseDTO> testCaseDTOs) {
-        this.testCaseDTOs = testCaseDTOs;
+    public void setTestCases(List<TestCase> testCases) {
+        this.testCases = testCases;
     }
 }

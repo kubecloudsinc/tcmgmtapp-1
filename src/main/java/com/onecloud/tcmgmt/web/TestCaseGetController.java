@@ -34,7 +34,7 @@ public class TestCaseGetController extends ParameterizableViewController {
         long id = ServletRequestUtils.getRequiredLongParameter(request, "id");
         TestCase result = this.dao.getById(id);
         this.logger.debug("Got {} by id {}", result, id);
-        Collections.sort(result.getTestSteps(),new SortByStepOrder());
+//        Collections.sort(result.getTestSteps(),new SortByStepOrder());
 
         return new ModelAndView(this.getViewName()).addObject(result);
     }

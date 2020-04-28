@@ -2,27 +2,26 @@
 package com.onecloud.tcmgmt.domain.appdb;
 
 import com.onecloud.tcmgmt.semantic.dto.TestCaseDTO;
-import com.onecloud.tcmgmt.semantic.utils.SortByStepOrder;
+import org.apache.commons.collections.CollectionUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.SortNatural;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "TEST_CASE")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class TestCase extends IdentifiableEntity {
+public class TestCase extends IdentifiableEntity implements Comparable{
 
     private static final Logger logger = LoggerFactory
             .getLogger(TestCase.class);
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     private String testName;
 
@@ -36,14 +35,14 @@ public class TestCase extends IdentifiableEntity {
 
     private boolean automated = false;
 
-    private List<TestStep> testSteps = new ArrayList<TestStep>();
+    private SortedSet<TestStep> testSteps = new TreeSet<TestStep>();
 
-    private List<TestRun> testRuns = new ArrayList<TestRun>();
+    private SortedSet<TestRun> testRuns = new TreeSet<TestRun>();
 
-    private Boolean checked=false;
+    private boolean checked;
 
-    @Size(max = 20)
-    @Column(name="TEST_NAME", length = 20, unique = true)
+    @Size(max = 25)
+    @Column(name="TEST_NAME", length = 25, unique = true)
     public String getTestName() {
         return testName;
     }
@@ -101,30 +100,49 @@ public class TestCase extends IdentifiableEntity {
         this.automated = automated;
     }
 
-    @OneToMany(mappedBy="testCase", targetEntity=TestStep.class, cascade = CascadeType.ALL)
-    public List<TestStep> getTestSteps() {
+    @OneToMany(mappedBy="testCase", targetEntity=TestStep.class,
+            orphanRemoval=true, cascade = CascadeType.ALL)
+    @SortNatural
+    @OrderBy("testStepOrder ASC")
+    public SortedSet<TestStep> getTestSteps() {
         return testSteps;
     }
 
-    public void setTestSteps(List<TestStep> testSteps) {
+    public void setTestSteps(SortedSet<TestStep> testSteps) {
         this.testSteps = testSteps;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "testCases")
-    public List<TestRun> getTestRuns() {
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade =
+                    {
+                        CascadeType.DETACH,
+                        CascadeType.MERGE,
+                        CascadeType.REFRESH,
+                        CascadeType.PERSIST
+                    })
+    @JoinTable(name = "TEST_CASE_RUN",
+            joinColumns = {
+                    @JoinColumn(name = "TEST_CASE_ID", nullable = false, updatable = false) },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "TEST_RUN_ID", nullable = false, updatable = false)},
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
+    @SortNatural
+    @OrderBy("id ASC")
+    public SortedSet<TestRun> getTestRuns() {
         return testRuns;
     }
 
-    public void setTestRuns(List<TestRun> testRuns) {
+    public void setTestRuns(SortedSet<TestRun> testRuns) {
         this.testRuns = testRuns;
     }
 
     @Transient
-    public Boolean getChecked() {
+    public boolean getChecked() {
         return this.checked;
     }
 
-    public void setChecked(Boolean checked) {
+    public void setChecked(boolean checked) {
         this.checked = checked;
     }
 
@@ -169,7 +187,7 @@ public class TestCase extends IdentifiableEntity {
         aDTO.setTestSetup(this.testSetup);
         aDTO.setTestType(this.testType);
 //        logger.debug("ABOUT TO SET THE TestSteps");
-        Collections.sort(this.getTestSteps(),new SortByStepOrder());
+//        Collections.sort(this.getTestSteps(),new SortByStepOrder());
 //        logger.debug("TestSteps Count:"+this.getTestSteps().size());
         aDTO.setTestSteps(this.getTestSteps());
 //        logger.debug("After setting DTO TestSteps Count:"+aDTO.getTestSteps().size());
@@ -210,7 +228,11 @@ public class TestCase extends IdentifiableEntity {
         }
 
         if(this.testSteps==null || this.testSteps.isEmpty() || (!this.testSteps.equals(testCaseDTO.getTestSteps()))) {
-            for (TestStep dtoStep: testCaseDTO.getTestSteps()){
+
+            logger.debug("Inside the test steps update method");
+            TestStep dtoStep ;
+            for (Iterator<TestStep> it = testCaseDTO.getTestSteps().iterator(); it.hasNext();){
+               dtoStep = it.next();
               if (dtoStep.getId()==null || dtoStep.getId().longValue() == 0){
                   dtoStep.setTestCase(this);
                   getTestSteps().add(dtoStep);
@@ -236,7 +258,32 @@ public class TestCase extends IdentifiableEntity {
 
               }
             }
+
+            logger.debug("Size of lists Before: "+getTestSteps().size()+" "+testCaseDTO.getTestSteps());
+            List<TestStep> removedList =
+                    (List<TestStep>)  CollectionUtils.subtract(getTestSteps(),testCaseDTO.getTestSteps());
+            logger.debug("Size of removed lists: "+removedList.size());
+            for (TestStep aTestStep : removedList){
+                getTestSteps().remove(aTestStep);
+            }
+            logger.debug("Size of lists After: "+getTestSteps().size()+" "+testCaseDTO.getTestSteps());
+
             logger.debug("testSteps created or updated ");
+        }
+    }
+
+    @Override
+    public int compareTo(Object o) {
+
+        if (this == o) {
+            return 0;
+        } else if (this.getTestDescription() == null) {
+            return -1;
+        } else if (o instanceof TestCase) {
+            TestCase that = (TestCase) o;
+            return this.getTestName().compareTo(that.getTestName());
+        } else {
+            return -1;
         }
     }
 }

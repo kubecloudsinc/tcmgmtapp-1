@@ -71,11 +71,21 @@
 									</li>
 								</ul>
 							</li>
-                            <li class="${nav eq 'testrun'? 'active' : ''}">
-                                <a href="<c:url value='/testruns.html'/>">
-                                    Test Run Management
-                                </a>
-                            </li>
+							<li class="dropdown ${nav eq 'testrun'? 'active' : ''}">
+							    <a href="#" class="dropdown-toggle"
+							          data-toggle="dropdown">Test Run Management <b class="caret"></b>
+							    </a>
+								<ul class="dropdown-menu">
+									<li>
+									    <a href="<c:url value='/testruns.html'/>">
+									        List Test Runs</a>
+									</li>
+									<li>
+                                        <a href="<c:url value='/testrun_form.html'/>">
+                                            Add New Test Run</a>
+									</li>
+								</ul>
+							</li>
 						</security:authorize>
 					</ul>
 				</div>

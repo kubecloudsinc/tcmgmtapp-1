@@ -9,7 +9,7 @@
 <%@ taglib prefix="f" uri="/WEB-INF/functions.tld"%>
 <tags:page title="${empty testCaseDTO.testName ? 'Add a new test case' : 'Edit Test Case: '.concat(testCaseDTO.testName)}" nav="testcase">
   <c:if test="${not empty param.success}">
-    <tags:alert type="success" title="Success!" message="Saved user."/>
+    <tags:alert type="success" title="Success!" message="Saved the test case."/>
   </c:if>
   <form:form commandName="testCaseDTO">
     <div class="form-horizontal">
@@ -25,6 +25,7 @@
       <table class="table table-striped table-hover" >
         <thead>
             <tr>
+               <th></th>
                <th scope="col">Test Step Number</th>
                <th scope="col">Test Step</th>
                <th scope="col">Test Step Result</th>
@@ -32,29 +33,36 @@
         </thead>
         <tbody>
             <c:forEach varStatus="index" items="${testCaseDTO.testSteps}">
-            <tr class="form-row form-group col">
-                <td>
-                    <tags:textInput path="testSteps[${index.count - 1}].testStepOrder" readonly="${true}" />
-                </td>
-                <td>
-                    <tags:textAreaInput path="testSteps[${index.count - 1}].testStep" rows="1" />
-                </td>
-                <td>
-                    <tags:textAreaInput path="testSteps[${index.count - 1}].testStepResult" rows="1" />
-                </td>
-            </tr>
+                <tr class="form-row form-group col">
+                    <td>
+                        <form:checkbox path="testSteps[${index.count - 1}].checked" value="true"/>
+                    </td>
+                    <td>
+                        <tags:textInput path="testSteps[${index.count - 1}].testStepOrder" readonly="${true}" />
+                    </td>
+                    <td>
+                        <tags:textAreaInput path="testSteps[${index.count - 1}].testStep" rows="1" />
+                    </td>
+                    <td>
+                        <tags:textAreaInput path="testSteps[${index.count - 1}].testStepResult" rows="1" />
+                    </td>
+                </tr>
             </c:forEach>
-            <td>
-                <c:url var="addStepUrl" value='/teststep_add.html'>
-                    <c:param name="id" value="${testCaseDTO.id}"/>
-                </c:url>
-                <a class="backUrl btn btn-primary" href="${addStepUrl}">Add Test Step</a>
-            </td>
         </tbody>
       </table>
      </div>
      <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Save</button>
+         <table class="table table-striped table-hover" >
+            <tbody>
+                <tr>
+                    <td>
+                        <button type="submit" class="btn btn-info" name="add" value="add">Add Test Step</button>
+                        <button type="submit" class="btn btn-info" name="remove" value="remove">Remove Test Step</button>
+                    </td>
+                </tr>
+            </tbody>
+         </table>
+         <button type="submit" class="btn btn-primary" name="save" value="save">Save</button>
      </div>
   </form:form>
 </tags:page>

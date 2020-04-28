@@ -1,11 +1,13 @@
 package com.onecloud.tcmgmt.semantic.dto;
 
-import com.onecloud.tcmgmt.domain.appdb.IdentifiableEntity;
 import com.onecloud.tcmgmt.domain.appdb.TestStep;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class TestCaseDTO {
 
@@ -25,7 +27,7 @@ public class TestCaseDTO {
 
     private boolean automated = false;
 
-    private List<TestStep> testSteps = new ArrayList<TestStep>();
+    private SortedSet<TestStep> testSteps = new TreeSet<TestStep>();
 
     public Long getId() {
         return id;
@@ -36,6 +38,7 @@ public class TestCaseDTO {
     }
 
     @NotEmpty
+    @Size(max = 25)
     public String getTestName() {
         return testName;
     }
@@ -44,6 +47,7 @@ public class TestCaseDTO {
         this.testName = testName;
     }
 
+    @Size(max = 200)
     public String getTestDescription() {
         return testDescription;
     }
@@ -53,6 +57,7 @@ public class TestCaseDTO {
     }
 
     @NotEmpty
+    @Size(max = 20)
     public String getTestType() {
         return testType;
     }
@@ -61,6 +66,7 @@ public class TestCaseDTO {
         this.testType = testType;
     }
 
+    @Size(max = 200)
     public String getTestSetup() {
         return testSetup;
     }
@@ -85,11 +91,11 @@ public class TestCaseDTO {
         this.automated = automated;
     }
 
-    public List<TestStep> getTestSteps() {
+    public SortedSet<TestStep> getTestSteps() {
         return testSteps;
     }
 
-    public void setTestSteps(List<TestStep> testSteps) {
+    public void setTestSteps(SortedSet<TestStep> testSteps) {
         this.testSteps = testSteps;
     }
 }

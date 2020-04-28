@@ -5,6 +5,9 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="f" uri="/WEB-INF/functions.tld"%>
 <tags:page title="Details of test case: ${fn:escapeXml(testCase.testName)}" nav="testcase">
+  <c:if test="${not empty param.success}">
+    <tags:alert type="success" title="Success!" message="Test case has been saved."/>
+  </c:if>
  <table>
   <tbody>
     <tr>
