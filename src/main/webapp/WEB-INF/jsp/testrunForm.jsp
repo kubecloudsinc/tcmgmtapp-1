@@ -13,71 +13,69 @@
   </c:if>
   <c:if test="${not empty param.addcase}">
       <tags:alert type="success" title="Success!" message="Add test cases success."/>
-   </c:if>
+  </c:if>
   <form:form commandName="testRun">
     <div class="form-horizontal">
-      <tags:showFormErrors name="testRun"/>
-      <tags:textInput path="name" label="Test Run Name" required="${true}" cssClass="form-control form-control-sm"/>
-      <tags:textInput path="description" label="Test Run Description" required="${false}" cssClass="form-control form-control-sm"/>
-      <fmt:formatDate var="createDate" type = "both" dateStyle = "short" timeStyle = "short" value = "${testRun.created}" />
-      <div class="control-group ${empty pageScope.error? '' : 'error'}">
-        <form:label path="created" cssClass="control-label"><strong>Create Date :</strong></form:label>
-        <div class="controls">
-            <form:input path="created" cssClass="form-control form-control-sm" readonly="true" value="${createDate}"  />
+        <tags:showFormErrors name="testRun"/>
+        <tags:textInput path="name" label="Test Run Name" required="${true}" cssClass="form-control form-control-sm"/>
+        <tags:textInput path="description" label="Test Run Description" required="${false}" cssClass="form-control form-control-sm"/>
+        <fmt:formatDate var="createDate" type = "both" dateStyle = "short" timeStyle = "short" value = "${testRun.created}" />
+        <div class="control-group ${empty pageScope.error? '' : 'error'}">
+            <form:label path="created" cssClass="control-label"><strong>Create Date :</strong></form:label>
+            <div class="controls">
+                <form:input path="created" cssClass="form-control form-control-sm" readonly="true" value="${createDate}"  />
+            </div>
         </div>
-      </div>
+        <div class="page-header"></div>
     </div>
-  <div class="container">
-    <div class="page-header"></div>
-  </div>
-  <div class="container">
-    <span class="badge badge-primary">Test Cases in this run</span>
-  </div>
     <div class="container">
-      <table class="table table-striped table-hover" >
-        <thead>
-        <tr>
-         <th></th>
-         <th>Test Case Id</th>
-         <th>Test Case Name</th>
-         <th>Test Case Description</th>
-         <th>Test Case Type</th>
-        </tr>
-        </thead>
-        <tbody>
-            <c:forEach varStatus="index" items="${testRun.testCases}">
-            <tr class="form-row form-group col">
-                <td>
-                    <form:checkbox path="testCases[${index.count - 1}].checked" value="true"/>
-                </td>
-                <td>
-                    <tags:textInput path="testCases[${index.count - 1}].id" readonly="${true}" />
-                </td>
-                <td>
-                    <tags:textInput path="testCases[${index.count - 1}].testName" readonly="${true}" />
-                </td>
-                <td>
-                    <tags:textInput path="testCases[${index.count - 1}].testDescription" readonly="${true}" />
-                </td>
-                <td>
-                    <tags:textInput path="testCases[${index.count - 1}].testType" readonly="${true}" />
-                </td>
-            </tr>
-            </c:forEach>
-        </tbody>
-      </table>
+        <span class="badge badge-primary">Test Cases in this run</span>
     </div>
-    <div class="form-actions">
-      <table class="table table-striped table-hover" >
-        <tbody>
-            <tr>
-                <td>
-                    <button type="submit" class="btn btn-info" name="add" value="add">Add Test Cases</button>
-                    <button type="submit" class="btn btn-info" name="remove" value="remove">Remove Test Cases</button>
-                </td>
-            </tr>
-        </tbody>
-      </table>
+    <div class="container">
+        <table class="table table-striped table-hover" >
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Test Case Id</th>
+                    <th>Test Case Name</th>
+                    <th>Test Case Description</th>
+                    <th>Test Case Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach varStatus="index" items="${testRun.testCases}">
+                    <tr>
+                        <td>
+                            <form:checkbox path="testCases[${index.count - 1}].checked" value="true" />
+                        </td>
+                        <td>
+                            <tags:textInput path="testCases[${index.count - 1}].id" readonly="${true}"  />
+                        </td>
+                        <td>
+                            <tags:textInput path="testCases[${index.count - 1}].testName" readonly="${true}" />
+                        </td>
+                        <td>
+                            <tags:textInput path="testCases[${index.count - 1}].testDescription" readonly="${true}" />
+                        </td>
+                        <td>
+                            <tags:textInput path="testCases[${index.count - 1}].testType" readonly="${true}" />
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+    <div class="w-25 p-3" style="background-color: #eee;">
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+                <button type="submit" class="btn btn-info" name="add" value="addTest">Add Test Cases</button>
+            </div>
+            <div class="btn-group mr-2" role="group" aria-label="Second group">
+                <button type="submit" class="btn btn-info" name="remove" value="remove">Remove Test Cases</button>
+            </div>
+        </div>
+    </div>
+    <div class="w-25 p-3" style="background-color: #eee;">
       <button type="submit" class="btn btn-primary" name="update" value="update">Create or Update Test Run</button>
     </div>
   </form:form>

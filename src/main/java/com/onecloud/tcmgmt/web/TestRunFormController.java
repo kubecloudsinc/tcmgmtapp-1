@@ -5,11 +5,13 @@ import com.onecloud.tcmgmt.dao.TestCaseDao;
 import com.onecloud.tcmgmt.dao.TestRunDao;
 import com.onecloud.tcmgmt.domain.appdb.TestCase;
 import com.onecloud.tcmgmt.domain.appdb.TestRun;
+import com.onecloud.tcmgmt.semantic.constants.ApplicationConstants;
 import com.onecloud.tcmgmt.semantic.dto.TestRunDTO;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -71,23 +73,45 @@ public class TestRunFormController {
 
     @RequestMapping(params = "add", method = RequestMethod.POST)
     public ModelAndView addTestCases(@RequestParam(value = "id", required = false) Long id,
-                                  @ModelAttribute TestRun testRun, BindingResult result,
-                                  HttpServletRequest request) {
+                            @RequestParam(value = "add") String navPage, @ModelAttribute TestRun testRun,
+                                     BindingResult result,HttpServletRequest request) {
 
-            testRun = (TestRun) request.getSession().getAttribute("testRun");
+        testRun = (TestRun) request.getSession().getAttribute("testRun");
+        logger.debug("INSIDE THE TEST CASE ADD : "+ testRun.getId());
+        logger.debug("INSIDE THE TEST CASE ADD navPage : "+ navPage);
+        logger.debug("INSIDE THE TEST CASE ADD test run navPage : "+ testRun.getNavPage());
+        PagedListHolder<TestCase> testCaseList = testRun.getTestCasePageList();
+
+        if(navPage == null || navPage.isEmpty() || navPage.equals("addTest")) {
             logger.debug("INSIDE THE TEST CASE ADD : "+ testRun.getId());
 
             List<TestCase> allTestCases = this.testCaseDao.getAll();
-            logger.debug("All testcases count : "+ allTestCases.size());
-            logger.debug("testcases in run : "+ testRun.getTestCases().size());
             List<TestCase> testCasesToAdd =
                     (List<TestCase>) CollectionUtils.subtract(allTestCases,testRun.getTestCases());
-            logger.debug("testcases that can be added : "+ testCasesToAdd.size());
+            // Setting the source for PagedListHolder
+            testRun.getTestCasePageList().setSource(testCasesToAdd);
+            testRun.getTestCasePageList().setPageSize(ApplicationConstants.UI_PAGINATION_PAGE_SIZE);
+            // Setting PagedListHolder instance to session
+            request.getSession().setAttribute("testCaseList", testRun.getTestCasePageList());
+        }else if(navPage.equals("prev")) {
+            // get the user list from session
+            testCaseList = (PagedListHolder<TestCase>)request.getSession().getAttribute("testCaseList");
+            // switch to previous page
+            testCaseList.previousPage();
+        }else if(navPage.equals("next")) {
+            testCaseList = (PagedListHolder<TestCase>)request.getSession().getAttribute("testCaseList");
+            // switch to next page
+            testCaseList.nextPage();
+        }else {
+            int pageNum = Integer.parseInt(navPage);
+            testCaseList = (PagedListHolder<TestCase>)request.getSession().getAttribute("testCaseList");
+            // set the current page number
+            // page number starts from zero in PagedListHolder that's why subtracting 1
+            testCaseList.setPage(pageNum - 1);
+        }
 
-            TestRunDTO testRunDTO = testRun.createDTO();
-            testRunDTO.getTestCases().addAll(testCasesToAdd);
-
-            return new ModelAndView("testcaseaddForm").addObject(testRunDTO);
+        testRun.setTestCasePageList(testCaseList);
+        return new ModelAndView("testcaseaddForm").addObject(testRun);
     }
 
     @RequestMapping(params = "remove", method = RequestMethod.POST)
@@ -128,23 +152,12 @@ public class TestRunFormController {
     }
 
     @RequestMapping(params = "save", method = RequestMethod.POST)
-    public ModelAndView processSubmit(@ModelAttribute("testRunDTO") TestRunDTO testRunDTO,
+    public ModelAndView processSubmit(@ModelAttribute("testRun") TestRun testRun,
                                                 HttpServletRequest request) {
 
         logger.debug("INSIDE THE FORM POST");
-        TestRun testRun = (TestRun) request.getSession().getAttribute("testRun");
-
-        logger.debug("The id in testCaseDTO: " + testRunDTO.getId());
-        for (TestCase aTest: testRunDTO.getTestCases()){
-            if (aTest.getChecked()){
-                testRun.getTestCases().add(aTest);
-            }
-        }
-//        this.testRunDao.save(testRun);
-
-//        redirectAttributes.addAttribute("addcase", true);
-//        redirectAttributes.addAttribute("id", testRun.getId());
-
+        testRun = (TestRun) request.getSession().getAttribute("testRun");
+        logger.debug("The id in testCaseDTO: " + testRun.getId());
         return new ModelAndView("testrunForm").addObject(testRun);
     }
 

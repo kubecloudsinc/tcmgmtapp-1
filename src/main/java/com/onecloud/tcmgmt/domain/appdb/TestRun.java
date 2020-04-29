@@ -9,6 +9,7 @@ import org.hibernate.annotations.SortNatural;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.support.PagedListHolder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -32,6 +33,10 @@ public class TestRun extends IdentifiableEntity implements Comparable{
     private SortedSet<TestCase> testCases = new TreeSet<TestCase>();
 
     private boolean selection;
+
+    PagedListHolder<TestCase> testCasePageList= new PagedListHolder<TestCase>();
+
+    String navPage;
 
     @Transient
     public boolean getSelection() {
@@ -158,6 +163,7 @@ public class TestRun extends IdentifiableEntity implements Comparable{
         dto.setId(this.getId());
         dto.setName(this.getName());
         dto.setDescription(this.getDescription());
+        dto.setTestRun(this);
 
         return dto;
     }
@@ -174,5 +180,23 @@ public class TestRun extends IdentifiableEntity implements Comparable{
         } else {
             return -1;
         }
+    }
+
+    @Transient
+    public String getNavPage() {
+        return navPage;
+    }
+
+    public void setNavPage(String navPage) {
+        this.navPage = navPage;
+    }
+
+    @Transient
+    public PagedListHolder<TestCase> getTestCasePageList() {
+        return testCasePageList;
+    }
+
+    public void setTestCasePageList(PagedListHolder<TestCase> testCasePageList) {
+        this.testCasePageList = testCasePageList;
     }
 }

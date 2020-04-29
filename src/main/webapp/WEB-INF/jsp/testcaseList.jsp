@@ -91,13 +91,13 @@
                           <a href='<c:out value="${url}" />'><strong>Next</strong></a>
                       </c:otherwise>
                   </c:choose>
-                </c:otherwise>
-              </c:choose>
-          </td>
-         </tr>
-     </thead>
-  </table>
-  </div>
+                </td>
+            </tr>
+        </thead>
+      </table>
+      </div>
+    </c:otherwise>
+  </c:choose>
   <security:authorize ifAllGranted="ROLE_ADMIN">
     <script type="text/javascript">
       $(document).ready(function() {

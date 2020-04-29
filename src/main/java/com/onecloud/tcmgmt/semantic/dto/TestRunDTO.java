@@ -1,6 +1,8 @@
 package com.onecloud.tcmgmt.semantic.dto;
 
 import com.onecloud.tcmgmt.domain.appdb.TestCase;
+import com.onecloud.tcmgmt.domain.appdb.TestRun;
+import org.springframework.beans.support.PagedListHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,8 @@ public class TestRunDTO {
     private String description;
 
     public List<TestCase> testCases = new ArrayList<TestCase>();
+
+    private TestRun testRun;
 
     public Long getId() {
         return id;
@@ -47,5 +51,13 @@ public class TestRunDTO {
 
     public void setTestCases(List<TestCase> testCases) {
         this.testCases = testCases;
+    }
+
+    public TestRun getTestRun() {
+        return testRun;
+    }
+
+    public void setTestRun(TestRun testRun) {
+        this.testRun = testRun;
     }
 }
