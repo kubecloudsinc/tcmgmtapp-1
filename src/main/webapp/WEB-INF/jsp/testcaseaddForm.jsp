@@ -19,7 +19,7 @@
         <c:otherwise>
             <form:form commandName="testRun">
                 <div class="container">
-                  <table class="table table-striped table-hover" >
+                  <table class="table table-striped table-hover table-condensed" >
                     <thead>
                         <tr>
                              <th></th>

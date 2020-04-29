@@ -49,52 +49,51 @@
         </tbody>
       </table>
       <div class="w-25 p-3" style="background-color: #eee;">
-      <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <td>
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group btn-group-sm" role="group" aria-label="First group">
                   <c:choose>
-                      <%-- Show Prev as link if not on first page --%>
                       <c:when test="${testCasePageList.firstPage}">
-                        <span><strong>Prev</strong></span>
+                        <button class="btn btn-info" name="add" disabled >Prev</button>
                       </c:when>
                       <c:otherwise>
                           <c:url value="/testcases.html" var="url">
                             <c:param name="navPage" value="prev"/>
                           </c:url>
-                          <a href='<c:out value="${url}" />'><strong>Prev</strong></a>
+                          <a href='<c:out value="${url}" />'>
+                            <button class="btn btn-info" name="add" >Prev</button>
+                          </a>
                       </c:otherwise>
                   </c:choose>
                   <c:forEach begin="1" end="${testCasePageList.pageCount}" step="1"  varStatus="tagStatus">
                       <c:choose>
-                          <%-- In PagedListHolder page count starts from 0 --%>
                           <c:when test="${(testCasePageList.page + 1) == tagStatus.index}">
-                              <span><strong>${tagStatus.index}</strong></span>
+                            <button class="btn btn-info" name="add" disabled >${tagStatus.index}</button>
                           </c:when>
                           <c:otherwise>
                               <c:url value="/testcases.html" var="url">
                                 <c:param name="navPage" value="${tagStatus.index}"/>
                               </c:url>
-                              <a href='<c:out value="${url}" />'><strong>${tagStatus.index}</strong></a>
+                              <a href='<c:out value="${url}" />'>
+                                <button class="btn btn-info" name="add">${tagStatus.index}</button>
+                              </a>
                           </c:otherwise>
                       </c:choose>
                   </c:forEach>
                   <c:choose>
-                      <%-- Show Next as link if not on last page --%>
                       <c:when test="${testCasePageList.lastPage}">
-                        <span><strong>Next</strong></span>
+                        <button class="btn btn-info" name="add" disabled >Next</button>
                       </c:when>
                       <c:otherwise>
                           <c:url value="/testcases.html" var="url">
                             <c:param name="navPage" value="next"/>
                           </c:url>
-                          <a href='<c:out value="${url}" />'><strong>Next</strong></a>
+                          <a href='<c:out value="${url}" />'>
+                            <button class="btn btn-info" name="add">Next</button>
+                          </a>
                       </c:otherwise>
                   </c:choose>
-                </td>
-            </tr>
-        </thead>
-      </table>
+            </div>
+        </div>
       </div>
     </c:otherwise>
   </c:choose>
