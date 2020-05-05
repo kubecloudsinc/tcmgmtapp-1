@@ -136,7 +136,7 @@ public class TestStep extends IdentifiableEntity implements Comparable{
                     return this.getTestStepOrder().intValue()-that.getTestStepOrder().intValue();
                 }
             }else{
-                return this.getId().intValue()-that.getTestCaseId().intValue();
+                return this.getId().intValue()-that.getId().intValue();
             }
         }
         return isEqual;

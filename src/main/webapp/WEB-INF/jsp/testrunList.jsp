@@ -23,11 +23,15 @@
             <th class="number">Id</th>
             <th>Test Run Name</th>
             <th>Test Run Description</th>
+            <th>Test Run Status</th>
           </tr>
         </thead>
         <tbody>
           <c:forEach var="testrun" items="${testRunPageList.pageList}">
             <c:url var="viewUrl" value="/testrun.html">
+              <c:param name="id" value="${testrun.id}"/>
+            </c:url>
+            <c:url var="updateUrl" value="/testruncase_update.html">
               <c:param name="id" value="${testrun.id}"/>
             </c:url>
             <c:url var="editUrl" value="/testrun_form.html">
@@ -40,8 +44,10 @@
                 <td class="number"><a href="${viewUrl}">${testrun.id}</a></td>
                 <td>${fn:escapeXml(testrun.name)}</td>
                 <td>${fn:escapeXml(testrun.description)}</td>
+                <td>${fn:escapeXml(statusMap[testrun.status])}</td>
                 <td>
                   <a class="viewUrl btn btn-primary" href="${viewUrl}">View</a>
+                  <a class="updateUrl btn btn-primary" href="${updateUrl}">Update Status</a>
                   <security:authorize ifAllGranted="ROLE_ADMIN">
                     <a class="editUrl btn btn-info" href="${editUrl}">Edit</a>
                     <a class="deleteUrl btn btn-danger" href="${deleteUrl}">Delete</a>
@@ -103,7 +109,7 @@
   <security:authorize ifAllGranted="ROLE_ADMIN">
     <script type="text/javascript">
       $(document).ready(function() {
-        executeDeleteAndRemoveContainer(".deleteUrl", "tr");
+        executeDeleteAndRedirect(".deleteUrl", "testruns.html");
       });
     </script>
   </security:authorize>

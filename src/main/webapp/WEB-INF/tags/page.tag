@@ -80,10 +80,12 @@
 									    <a href="<c:url value='/testruns.html'/>">
 									        List Test Runs</a>
 									</li>
-									<li>
-                                        <a href="<c:url value='/testrun_form.html'/>">
-                                            Add New Test Run</a>
-									</li>
+                                    <security:authorize ifAllGranted="ROLE_ADMIN">
+                                        <li>
+                                            <a href="<c:url value='/testrun_form.html'/>">
+                                                Add New Test Run</a>
+                                        </li>
+									</security:authorize>
 								</ul>
 							</li>
 						</security:authorize>

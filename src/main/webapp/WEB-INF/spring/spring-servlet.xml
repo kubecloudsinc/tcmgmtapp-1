@@ -52,12 +52,6 @@
 		class="com.onecloud.tcmgmt.web.IdentifiableEntityDeleteController"
 		p:dao-ref="userDao" />
 
-	<!--
-	<bean name="/testcases.html"
-		  class="com.onecloud.tcmgmt.web.IdentifiableEntityListController"
-		  p:dao-ref="testCaseDao" p:viewName="testcaseList" />
-     -->
-
 	<bean name="/testcase.html"
 		  class="com.onecloud.tcmgmt.web.TestCaseGetController"
 		  p:dao-ref="testCaseDao" p:viewName="testcaseView" />
@@ -69,10 +63,6 @@
 	<bean name="/testruns.html"
 		  class="com.onecloud.tcmgmt.web.IdentifiableEntityListController"
 		  p:dao-ref="testRunDao" p:viewName="testrunList" />
-
-	<bean name="/testrun.html"
-		  class="com.onecloud.tcmgmt.web.IdentifiableEntityGetController"
-		  p:dao-ref="testRunDao" p:viewName="testrunView" />
 
 	<bean name="/testrun_delete.html"
 		  class="com.onecloud.tcmgmt.web.IdentifiableEntityDeleteController"

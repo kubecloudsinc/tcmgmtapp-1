@@ -35,6 +35,8 @@ public class TestCase extends IdentifiableEntity implements Comparable{
 
     private boolean automated = false;
 
+    private Long status;
+
     private SortedSet<TestStep> testSteps = new TreeSet<TestStep>();
 
     private SortedSet<TestRun> testRuns = new TreeSet<TestRun>();
@@ -144,6 +146,15 @@ public class TestCase extends IdentifiableEntity implements Comparable{
 
     public void setChecked(boolean checked) {
         this.checked = checked;
+    }
+
+    @Transient
+    public Long getStatus() {
+        return status;
+    }
+
+    public void setStatus(Long statusId) {
+        this.status = statusId;
     }
 
     @Override

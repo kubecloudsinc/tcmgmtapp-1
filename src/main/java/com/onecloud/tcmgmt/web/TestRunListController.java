@@ -2,8 +2,10 @@
 package com.onecloud.tcmgmt.web;
 
 import com.onecloud.tcmgmt.dao.TestRunDao;
+import com.onecloud.tcmgmt.dao.TestRunStatusDao;
 import com.onecloud.tcmgmt.domain.appdb.TestRun;
 import com.onecloud.tcmgmt.domain.appdb.TestRun;
+import com.onecloud.tcmgmt.domain.appdb.TestRunStatus;
 import com.onecloud.tcmgmt.semantic.constants.ApplicationConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,16 +23,19 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/testruns.html")
-public class TestRunListController {
+public class TestRunListController extends BaseFormController{
 
     private static final Logger logger =
             LoggerFactory.getLogger(TestRunListController.class);
 
     private final TestRunDao dao;
+    private final TestRunStatusDao testRunStatusDao;
 
     @Autowired
-    public TestRunListController(TestRunDao dao) {
+    public TestRunListController(TestRunDao dao, TestRunStatusDao statusDao) {
+
         this.dao = dao;
+        this.testRunStatusDao = statusDao;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -65,6 +70,7 @@ public class TestRunListController {
             testRunList.setPage(pageNum - 1);
         }
 
-        return new ModelAndView("testrunList");
+        return new ModelAndView("testrunList")
+                .addObject("statusMap",getTestRunStatusMap(this.testRunStatusDao));
     }
 }

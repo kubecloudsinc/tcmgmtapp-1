@@ -100,7 +100,7 @@
   <security:authorize ifAllGranted="ROLE_ADMIN">
     <script type="text/javascript">
       $(document).ready(function() {
-        executeDeleteAndRemoveContainer(".deleteUrl", "tr");
+        executeDeleteAndRedirect(".deleteUrl", "testcases.html");
       });
     </script>
   </security:authorize>

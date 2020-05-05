@@ -8,7 +8,6 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="f" uri="/WEB-INF/functions.tld"%>
 <tags:page title="Add Test Cases To Test Run" nav="testrun">
-    <c:set value="${testRun.testCasePageList}" var="testCasePageList" />
     <div class="container">
         <span class="badge badge-primary">Test Cases List</span>
     </div>
@@ -56,16 +55,16 @@
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group btn-group-sm" role="group" aria-label="First group">
                             <c:choose>
-                                <c:when test="${testCasePageList.firstPage}">
+                                <c:when test="${testRun.testCasePageList.firstPage}">
                                     <button type="submit" class="btn btn-info" name="add" disabled >Prev</button>
                                 </c:when>
                                 <c:otherwise>
                                     <button type="submit" class="btn btn-info" name="add" value="prev">Prev</button>
                                 </c:otherwise>
                             </c:choose>
-                            <c:forEach begin="1" end="${testCasePageList.pageCount}" step="1"  varStatus="tagStatus">
+                            <c:forEach begin="1" end="${testRun.testCasePageList.pageCount}" step="1"  varStatus="tagStatus">
                                 <c:choose>
-                                    <c:when test="${(testCasePageList.page + 1) == tagStatus.index}">
+                                    <c:when test="${(testRun.testCasePageList.page + 1) == tagStatus.index}">
                                         <button type="submit" class="btn btn-info" name="add" disabled >${tagStatus.index}</button>
                                     </c:when>
                                     <c:otherwise>
@@ -74,7 +73,7 @@
                                 </c:choose>
                             </c:forEach>
                             <c:choose>
-                                <c:when test="${testCasePageList.lastPage}">
+                                <c:when test="${testRun.testCasePageList.lastPage}">
                                     <button type="submit" class="btn btn-info" name="add" disabled >Next</button>
                                 </c:when>
                                 <c:otherwise>

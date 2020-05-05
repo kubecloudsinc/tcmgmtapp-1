@@ -19,6 +19,14 @@
         <tags:showFormErrors name="testRun"/>
         <tags:textInput path="name" label="Test Run Name" required="${true}" cssClass="form-control form-control-sm"/>
         <tags:textInput path="description" label="Test Run Description" required="${false}" cssClass="form-control form-control-sm"/>
+        <div class="control-group ${empty pageScope.error? '' : 'error'}">
+            <form:label path="status" cssClass="control-label"><strong>Test Run Status :</strong></form:label>
+            <div class="controls">
+                <form:select path="status">
+                    <form:options items="${statusMap}"/>
+                </form:select>
+            </div>
+        </div>
         <fmt:formatDate var="createDate" type = "both" dateStyle = "short" timeStyle = "short" value = "${testRun.created}" />
         <div class="control-group ${empty pageScope.error? '' : 'error'}">
             <form:label path="created" cssClass="control-label"><strong>Create Date :</strong></form:label>
@@ -43,27 +51,60 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach varStatus="index" items="${testRun.testCases}">
+                <c:forEach varStatus="index" items="${testRun.testCasePageList.pageList}">
                     <tr>
                         <td>
-                            <form:checkbox path="testCases[${index.count - 1}].checked" value="true" />
+                            <form:checkbox path="testCasePageList.pageList[${index.count - 1}].checked" value="true" />
                         </td>
                         <td>
-                            <tags:textInput path="testCases[${index.count - 1}].id" readonly="${true}"  />
+                            <tags:textInput path="testCasePageList.pageList[${index.count - 1}].id" readonly="${true}"  />
                         </td>
                         <td>
-                            <tags:textInput path="testCases[${index.count - 1}].testName" readonly="${true}" />
+                            <tags:textInput path="testCasePageList.pageList[${index.count - 1}].testName" readonly="${true}" />
                         </td>
                         <td>
-                            <tags:textInput path="testCases[${index.count - 1}].testDescription" readonly="${true}" />
+                            <tags:textInput path="testCasePageList.pageList[${index.count - 1}].testDescription" readonly="${true}" />
                         </td>
                         <td>
-                            <tags:textInput path="testCases[${index.count - 1}].testType" readonly="${true}" />
+                            <tags:textInput path="testCasePageList.pageList[${index.count - 1}].testType" readonly="${true}" />
                         </td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
+    </div>
+    <div class="w-25 p-3" style="background-color: #eee;">
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group btn-group-sm" role="group" aria-label="First group">
+                <c:choose>
+                    <c:when test="${testRun.testCasePageList.firstPage}">
+                        <button type="submit" class="btn btn-info" name="nav" disabled >Prev</button>
+                    </c:when>
+                    <c:otherwise>
+                        <button type="submit" class="btn btn-info" name="nav" value="prev">Prev</button>
+                    </c:otherwise>
+                </c:choose>
+                <c:forEach begin="1" end="${testRun.testCasePageList.pageCount}" step="1"  varStatus="tagStatus">
+                    <c:choose>
+                        <c:when test="${(testRun.testCasePageList.page + 1) == tagStatus.index}">
+                            <button type="submit" class="btn btn-info" name="nav" disabled >${tagStatus.index}</button>
+                        </c:when>
+                        <c:otherwise>
+                            <button type="submit" class="btn btn-info" name="nav" value="${tagStatus.index}">${tagStatus.index}</button>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+                <c:choose>
+                    <c:when test="${testRun.testCasePageList.lastPage}">
+                        <button type="submit" class="btn btn-info" name="nav" disabled >Next</button>
+                    </c:when>
+                    <c:otherwise>
+                        <form:hidden path="navPage" value="next"/>
+                        <button type="submit" class="btn btn-info" name="nav" value="next">Next</button>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+        </div>
     </div>
     <div class="w-25 p-3" style="background-color: #eee;">
         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">

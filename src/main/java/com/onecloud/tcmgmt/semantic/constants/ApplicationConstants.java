@@ -8,9 +8,7 @@ import java.io.Writer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,10 +36,10 @@ public class ApplicationConstants {
 	 */
 	public static Configuration APPLICATION_CONFIG = new ComponentConfiguration(ApplicationConstants.class);
 
-	public static final int UI_PAGINATION_PAGE_SIZE = 10;
+	public static final int UI_PAGINATION_PAGE_SIZE = 4;
 
 	public static final String APPLICATION_DEFAULT_ENCODING = APPLICATION_CONFIG.getStringValue(APPLICATION_DEFAULT_ENCODING_KEY);
-	
+
 	public static final String REPORTS_FOLDER = APPLICATION_CONFIG.getStringValue(REPORTS_FOLDER_KEY);
 	public static final String REPORT_FILE_EXTENSION = APPLICATION_CONFIG.getStringValue(REPORT_FILE_EXTENSION_KEY);
 	public static final String REPORT_FILENAME_STARTING_STRING = APPLICATION_CONFIG.getStringValue(REPORT_FILENAME_STARTING_STRING_KEY);
@@ -205,4 +203,5 @@ public class ApplicationConstants {
 		    logger.info(result.toString());
 		}
 	}
+
 }
