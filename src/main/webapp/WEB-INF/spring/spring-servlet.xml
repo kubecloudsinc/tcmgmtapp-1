@@ -68,6 +68,10 @@
 		  class="com.onecloud.tcmgmt.web.IdentifiableEntityDeleteController"
 		  p:dao-ref="testRunDao" />
 
+	<bean name="/defect_delete.html"
+		  class="com.onecloud.tcmgmt.web.IdentifiableEntityDeleteController"
+		  p:dao-ref="defectDao" />
+
 	<bean id="exceptionResolver"
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">

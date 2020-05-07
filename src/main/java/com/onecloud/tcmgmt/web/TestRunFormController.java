@@ -7,18 +7,13 @@ import com.onecloud.tcmgmt.dao.TestRunDao;
 import com.onecloud.tcmgmt.dao.TestRunStatusDao;
 import com.onecloud.tcmgmt.domain.appdb.TestCase;
 import com.onecloud.tcmgmt.domain.appdb.TestRun;
-import com.onecloud.tcmgmt.semantic.constants.ApplicationConstants;
-import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.support.PagedListHolder;
 import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,9 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 @Controller
 @RequestMapping(value = "/testrun_form.html")

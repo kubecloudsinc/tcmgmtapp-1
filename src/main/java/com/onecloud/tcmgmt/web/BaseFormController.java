@@ -1,9 +1,7 @@
 
 package com.onecloud.tcmgmt.web;
 
-import com.onecloud.tcmgmt.dao.TestCaseDao;
-import com.onecloud.tcmgmt.dao.TestCaseStatusDao;
-import com.onecloud.tcmgmt.dao.TestRunStatusDao;
+import com.onecloud.tcmgmt.dao.*;
 import com.onecloud.tcmgmt.domain.appdb.*;
 import com.onecloud.tcmgmt.semantic.constants.ApplicationConstants;
 import org.apache.commons.collections.CollectionUtils;
@@ -21,6 +19,12 @@ public class BaseFormController {
 
     public static Map<Long,String> TEST_CASE_STATUS_MAP=null;
     public static Map<Long,String> TEST_RUN_STATUS_MAP=null;
+
+    public static Map<Long,String> COMPONENT_MAP=null;
+    public static Map<Long,String> DEFECT_STATUS_MAP=null;
+    public static Map<Long,String> PRIORITY_MAP=null;
+    public static Map<Long,String> SEVERITY_MAP=null;
+    public static Map<Long,String> PRODUCT_MAP=null;
 
     public BaseFormController()
     {
@@ -49,6 +53,71 @@ public class BaseFormController {
             }
         }
         return TEST_RUN_STATUS_MAP;
+    }
+
+    public Map<Long,String> getComponentMap(ComponentDao componentDao){
+
+        if(COMPONENT_MAP ==null || COMPONENT_MAP.isEmpty()) {
+
+            COMPONENT_MAP = new HashMap<Long,String>();
+            List<Component> componentList = componentDao.getAll();
+            for (Component component: componentList){
+                COMPONENT_MAP.put(component.getId(),component.getComponent());
+            }
+        }
+        return COMPONENT_MAP;
+    }
+
+    public Map<Long,String> getDefectStatusMap(DefectStatusDao defectStatusDao){
+
+        if(DEFECT_STATUS_MAP==null || DEFECT_STATUS_MAP.isEmpty()) {
+
+            DEFECT_STATUS_MAP = new HashMap<Long,String>();
+            List<DefectStatus> statusList = defectStatusDao.getAll();
+            for (DefectStatus status: statusList){
+                DEFECT_STATUS_MAP.put(status.getId(),status.getStatus());
+            }
+        }
+        return DEFECT_STATUS_MAP;
+    }
+
+    public Map<Long,String> getPriorityMap(PriorityDao priorityDao){
+
+        if(PRIORITY_MAP==null || PRIORITY_MAP.isEmpty()) {
+
+            PRIORITY_MAP = new HashMap<Long,String>();
+            List<Priority> priorityList = priorityDao.getAll();
+            for (Priority priority: priorityList){
+                PRIORITY_MAP.put(priority.getId(),priority.getPriority());
+            }
+        }
+        return PRIORITY_MAP;
+    }
+
+    public Map<Long,String> getProductMap(ProductDao productDao){
+
+        if(PRODUCT_MAP==null || PRODUCT_MAP.isEmpty()) {
+
+            PRODUCT_MAP = new HashMap<Long,String>();
+            List<Product> productList = productDao.getAll();
+            for (Product product: productList){
+                PRODUCT_MAP.put(product.getId(),product.getProduct());
+            }
+        }
+        return PRODUCT_MAP;
+    }
+
+    public Map<Long,String> getSeverityMap(SeverityDao severityDao){
+
+        if(SEVERITY_MAP==null || SEVERITY_MAP.isEmpty()) {
+
+            SEVERITY_MAP = new HashMap<Long,String>();
+            List<Severity> severityList = severityDao.getAll();
+            for (Severity severity: severityList){
+                SEVERITY_MAP.put(severity.getId(),severity.getSeverity());
+            }
+        }
+        return SEVERITY_MAP;
     }
 
     protected void navigatePages(TestRun aTestRun, String navPage, HttpServletRequest request){

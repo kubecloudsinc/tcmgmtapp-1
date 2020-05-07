@@ -88,6 +88,21 @@
 									</security:authorize>
 								</ul>
 							</li>
+							<li class="dropdown ${nav eq 'defects'? 'active' : ''}">
+							    <a href="#" class="dropdown-toggle"
+							          data-toggle="dropdown">Defect Management <b class="caret"></b>
+							    </a>
+								<ul class="dropdown-menu">
+									<li>
+									    <a href="<c:url value='/defects.html'/>">
+									        List All Defects</a>
+									</li>
+                                    <li>
+                                        <a href="<c:url value='/defect_form.html'/>">
+                                            Add New Defect</a>
+                                    </li>
+								</ul>
+							</li>
 						</security:authorize>
 					</ul>
 				</div>
