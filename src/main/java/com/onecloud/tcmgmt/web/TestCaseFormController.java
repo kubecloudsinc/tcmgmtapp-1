@@ -4,6 +4,7 @@ package com.onecloud.tcmgmt.web;
 import com.onecloud.tcmgmt.dao.TestCaseDao;
 import com.onecloud.tcmgmt.domain.appdb.TestCase;
 import com.onecloud.tcmgmt.domain.appdb.TestStep;
+import com.onecloud.tcmgmt.domain.appdb.User;
 import com.onecloud.tcmgmt.semantic.dto.TestCaseDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,7 @@ public class TestCaseFormController {
             .getLogger(TestCaseFormController.class);
 
     private final TestCaseDao dao;
+    private String authUserName = "authUser";
 
     @Autowired
     public TestCaseFormController(TestCaseDao dao) {
@@ -45,6 +47,10 @@ public class TestCaseFormController {
             if(!stepUpdate) {
                 logger.debug("add step is false so must be coming from the Add new Test");
                 testCaseDTO = new TestCaseDTO();
+                User currentUser = (User) request.getAttribute(authUserName);
+                logger.debug("about to set user id: "+currentUser.getId());
+                testCaseDTO.setAuthorId(currentUser.getId());
+
             }else{
 
                 testCaseDTO = (TestCaseDTO) request.getSession().getAttribute("testCaseDTO");

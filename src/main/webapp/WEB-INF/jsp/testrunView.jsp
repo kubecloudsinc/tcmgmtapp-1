@@ -50,6 +50,7 @@
                 <thead>
                     <tr>
                         <th>Test Case Id</th>
+                        <th>Test Case Author</th>
                         <th>Test Case Name</th>
                         <th>Test Case Description</th>
                         <th>Test Case Status</th>
@@ -68,6 +69,7 @@
                                 <form:hidden path="testCaseRunPageList.pageList[${index.count - 1}].testCaseId"
                                                     value="${testCaseRunStatus.testCase.id}" />
                             </td>
+                            <td>${testCaseRunStatus.testCase.author.name}</td>
                             <td>${fn:escapeXml(testCaseRunStatus.testCase.testName)}</td>
                             <td>${testCaseRunStatus.testCase.testDescription}</td>
                             <c:choose>

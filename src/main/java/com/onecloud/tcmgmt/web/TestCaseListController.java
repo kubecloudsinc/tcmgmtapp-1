@@ -4,6 +4,7 @@ package com.onecloud.tcmgmt.web;
 import com.onecloud.tcmgmt.dao.TestCaseDao;
 import com.onecloud.tcmgmt.domain.appdb.IdentifiableEntity;
 import com.onecloud.tcmgmt.domain.appdb.TestCase;
+import com.onecloud.tcmgmt.domain.appdb.User;
 import com.onecloud.tcmgmt.semantic.constants.ApplicationConstants;
 import com.onecloud.tcmgmt.semantic.dto.TestCaseDTO;
 import org.slf4j.Logger;
@@ -30,6 +31,8 @@ public class TestCaseListController{
 
     private final TestCaseDao dao;
 
+    private String authUserName = "authUser";
+
     @Autowired
     public TestCaseListController(TestCaseDao dao) {
         this.dao = dao;
@@ -44,7 +47,7 @@ public class TestCaseListController{
         List<TestCase> testCases=null;
         if(navPage == null) {
             testCaseList = new PagedListHolder<TestCase>();
-            testCases = dao.getAll();
+            testCases = dao.getByAuthor(((User)request.getAttribute(authUserName)).getId());
             // Setting the source for PagedListHolder
             testCaseList.setSource(testCases);
             testCaseList.setPageSize(ApplicationConstants.UI_PAGINATION_PAGE_SIZE);
@@ -67,6 +70,7 @@ public class TestCaseListController{
             testCaseList.setPage(pageNum - 1);
         }
 
+        logger.debug("about to return the view: testcaseList");
         return new ModelAndView("testcaseList");
     }
 }

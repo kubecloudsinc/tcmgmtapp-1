@@ -5,6 +5,7 @@ import com.onecloud.tcmgmt.dao.*;
 import com.onecloud.tcmgmt.domain.appdb.Defect;
 import com.onecloud.tcmgmt.domain.appdb.TestCase;
 import com.onecloud.tcmgmt.domain.appdb.TestRun;
+import com.onecloud.tcmgmt.domain.appdb.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,8 @@ public class DefectFormController extends BaseFormController {
     private ProductDao productDao;
     private SeverityDao severityDao;
 
+    private String authUserName = "authUser";
+
     @Autowired
     public DefectFormController(DefectDao defectDao, ComponentDao componentDao,
                                DefectStatusDao defectStatusDao, PriorityDao priorityDao,
@@ -58,6 +61,9 @@ public class DefectFormController extends BaseFormController {
             logger.debug("ID is null so must be coming from the Add new ");
             logger.debug("Creating a new defect");
                 defect = new Defect();
+            User currentUser = (User) request.getAttribute(authUserName);
+            logger.debug("about to set user id: "+currentUser.getId());
+            defect.setReportedBy(currentUser);
 
         } else{
             logger.debug("ID is not null so must be coming from Edit: " + id);

@@ -15,7 +15,7 @@
     <div class="form-horizontal">
         <tags:showFormErrors name="defect"/>
         <tags:textInput path="name" label="Defect Name" required="${true}" cssClass="form-control form-control-sm"/>
-        <tags:textInput path="reportedBy" label="Reported By" cssClass="form-control form-control-sm"/>
+        <tags:textInput path="reportedBy.name" label="Reported By" cssClass="form-control form-control-sm" readonly="${true}" />
         <div class="control-group ${empty pageScope.error? '' : 'error'}">
             <form:label path="product" cssClass="control-label"><strong>Product :</strong></form:label>
             <div class="controls">

@@ -20,7 +20,7 @@
       <td><b>Status :</b></td><td></td><td></td><td>${statusMap[defect.status]}</td>
     </tr>
     <tr>
-      <td><b>Defect reported By :</b></td><td></td><td></td><td>${defect.reportedBy}</td>
+      <td><b>Defect reported By :</b></td><td></td><td></td><td>${defect.reportedBy.name}</td>
     </tr>
     <tr>
       <td><b>Product :</b></td><td></td><td></td><td>${productMap[defect.product]}</td>

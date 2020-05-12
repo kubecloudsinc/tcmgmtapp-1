@@ -43,8 +43,10 @@ public class TestCase extends IdentifiableEntity implements Comparable{
 
     private boolean checked;
 
+    private User author;
+
     @Size(max = 25)
-    @Column(name="TEST_NAME", length = 25, unique = true)
+    @Column(name="TEST_NAME", length = 25)
     public String getTestName() {
         return testName;
     }
@@ -139,6 +141,16 @@ public class TestCase extends IdentifiableEntity implements Comparable{
         this.testRuns = testRuns;
     }
 
+    @ManyToOne
+    @JoinColumn(name="AUTHOR_ID")
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
     @Transient
     public boolean getChecked() {
         return this.checked;
@@ -197,6 +209,7 @@ public class TestCase extends IdentifiableEntity implements Comparable{
         aDTO.setTestName(this.testName);
         aDTO.setTestSetup(this.testSetup);
         aDTO.setTestType(this.testType);
+        aDTO.setAuthorId(this.author.getId());
 //        logger.debug("ABOUT TO SET THE TestSteps");
 //        Collections.sort(this.getTestSteps(),new SortByStepOrder());
 //        logger.debug("TestSteps Count:"+this.getTestSteps().size());
@@ -236,6 +249,12 @@ public class TestCase extends IdentifiableEntity implements Comparable{
         if(this.testType==null || this.testType.isEmpty() || (!this.testType.equals(testCaseDTO.getTestType()))) {
             setTestType(testCaseDTO.getTestType());
             logger.debug("testType created or updated ");
+        }
+        if(this.author==null || this.author.getId()==null ) {
+            User user = new User();
+            user.setId(testCaseDTO.getAuthorId());
+            setAuthor(user);
+            logger.debug("author id updated");
         }
 
         if(this.testSteps==null || this.testSteps.isEmpty() || (!this.testSteps.equals(testCaseDTO.getTestSteps()))) {

@@ -27,6 +27,8 @@ public class TestCaseDTO {
 
     private boolean automated = false;
 
+    private Long authorId;
+
     private SortedSet<TestStep> testSteps = new TreeSet<TestStep>();
 
     public Long getId() {
@@ -89,6 +91,14 @@ public class TestCaseDTO {
 
     public void setAutomated(boolean automated) {
         this.automated = automated;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
 
     public SortedSet<TestStep> getTestSteps() {

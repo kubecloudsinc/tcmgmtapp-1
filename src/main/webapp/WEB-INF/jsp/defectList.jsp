@@ -46,7 +46,7 @@
               <td>${componentMap[defect.component]}</td>
               <td>${severityMap[defect.severity]}</td>
               <td>${priorityMap[defect.priority]}</td>
-              <td>${defect.reportedBy}</td>
+              <td>${defect.reportedBy.name}</td>
               <td>
                 <a class="viewUrl btn btn-primary" href="${viewUrl}">View</a>
                 <a class="editUrl btn btn-info" href="${editUrl}">Edit</a>

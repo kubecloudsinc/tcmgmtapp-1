@@ -41,7 +41,7 @@ public class Defect extends IdentifiableEntity implements Comparable{
 
     private Long status;
 
-    private String reportedBy;
+    private User reportedBy;
 
     private PagedListHolder<Defect> defectPageList= new PagedListHolder<Defect>();
 
@@ -111,12 +111,13 @@ public class Defect extends IdentifiableEntity implements Comparable{
         this.status = status;
     }
 
-    @Column(name="REPORTER")
-    public String getReportedBy() {
+    @ManyToOne
+    @JoinColumn(name="REPORTER_ID")
+    public User getReportedBy() {
         return reportedBy;
     }
 
-    public void setReportedBy(String reportedBy) {
+    public void setReportedBy(User reportedBy) {
         this.reportedBy = reportedBy;
     }
 
@@ -194,7 +195,7 @@ public class Defect extends IdentifiableEntity implements Comparable{
             if(anotherDefect.getStatus().intValue()!=this.status.intValue()){
                 setStatus(anotherDefect.getStatus());
             }
-            if(!anotherDefect.getReportedBy().equals(this.reportedBy)){
+            if(this.reportedBy==null || this.reportedBy.getId()==null){
                 setReportedBy(anotherDefect.getReportedBy());
             }
         }

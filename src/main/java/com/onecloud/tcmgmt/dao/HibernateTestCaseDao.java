@@ -43,4 +43,8 @@ public class HibernateTestCaseDao extends AbstractHibernateDao<TestCase> impleme
         return lastPageNumber;
     }
 
+    @Transactional(readOnly = true, value="txManager")
+    public List<TestCase> getByAuthor(Long authorId) throws DataAccessException {
+        return super.findAll("from TestCase where author.id=?", authorId.longValue());
+    }
 }

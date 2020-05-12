@@ -4,7 +4,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="f" uri="/WEB-INF/functions.tld"%>
-<tags:page title="Test Cases" nav="testcase">
+<tags:page title="Test Cases written by ${authUser.firstName}" nav="testcase">
   <c:set value="${testCaseList}" var="testCasePageList" />
   <c:choose>
     <c:when test="${empty testCasePageList}">

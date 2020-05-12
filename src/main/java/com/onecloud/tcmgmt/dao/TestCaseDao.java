@@ -10,6 +10,8 @@ public interface TestCaseDao extends IdentifiableEntityDao<TestCase> {
 
     public TestCase getByName(String testName) throws DataAccessException;
 
+    public List<TestCase> getByAuthor(Long authorId) throws DataAccessException;
+
     public List<TestCase> getNthPage(int pageNumber) throws DataAccessException;
 
     public int getTotalPages() throws DataAccessException;

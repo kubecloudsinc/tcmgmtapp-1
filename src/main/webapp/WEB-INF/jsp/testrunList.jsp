@@ -4,7 +4,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="f" uri="/WEB-INF/functions.tld"%>
-<tags:page title="Test Runs" nav="testrun">
+<tags:page title="All Test Runs" nav="testrun">
   <c:set value="${testRunList}" var="testRunPageList" />
   <c:if test="${not empty param.success}">
     <tags:alert type="success" title="Success!" message="Saved Test Run."/>

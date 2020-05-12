@@ -45,8 +45,8 @@
                 <tr>
                     <th></th>
                     <th>Test Case Id</th>
+                    <th>Test Case Author</th>
                     <th>Test Case Name</th>
-                    <th>Test Case Description</th>
                     <th>Test Case Type</th>
                 </tr>
             </thead>
@@ -60,10 +60,10 @@
                             <tags:textInput path="testCasePageList.pageList[${index.count - 1}].id" readonly="${true}"  />
                         </td>
                         <td>
-                            <tags:textInput path="testCasePageList.pageList[${index.count - 1}].testName" readonly="${true}" />
+                            <tags:textInput path="testCasePageList.pageList[${index.count - 1}].author.name" readonly="${true}"  />
                         </td>
                         <td>
-                            <tags:textInput path="testCasePageList.pageList[${index.count - 1}].testDescription" readonly="${true}" />
+                            <tags:textInput path="testCasePageList.pageList[${index.count - 1}].testName" readonly="${true}" />
                         </td>
                         <td>
                             <tags:textInput path="testCasePageList.pageList[${index.count - 1}].testType" readonly="${true}" />
