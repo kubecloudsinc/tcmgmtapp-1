@@ -43,6 +43,8 @@ public class TestRunListController extends BaseFormController{
             HttpServletRequest request, HttpServletResponse response) {
 
         logger.debug("INSIDE THE PAGINATION CONTROLLER");
+        logger.debug(ApplicationConstants.APPLICATION_CONFIG
+                .getStringValue(ApplicationConstants.APPLICATION_DEFAULT_ENCODING_KEY));
         PagedListHolder<TestRun> testRunList;
         List<TestRun> testRuns=null;
         if(navPage == null) {

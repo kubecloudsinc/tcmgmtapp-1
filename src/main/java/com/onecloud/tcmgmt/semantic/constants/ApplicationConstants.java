@@ -31,9 +31,11 @@ public class ApplicationConstants {
 	public static final String DATE_FORMAT_IN_REPORT_FILENAME_KEY ="dateFormatInReportFile";
 	public static final String LEVEL_DIFF_BETWEEN_REPORTS_FOLDER_AND_CLASSPATH_KEY ="diffInLevels";
 	public static final String LEVEL_ROOT_INDEX_KEY ="rootIndex";
+
 	/**
 	 * Application related configuration.
 	 */
+	public static final String CONFIG_FILE_EXTENTION ="cfg";
 	public static Configuration APPLICATION_CONFIG = new ComponentConfiguration(ApplicationConstants.class);
 
 	public static final int UI_PAGINATION_PAGE_SIZE = 10;

@@ -26,17 +26,15 @@ package com.onecloud.tcmgmt.support.configuration;
  * @author sichituk
  */
 public class SystemEnvironment implements Environment {
-	private static final String EXECUTION_ENVIRONMENT_VARIABLE_NAME = "com.cisco.cstg.tcmgmt.environment";
+	private static final String EXECUTION_ENVIRONMENT_VARIABLE_NAME = "com.onecloud.tcmgmt.environment";
 
-	private static final String PARTNER_ENVIRONMENT_VARIABLE_NAME = "com.cisco.cstg.tcmgmt.partner.environment";
+	private static final String PARTNER_ENVIRONMENT_VARIABLE_NAME = "com.onecloud.tcmgmt.partner.environment";
 
 	private static final String DEFAULT_EXECUTION_ENVIRONMENT = "development";
 
 	private static final String DEFAULT_PARTNER_ENVIRONMENT = "partner";
 
-	/*
-	 * @see gov.g5.support.configuration.Environment#getExecutionEnvironment()
-	 */
+
 	public String getExecutionEnvironment() {
 		String designator = System.getProperty(EXECUTION_ENVIRONMENT_VARIABLE_NAME);
 		if (designator == null) {
@@ -45,9 +43,7 @@ public class SystemEnvironment implements Environment {
 		return designator;
 	}
 
-	/*
-	 * @see gov.g5.support.configuration.Environment#getPartnerEnvironment()
-	 */
+
 	public String getPartnerEnvironment() {
 		String designator = System.getProperty(PARTNER_ENVIRONMENT_VARIABLE_NAME);
 		if (designator == null) {

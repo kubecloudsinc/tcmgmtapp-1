@@ -43,6 +43,7 @@ public class TestCaseListController{
             HttpServletRequest request, HttpServletResponse response) {
 
         logger.debug("INSIDE THE PAGINATION METHOD");
+
         PagedListHolder<TestCase> testCaseList;
         List<TestCase> testCases=null;
         if(navPage == null) {
