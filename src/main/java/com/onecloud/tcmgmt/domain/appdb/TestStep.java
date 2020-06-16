@@ -35,8 +35,8 @@ public class TestStep extends IdentifiableEntity implements Comparable{
         this.testStepOrder = testStepOrder;
     }
 
-    @Size(max = 200)
-    @Column(name="TEST_STEP", length = 200)
+    @Size(max = 1000)
+    @Column(name="TEST_STEP", length = 1000)
     public String getTestStep() {
         return testStep;
     }
@@ -45,8 +45,8 @@ public class TestStep extends IdentifiableEntity implements Comparable{
         this.testStep = testStep;
     }
 
-    @Size(max = 200)
-    @Column(name="TEST_STEP_RESULT", length = 200, nullable = false)
+    @Size(max = 1000)
+    @Column(name="TEST_STEP_RESULT", length = 1000, nullable = false)
     public String getTestStepResult() {
         return testStepResult;
     }

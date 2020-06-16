@@ -61,6 +61,10 @@
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 
+	<session-config>
+		<session-timeout>120</session-timeout>
+	</session-config>
+
 	<resource-ref>
 		<description>Database Connection Pool</description>
 		<res-ref-name>jdbc/tcmgmt</res-ref-name>

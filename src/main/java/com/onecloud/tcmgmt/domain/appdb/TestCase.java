@@ -45,8 +45,8 @@ public class TestCase extends IdentifiableEntity implements Comparable{
 
     private User author;
 
-    @Size(max = 25)
-    @Column(name="TEST_NAME", length = 25)
+    @Size(max = 100)
+    @Column(name="TEST_NAME", length = 100)
     public String getTestName() {
         return testName;
     }
@@ -55,8 +55,8 @@ public class TestCase extends IdentifiableEntity implements Comparable{
         this.testName = testName;
     }
 
-    @Size(max = 200)
-    @Column(name="TEST_DESCRIPTION", length = 200)
+    @Size(max = 1000)
+    @Column(name="TEST_DESCRIPTION", length = 1000)
     public String getTestDescription() {
         return testDescription;
     }
@@ -75,8 +75,8 @@ public class TestCase extends IdentifiableEntity implements Comparable{
         this.testType = testType;
     }
 
-    @Size(max = 200)
-    @Column(name="TEST_SETUP", length = 200, nullable = false)
+    @Size(max = 1000)
+    @Column(name="TEST_SETUP", length = 1000, nullable = false)
     public String getTestSetup() {
         return testSetup;
     }
@@ -85,8 +85,8 @@ public class TestCase extends IdentifiableEntity implements Comparable{
         this.testSetup = testSetup;
     }
 
-    @Size(max = 200)
-    @Column(name="EXPECTED_RESULT", length = 10, nullable = false)
+    @Size(max = 1000)
+    @Column(name="EXPECTED_RESULT", length = 1000, nullable = false)
     public String getExpectedResult() {
         return expectedResult;
     }

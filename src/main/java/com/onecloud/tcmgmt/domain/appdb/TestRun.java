@@ -55,7 +55,7 @@ public class TestRun extends IdentifiableEntity implements Comparable{
     }
 
     @NotEmpty
-    @Size(max = 20)
+    @Size(max = 50)
     @Column(name="NAME")
     public String getName() {
         return name;
@@ -65,7 +65,7 @@ public class TestRun extends IdentifiableEntity implements Comparable{
         this.name = name;
     }
 
-    @Size(max = 100)
+    @Size(max = 1000)
     @Column(name="DESCRIPTION")
     public String getDescription() {
         return description;

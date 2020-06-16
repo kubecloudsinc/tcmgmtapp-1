@@ -45,9 +45,9 @@ public class Defect extends IdentifiableEntity implements Comparable{
 
     private PagedListHolder<Defect> defectPageList= new PagedListHolder<Defect>();
 
-    @Size(max = 25)
+    @Size(max = 100)
     @NotEmpty
-    @Column(name="NAME", length = 25)
+    @Column(name="NAME", length = 100)
     public String getName() {
         return name;
     }
@@ -56,8 +56,8 @@ public class Defect extends IdentifiableEntity implements Comparable{
         this.name = name;
     }
 
-    @Size(max = 200)
-    @Column(name="DESCRIPTION", length = 200)
+    @Size(max = 1000)
+    @Column(name="DESCRIPTION", length = 1000)
     public String getDescription() {
         return description;
     }
