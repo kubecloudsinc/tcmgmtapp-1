@@ -40,7 +40,7 @@ public class TestCaseDTO {
     }
 
     @NotEmpty
-    @Size(max = 25)
+    @Size(max = 100)
     public String getTestName() {
         return testName;
     }
@@ -49,7 +49,7 @@ public class TestCaseDTO {
         this.testName = testName;
     }
 
-    @Size(max = 200)
+    @Size(max = 1000)
     public String getTestDescription() {
         return testDescription;
     }
@@ -68,7 +68,7 @@ public class TestCaseDTO {
         this.testType = testType;
     }
 
-    @Size(max = 200)
+    @Size(max = 1000)
     public String getTestSetup() {
         return testSetup;
     }
