@@ -48,7 +48,8 @@ public class TestCaseListController{
         List<TestCase> testCases=null;
         if(navPage == null) {
             testCaseList = new PagedListHolder<TestCase>();
-            testCases = dao.getByAuthor(((User)request.getAttribute(authUserName)).getId());
+            //yyptestCases = dao.getByAuthor(((User)request.getAttribute(authUserName)).getId());
+            testCases = dao.getAll();
             // Setting the source for PagedListHolder
             testCaseList.setSource(testCases);
             testCaseList.setPageSize(ApplicationConstants.UI_PAGINATION_PAGE_SIZE);

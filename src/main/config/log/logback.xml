@@ -3,11 +3,11 @@
 <configuration xmlns="">
 	<jmxConfigurator />
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>C:\logs\tcmgmt.log</file>
+		<file>/opt/logs/tcmgmt.log</file>
 		<append>true</append>
 		   <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- rollover daily -->
-      <fileNamePattern>C:logs\tcmgmt-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <fileNamePattern>/opt/logs/tcmgmt-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
       <timeBasedFileNamingAndTriggeringPolicy
             class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
         <!-- or whenever the file size reaches 100MB -->
@@ -23,11 +23,11 @@
 	</appender>
 
 	<appender name="CLASSFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>C:\logs\tcmgmtCode.log</file>
+		<file>/opt/logs/tcmgmtCode.log</file>
 		<append>true</append>
 		   <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- rollover daily -->
-      <fileNamePattern>C:\logs\tcmgmtCode-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <fileNamePattern>/opt/logs/tcmgmtCode-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
       <timeBasedFileNamingAndTriggeringPolicy
             class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
         <!-- or whenever the file size reaches 100MB -->
@@ -43,11 +43,11 @@
 	</appender>
 	
 	<appender name="HIBFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>C:\logs\tcmgmtHibernate.log</file>
+		<file>/opt/logs/tcmgmtHibernate.log</file>
 		<append>true</append>
 		   <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- rollover daily -->
-      <fileNamePattern>C:\logs\tcmgmtHibernate-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <fileNamePattern>/opt/logs/tcmgmtHibernate-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
       <timeBasedFileNamingAndTriggeringPolicy
             class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
         <!-- or whenever the file size reaches 100MB -->

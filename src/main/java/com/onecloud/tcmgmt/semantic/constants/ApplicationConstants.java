@@ -38,7 +38,7 @@ public class ApplicationConstants {
 	public static final String CONFIG_FILE_EXTENTION ="cfg";
 	public static Configuration APPLICATION_CONFIG = new ComponentConfiguration(ApplicationConstants.class);
 
-	public static final int UI_PAGINATION_PAGE_SIZE = 10;
+	public static final int UI_PAGINATION_PAGE_SIZE = 25;
 
 	public static final String APPLICATION_DEFAULT_ENCODING = APPLICATION_CONFIG.getStringValue(APPLICATION_DEFAULT_ENCODING_KEY);
 
