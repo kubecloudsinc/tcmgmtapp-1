@@ -48,7 +48,11 @@ public class TestCaseListController{
         List<TestCase> testCases=null;
         if(navPage == null) {
             testCaseList = new PagedListHolder<TestCase>();
+<<<<<<< HEAD
             //yyptestCases = dao.getByAuthor(((User)request.getAttribute(authUserName)).getId());
+=======
+//            testCases = dao.getByAuthor(((User)request.getAttribute(authUserName)).getId());
+>>>>>>> a6bc29658af0899281aee0ef787e218adc283b1f
             testCases = dao.getAll();
             // Setting the source for PagedListHolder
             testCaseList.setSource(testCases);
